@@ -1,0 +1,15 @@
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Netlify (local)
+.netlify/
+
+# Logs
+*.log
+npm-debug.log*

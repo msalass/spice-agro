@@ -1,0 +1,38 @@
+# =====================================================================
+# SPICe Agro — agro.spicelab.cl
+# Sitio estático hecho a mano (sin generador). Netlify solo publica.
+# =====================================================================
+
+[build]
+  # No hay paso de build: se publica la raíz del repo tal cual.
+  publish = "."
+  command = ""
+
+# --- Cabeceras de seguridad (todas las rutas) ---
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    # Nota: NO se fija Content-Security-Policy estricta a propósito,
+    # para no bloquear GTM / Google Ads / Doppler / Flow cuando se agreguen.
+
+# --- Caché larga para assets versionables ---
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Las páginas HTML deben revalidarse (para que los deploys se vean al instante)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# --- Página 404 propia ---
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
