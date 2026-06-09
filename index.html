@@ -1,345 +1,559 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SPICe Agro — Del laboratorio al huerto</title>
-<meta name="description" content="Seminarios online, Huerto Rentable y ciencia del suelo para agricultura regenerativa de pequeña escala en el sur de Chile.">
-<link rel="canonical" href="https://agro.spicelab.cl/">
-<meta property="og:title" content="SPICe Agro — Del laboratorio al huerto">
-<meta property="og:description" content="Seminarios, Huerto Rentable y ciencia aplicada al huerto productivo.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://agro.spicelab.cl/">
-<meta property="og:image" content="https://agro.spicelab.cl/assets/images/og-cover.jpg">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%23317286' stroke-width='2.3' stroke-linecap='round'%3E%3Cpath d='M24,17.54c-3.5-6.8-8.5-9.78-12.2-10.2,0,3.57,3.6,8.16,12.2,10.2Z'/%3E%3Cpath d='M24,16.4c3.5-6.8,8.5-9.78,12.2-10.2,0,3.57-3.6,8.16-12.2,10.2Z'/%3E%3Cpath d='M24,11.41v11.79'/%3E%3C/g%3E%3Cpath fill='none' stroke='%23cb9831' stroke-width='2.3' stroke-linecap='round' d='M11,23.2h26'/%3E%3Ccircle cx='23.98' cy='29.87' r='2.6' fill='%23cb9831'/%3E%3Ccircle cx='14.94' cy='30.29' r='2.1' fill='%23cb9831'/%3E%3Ccircle cx='32.56' cy='30.12' r='2.1' fill='%23cb9831'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Programa Huerto Rentable 35 | SPICe Lab</title>
+  <meta name="description" content="Huerto Rentable 35: programa pagado de implementación agrícola con invernadero de 35 m² instalado en terreno y acompañamiento técnico. Inversión: $990.000 CLP. La Araucanía, Los Ríos y Los Lagos." />
+  <meta name="keywords" content="huerto rentable, invernadero instalado Chile, programa agrícola, pequeños productores, SPICe Lab, asesoría agrícola" />
+  <meta name="author" content="SPICe Lab" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://spicelab.cl/ciencia-en-el-campo/huerto-35/" />
+
+  <meta property="og:title" content="Programa Huerto Rentable 35 | SPICe Lab" />
+  <meta property="og:description" content="Programa pagado: invernadero de 35 m² instalado en terreno + acompañamiento técnico. Inversión: $990.000 CLP." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://spicelab.cl/assets/images/horizontal-positivo.png" />
+  <meta property="og:url" content="https://spicelab.cl/ciencia-en-el-campo/huerto-35/" />
+  <meta property="og:site_name" content="SPICe Lab" />
+  <meta property="og:locale" content="es_CL" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Programa Huerto Rentable 35 | SPICe Lab" />
+  <meta name="twitter:description" content="Programa pagado: invernadero de 35 m² instalado + acompañamiento técnico. Inversión: $990.000 CLP." />
+  <meta name="twitter:image" content="https://spicelab.cl/assets/images/horizontal-positivo.png" />
+
+  <link rel="icon" href="/assets/images/isotipo-sin-fondo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Preload del hero (elemento LCP): empieza a descargar de inmediato -->
+  <link rel="preload" as="image" href="/assets/images/antes-despues-huerto35.webp" type="image/webp" fetchpriority="high" />
+
+  <!-- Fuentes cargadas aquí en el <head> (descubiertas temprano y en paralelo), en vez del @import tardío de index.css -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+
+  <link rel="stylesheet" href="/assets/css/index.css" />
+  <link rel="stylesheet" href="/assets/css/pages/huerto-rentable-35.css" />
+
+  <!-- Google Tag Manager -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer' ? '&l='+l : '';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PP99D648');
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18018765001"></script>
+  <script>
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18018765001');
+  </script>
+
+  <!-- Spot counter styles — uses page color palette -->
+  <style>
+  .hr35-cupos-wrap {
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .hr35-cupos-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9ca3af;
+    margin: 0 0 18px;
+  }
+  .hr35-cupos-dots {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .hr35-cupo-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .hr35-cupo-dot.taken    { background: #0d1b2a; }
+  .hr35-cupo-dot.available { background: transparent; border: 2px solid #d1d5db; }
+  .hr35-cupos-bar-wrap {
+    background: #f3f4f6;
+    border-radius: 99px;
+    height: 8px;
+    margin: 0 auto 16px;
+    max-width: 320px;
+    overflow: hidden;
+  }
+  .hr35-cupos-bar-fill {
+    background: #0d1b2a;
+    height: 100%;
+    width: 87%; /* 13 of 15 taken */
+    border-radius: 99px;
+  }
+  .hr35-cupos-count {
+    font-size: 24px;
+    font-weight: 800;
+    color: #0d1b2a;
+    margin: 0 0 4px;
+    line-height: 1.2;
+  }
+  .hr35-cupos-count span { font-size: 14px; font-weight: 400; color: #6b7280; }
+  .hr35-cupos-available {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 14px;
+  }
+  .hr35-cupos-note {
+    font-size: 12px;
+    color: #9ca3af;
+    line-height: 1.6;
+    margin: 0;
+    padding-top: 12px;
+    border-top: 1px solid #f3f4f6;
+  }
+
+  /* ✅ Before/after image — full width, prominent display */
+  .hr35-hero-visual,
+  .hr35-hero-visual-centered {
+    width: 100%;
+    max-width: 100%;
+    margin: 28px 0;
+  }
+  .hr35-hero-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(13, 27, 42, 0.18);
+  }
+
+  /* ✅ Hero subtitle — larger, centered */
+  .hr35-hero .hr35-hero-subtitle-centered {
+    font-size: 1.35rem !important;
+    line-height: 1.65 !important;
+    text-align: center !important;
+    max-width: 720px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* ✅ Alerta de cupos — animación elegante (acelerada por GPU) */
+  .hr35-cupos-alerta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.6rem auto 0.9rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(49, 114, 134, 0.5);
+    border-radius: 999px;
+    background: rgba(49, 114, 134, 0.14);
+    color: #fffbdc;
+    font-family: var(--font-mono), monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    animation: hr35-breathe 2.8s ease-in-out infinite;
+  }
+  .hr35-cupos-alerta-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #317286;
+    flex-shrink: 0;
+    animation: hr35-dot 2.8s ease-in-out infinite;
+  }
+  @keyframes hr35-breathe { 0%,100% { transform: scale(1); opacity: .95; } 50% { transform: scale(1.04); opacity: 1; } }
+  @keyframes hr35-dot     { 0%,100% { transform: scale(1); opacity: .6; }  50% { transform: scale(1.3); opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .hr35-cupos-alerta, .hr35-cupos-alerta-dot { animation: none; }
+  }
+  </style>
 </head>
+
 <body>
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PP99D648"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
 
-<!-- mark symbol (currentColor = monocromo) -->
-<svg style="position:absolute;width:0;height:0" aria-hidden="true">
-  <symbol id="mark" viewBox="0 0 48 48">
-    <g fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M24,17.54c-3.5-6.8-8.5-9.78-12.2-10.2,0,3.57,3.6,8.16,12.2,10.2Z"/>
-      <path d="M24,16.4c3.5-6.8,8.5-9.78,12.2-10.2,0,3.57-3.6,8.16-12.2,10.2Z"/>
-      <path d="M24,11.41v11.79"/>
-    </g>
-    <path fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" d="M11,23.2h26"/>
-    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M23.98,24.13v5.74"/><path d="M23.17,29.87l-8.39,.5"/>
-      <path d="M23.98,29.87l8.18,.25"/><path d="M24.03,31.38l-.1,6.51"/>
-      <path d="M23.84,37.9l-6,2.5"/><path d="M23.84,37.9l6.5,2"/>
-      <path d="M35.31,37.3l-4.94,2.6"/>
-    </g>
-    <circle cx="23.98" cy="29.87" r="2.6" fill="currentColor" stroke="none"/>
-    <circle cx="14.94" cy="30.29" r="2.1" fill="currentColor" stroke="none"/>
-    <circle cx="32.56" cy="30.12" r="2.1" fill="currentColor" stroke="none"/>
-    <circle cx="23.84" cy="37.9"  r="2.4" fill="currentColor" stroke="none"/>
-    <circle cx="17.84" cy="40.4"  r="1.9" fill="currentColor" stroke="none"/>
-    <circle cx="30.34" cy="39.9"  r="1.9" fill="currentColor" stroke="none"/>
-  </symbol>
-</svg>
-
-<!-- HEADER -->
-<header id="top">
-  <div class="wrap">
-    <nav>
-      <a class="brand" href="/" aria-label="SPICe Agro — inicio">
-        <svg viewBox="0 0 48 48" width="36" height="36" aria-hidden="true">
-<g fill="none" stroke="#317286" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M24,17.54c-3.5-6.8-8.5-9.78-12.2-10.2,0,3.57,3.6,8.16,12.2,10.2Z"/>
-  <path d="M24,16.4c3.5-6.8,8.5-9.78,12.2-10.2,0,3.57-3.6,8.16-12.2,10.2Z"/>
-  <path d="M24,11.41v11.79"/>
-</g>
-<path fill="none" stroke="#cb9831" stroke-width="2.3" stroke-linecap="round" d="M11,23.2h26"/>
-<g fill="none" stroke="#cb9831" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M23.98,24.13v5.74"/><path d="M23.17,29.87l-8.39,.5"/>
-  <path d="M23.98,29.87l8.18,.25"/><path d="M24.03,31.38l-.1,6.51"/>
-  <path d="M23.84,37.9l-6,2.5"/><path d="M23.84,37.9l6.5,2"/>
-  <path d="M35.31,37.3l-4.94,2.6"/>
-</g>
-<g fill="#cb9831" stroke="none">
-  <circle cx="23.98" cy="29.87" r="2.6"/><circle cx="14.94" cy="30.29" r="2.1"/>
-  <circle cx="32.56" cy="30.12" r="2.1"/><circle cx="23.84" cy="37.9" r="2.4"/>
-  <circle cx="17.84" cy="40.4" r="1.9"/><circle cx="30.34" cy="39.9" r="1.9"/>
-</g></svg>
-        <div class="brand-text">
-          <span class="brand-wm">SPICe <span>Agro</span></span>
-          <span class="brand-tag">del laboratorio al huerto</span>
+  <header>
+    <nav class="main-nav">
+      <div class="nav-wrap">
+        <div class="logo-wrap">
+          <a class="logo-link" href="/">
+            <img src="/assets/images/isotipo-sin-fondo.webp" width="28" height="28" alt="SPICe Lab Icono" />
+          </a>
         </div>
-      </a>
-      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-      </button>
-      <ul class="nav-links" id="nav-menu" role="list">
-        <li><a href="#seminarios">Seminarios</a></li>
-        <li><a href="#programa">Huerto Rentable</a></li>
-        <li><a href="#herramientas">Herramientas</a></li>
-        <li><a href="#ciencia">La ciencia</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-        <li><a class="btn ochre" href="/seminario-suelo-vivo.html">Suelo Vivo &rsaquo;</a></li>
-      </ul>
+        <div class="nav-links">
+          <a href="/">Inicio</a>
+          <a href="/acerca-de/">Acerca de</a>
+          <a href="/equipo/">Equipo</a>
+          <a href="/servicios/">Servicios</a>
+          <div class="nav-dropdown">
+            <a href="/ciencia-en-el-campo/servicios-ag/" class="nav-dropdown-toggle">Ciencia Aplicada al Campo</a>
+            <div class="nav-dropdown-menu">
+              <a href="/ciencia-en-el-campo/servicios-ag/">Servicios Agrícolas</a>
+              <a href="/ciencia-en-el-campo/huerto-35/">Huerto Rentable 35</a>
+            </div>
+          </div>
+          <a href="/proyectos/">Proyectos</a>
+          <a href="/muestras/">Muestras</a>
+          <a href="/contacto/">Contacto</a>
+        </div>
+      </div>
+      <span class="lang-switch-desktop">ES | <a href="/en/">EN</a></span>
+      <div class="menu-button-wrap">
+        <span class="lang-switch-mobile">ES | <a href="/en/">EN</a></span>
+        <button id="mobile-menu-button" class="mobile-menu-button" aria-label="Abrir menú">
+          <svg class="menu-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
     </nav>
-  </div>
-</header>
-
-<!-- HERO -->
-<section class="hero">
-  <svg class="topo" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-  <path d="M-60 120 C 280 60 580 200 880 120 S 1500 40 1500 120"/>
-  <path d="M-60 210 C 300 140 600 300 900 210 S 1500 120 1500 210"/>
-  <path d="M-60 310 C 320 230 620 390 920 310 S 1500 220 1500 310"/>
-  <path d="M-60 420 C 340 340 640 490 940 420 S 1500 330 1500 420"/>
-  <path d="M-60 530 C 360 450 660 600 960 530 S 1500 440 1500 530"/>
-</svg>
-  <svg class="ghostmark" viewBox="0 0 48 48" aria-hidden="true"><use href="#mark" style="color:var(--ochre)"/></svg>
-  <div class="wrap">
-    <div class="rise d1"><span class="mono eyebrow--ochre eyebrow">Ciencia aplicada · Región de Los Ríos · 39°S</span></div>
-    <h1 class="rise d2">Del laboratorio <em>al huerto.</em></h1>
-    <p class="lead rise d3">Herramientas de precisión, seminarios online y ciencia del suelo para una agricultura de pequeña escala <strong>rentable y regenerativa.</strong></p>
-    <div class="hero-cta rise d4">
-      <a class="btn ochre" href="/seminario-suelo-vivo.html">Seminario Suelo Vivo &rsaquo;</a>
-      <a class="btn ghost-light" href="#programa">Conoce Huerto Rentable</a>
+    <div id="mobile-menu" class="mobile-menu-container">
+      <nav class="mobile-menu-nav">
+        <a href="/" class="menu-link">Inicio</a>
+        <a href="/acerca-de/" class="menu-link">Acerca de</a>
+        <a href="/equipo/" class="menu-link">Equipo</a>
+        <a href="/servicios/" class="menu-link">Servicios</a>
+        <a href="/ciencia-en-el-campo/servicios-ag/" class="menu-link">Ciencia Aplicada al Campo</a>
+        <a href="/ciencia-en-el-campo/servicios-ag/" class="menu-link menu-sublink">Servicios Agrícolas</a>
+        <a href="/ciencia-en-el-campo/huerto-35/" class="menu-link menu-sublink">Huerto Rentable 35</a>
+        <a href="/proyectos/" class="menu-link">Proyectos</a>
+        <a href="/muestras/" class="menu-link">Muestras</a>
+        <a href="/contacto/" class="menu-link">Contacto</a>
+      </nav>
     </div>
-    <div class="hero-meta rise d5">
-      <div class="hero-meta-item"><div class="k">6</div><div class="v">Seminarios online<br>en producción</div></div>
-      <div class="hero-meta-item"><div class="k">35–85 m²</div><div class="v">Módulos productivos<br>bio-intensivos</div></div>
-      <div class="hero-meta-item"><div class="k">100%</div><div class="v">Respaldo geoquímico<br>de SPICe Lab</div></div>
-    </div>
-  </div>
-</section>
+  </header>
 
-<!-- SEMINARIO SUELO VIVO -->
-<section id="seminarios" class="seminario">
-  <div class="wrap">
-    <div class="sem-grid">
-      <div class="reveal">
-        <span class="mono eyebrow">Seminario ancla</span>
-        <h2 style="font-family:var(--serif);font-weight:600;font-size:clamp(2.2rem,5vw,3.8rem);line-height:1;letter-spacing:-.028em;margin:14px 0 6px">Suelo Vivo</h2>
-        <p style="font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--teal);margin-bottom:1.4rem">Salud del suelo · agricultura regenerativa</p>
-        <p class="sem-lead">Por qué un suelo vivo es la base de un huerto productivo, y cómo regenerarlo con prácticas que funcionan en el clima del sur de Chile. El primer seminario de la serie SPICe Agro.</p>
-        <ul class="sem-items">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20"><path d="M20 6L9 17l-5-5"/></svg>Qué es la salud del suelo y cómo se mide en terreno</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20"><path d="M20 6L9 17l-5-5"/></svg>Materia orgánica, vida microbiana y estructura física</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20"><path d="M20 6L9 17l-5-5"/></svg>Prácticas regenerativas adaptadas al sur de Chile</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20"><path d="M20 6L9 17l-5-5"/></svg>Guía descargable + certificado de participación</li>
-        </ul>
-        <a class="btn" href="/seminario-suelo-vivo.html">Ver el programa completo &rsaquo;</a>
+  <main>
+    <section class="hero hr35-hero hr35-hero-centered">
+      <div class="hero-content hr35-hero-content-centered">
+        <h1 class="hr35-hero-title-centered">
+          Comienza un <span class="hr35-highlight">huerto más ordenado, controlado y productivo</span> — instalado en tu terreno.
+        </h1>
+
+        <p class="hero-subtitle hr35-hero-subtitle-centered">
+          Te entregamos el invernadero instalado, la implementación inicial y el acompañamiento técnico. Tú te enfocas en producir.
+        </p>
+
+        <div class="hr35-hero-visual hr35-hero-visual-centered">
+          <picture style="display:contents">
+            <source srcset="/assets/images/antes-despues-huerto35.webp" type="image/webp" />
+            <img src="/assets/images/antes-despues-huerto35.jpg" width="2400" height="900" fetchpriority="high" decoding="async" alt="Antes y después — terreno vacío transformado en huerto productivo con invernadero Huerto Rentable 35" class="hr35-hero-image" />
+          </picture>
+        </div>
+
+        <div class="hero-buttons hero-buttons-centered">
+          <a href="#postular" class="button primary">Quiero mi Huerto Rentable</a>
+        </div>
+
+        <p class="hr35-cupos-alerta"><span class="hr35-cupos-alerta-dot"></span>Solo quedan 2 de 15 cupos</p>
+
+        <div class="hr35-microtrust hr35-microtrust-centered">
+          <span>Precio de lanzamiento</span>
+          <span>•</span>
+          <span>La Araucanía, Los Ríos y Los Lagos</span>
+        </div>
       </div>
-      <div class="reveal">
-        <div class="ticket">
-          <p class="ticket-label">Seminario online en vivo</p>
-          <h3>Suelo Vivo</h3>
-          <p class="sub">SPICe Agro · primer seminario de la serie</p>
-          <!-- TODO: completar fecha y precio confirmados -->
-          <div class="ticket-specs">
-            <div class="ticket-row"><span class="k">Fecha</span><span class="v">Miércoles 15 de julio · 19:00 hrs</span></div>
-            <div class="ticket-row"><span class="k">Modalidad</span><span class="v">Online · en vivo</span></div>
-            <div class="ticket-row"><span class="k">Incluye</span><span class="v">Guía PDF + certificado</span></div>
+    </section>
+
+    <section id="precio" class="cta-section hr35-section hr35-pricing">
+      <div class="cta-content">
+        <span class="badge">Programa con Inversión</span>
+        <h2 class="section-title">Diseñado para que tu huerto deje de ser una idea… y empiece a darte resultados reales.</h2>
+
+        <div class="hr35-price-box">
+          <p class="hr35-anchor">Valor referencial del programa completo: <strong>$1.690.000 CLP</strong></p>
+          <p class="hr35-price">Inversión del programa: <strong>$990.000 CLP</strong></p>
+          <p class="hr35-price-note">Precio de lanzamiento para los primeros 15 cupos · Pago por transferencia bancaria</p>
+        </div>
+
+        <details class="hr35-collapse">
+          <summary class="hr35-collapse-summary">Ver qué incluye</summary>
+          <div class="hr35-collapse-content">
+            <div class="focus-grid">
+              <div class="focus-card">
+                <h3 class="focus-title">Invernadero instalado</h3>
+                <p class="focus-text">Unidad base de 35 m² instalada físicamente en tu terreno, lista para comenzar a producir.</p>
+              </div>
+              <div class="focus-card">
+                <h3 class="focus-title">Implementación inicial</h3>
+                <p class="focus-text">Puesta en marcha del sistema en terreno con criterio técnico y orientación desde el inicio.</p>
+              </div>
+              <div class="focus-card">
+                <h3 class="focus-title">Acompañamiento técnico</h3>
+                <p class="focus-text">Visita técnica presencial de partida para arrancar bien y evitar errores frecuentes.</p>
+              </div>
+              <div class="focus-card">
+                <h3 class="focus-title">Guía de organización</h3>
+                <p class="focus-text">Documento práctico para organizar y operar el sistema de forma clara desde el primer día.</p>
+              </div>
+            </div>
           </div>
-          <!-- TODO: precio confirmado -->
-          <div class="ticket-price">
-            <span class="amount">$12.990 <small style="font-family:var(--mono);font-size:.8rem;font-weight:400">CLP</small></span>
+        </details>
+
+
+
+        <details class="hr35-collapse">
+          <summary class="hr35-collapse-summary">Ver seminarios incluidos</summary>
+          <div class="hr35-collapse-content">
+            <div class="focus-grid">
+              <div class="focus-card">
+                <h3 class="focus-title">1 · Presentación y diseño de tu huerto</h3>
+                <p class="focus-text">Propuesta inicial y diseño preliminar de tu huerto.</p>
+              </div>
+              <div class="focus-card">
+                <h3 class="focus-title">2 · Salud del suelo y agricultura regenerativa</h3>
+                <p class="focus-text">Por qué un suelo vivo es la base de un huerto productivo.</p>
+              </div>
+              <div class="focus-card">
+                <h3 class="focus-title">3 · El clima y el uso correcto del invernadero</h3>
+                <p class="focus-text">Cómo leer el clima de tu zona y sacarle el máximo provecho a la cubierta.</p>
+              </div>
+              <div class="focus-card">
+                <h3 class="focus-title">4 · Pesticidas y fertilizantes orgánicos</h3>
+                <p class="focus-text">Qué usar, cómo prepararlos y cuándo aplicarlos.</p>
+              </div>
+              <div class="focus-card">
+                <h3 class="focus-title">5 · Planificación y sucesión de cultivos</h3>
+                <p class="focus-text">Herramientas para ahorrar tiempo y optimizar el trabajo del huerto (farm optimization).</p>
+              </div>
+              <div class="focus-card">
+                <h3 class="focus-title">6 · Monetización de tu huerto</h3>
+                <p class="focus-text">Ejemplos exitosos de market gardening en EE.UU., Canadá, Australia y Chile.</p>
+              </div>
+            </div>
           </div>
-          <!-- TODO: reemplazar con enlace/botón de pago Mercado Pago -->
-          <a class="btn ochre" href="https://mpago.la/18ZeRHe" target="_blank" rel="noopener">Inscribirme &rsaquo;</a>
-          <p class="ticket-note">Certificado emitido por SPICe Agro · respaldado por South Pacific Isotope Centre SpA</p>
+        </details>
+
+        <details class="hr35-collapse">
+          <summary class="hr35-collapse-summary">Ver bonos incluidos</summary>
+          <div class="hr35-collapse-content">
+            <div class="focus-grid">
+              <div class="focus-card">
+                <h3 class="focus-title">Bono 1: Checklist de implementación</h3>
+                <p class="focus-text">Lista práctica de pasos y verificaciones para que el sistema no dependa solo de la memoria o la improvisación.</p>
+              </div>
+              <div class="focus-card">
+                <h3 class="focus-title">Bono 2: Plan de sucesión y continuidad</h3>
+                <p class="focus-text">Calendario base para sembrar, trasplantar y escalonar producción con el objetivo de tener mayor continuidad semanal de cosecha.</p>
+              </div>
+              <div class="focus-card">
+                <h3 class="focus-title">Bono 3: Lista base de cultivos sugeridos</h3>
+                <p class="focus-text">Selección inicial de cultivos recomendados según lógica de rotación, velocidad de salida y practicidad para una unidad pequeña.</p>
+              </div>
+              <div class="focus-card">
+                <h3 class="focus-title">Bono 4: Plantilla simple de registro</h3>
+                <p class="focus-text">Formato práctico para anotar siembras, trasplantes, cosechas y observaciones sin necesidad de software complejo.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- GALERÍA: instalaciones reales -->
+    <section class="hr35-section hr35-galeria">
+      <div class="hr35-container">
+        <span class="badge">Instalaciones reales</span>
+        <h2 class="section-title">Invernaderos que construimos nosotros, en terreno</h2>
+        <p class="section-intro">
+          Cada Huerto Rentable lo instala nuestro equipo de principio a fin: desde el armado de la estructura hasta la cobertura final. Estas son instalaciones reales en Loncopangue y Peulla.
+        </p>
+        <div class="hr35-galeria-grid">
+          <figure class="hr35-galeria-item"><img src="/assets/images/peulla-2.webp" width="1200" height="678" loading="lazy" decoding="async" alt="Terreno preparado e inicio de la instalación del invernadero en Peulla" /></figure>
+          <figure class="hr35-galeria-item"><img src="/assets/images/loncopangue-2.webp" width="1200" height="678" loading="lazy" decoding="async" alt="Preparación y doblado de los arcos de acero de la estructura" /></figure>
+          <figure class="hr35-galeria-item"><img src="/assets/images/loncopangue-3.webp" width="1200" height="678" loading="lazy" decoding="async" alt="Montaje de los arcos del invernadero sobre el terreno" /></figure>
+          <figure class="hr35-galeria-item"><img src="/assets/images/loncopangue-4.webp" width="1200" height="678" loading="lazy" decoding="async" alt="Instalación de la estructura por nuestro equipo en terreno" /></figure>
+          <figure class="hr35-galeria-item"><img src="/assets/images/loncopangue-6.webp" width="1200" height="678" loading="lazy" decoding="async" alt="Ensamblaje de arcos y largueros del invernadero" /></figure>
+          <figure class="hr35-galeria-item"><img src="/assets/images/loncopangue-1.webp" width="1200" height="678" loading="lazy" decoding="async" alt="Estructura del invernadero Huerto Rentable montada en terreno" /></figure>
+          <figure class="hr35-galeria-item"><img src="/assets/images/peulla-4.webp" width="1200" height="678" loading="lazy" decoding="async" alt="Vista interior de la estructura de arcos del invernadero en Peulla" /></figure>
+          <figure class="hr35-galeria-item"><img src="/assets/images/peulla-5.webp" width="1200" height="678" loading="lazy" decoding="async" alt="Escala del invernadero: una persona de pie dentro de la estructura" /></figure>
+          <figure class="hr35-galeria-item"><img src="/assets/images/loncopangue-5.webp" width="1200" height="669" loading="lazy" decoding="async" alt="Colocación de la cobertura de polietileno UV del invernadero" /></figure>
+          <figure class="hr35-galeria-item"><img src="/assets/images/peulla-6.webp" width="1200" height="678" loading="lazy" decoding="async" alt="Instalación de la cobertura y la puerta del invernadero en Peulla" /></figure>
+          <figure class="hr35-galeria-item"><img src="/assets/images/peulla-1.webp" width="1168" height="880" loading="lazy" decoding="async" alt="Invernadero Huerto Rentable terminado en Peulla, entre montañas" /></figure>
+          <figure class="hr35-galeria-item"><img src="/assets/images/peulla-3.webp" width="1200" height="678" loading="lazy" decoding="async" alt="Invernadero instalado y operativo en Peulla, sur de Chile" /></figure>
+          <figure class="hr35-galeria-item"><img src="/assets/images/peulla-7.webp" width="1200" height="678" loading="lazy" decoding="async" alt="Invernadero Huerto Rentable terminado, vista de la entrada" /></figure>
+          <figure class="hr35-galeria-item"><img src="/assets/images/peulla-8.webp" width="1200" height="678" loading="lazy" decoding="async" alt="Interior del invernadero terminado con cubierta de polietileno" /></figure>
         </div>
       </div>
+    </section>
+
+    <!-- ✅ SPOT COUNTER — sits directly above the form -->
+    <section class="hr35-section">
+      <div class="hr35-container">
+        <div class="hr35-price-box">
+          <div class="hr35-cupos-wrap">
+
+            <p class="hr35-cupos-label">Disponibilidad · Precio de lanzamiento</p>
+
+            <div class="hr35-cupos-dots">
+              <!-- 13 taken -->
+              <span class="hr35-cupo-dot taken"    title="Cupo ocupado"></span>
+              <span class="hr35-cupo-dot taken"    title="Cupo ocupado"></span>
+              <span class="hr35-cupo-dot taken"    title="Cupo ocupado"></span>
+              <span class="hr35-cupo-dot taken"    title="Cupo ocupado"></span>
+              <span class="hr35-cupo-dot taken"    title="Cupo ocupado"></span>
+              <span class="hr35-cupo-dot taken"    title="Cupo ocupado"></span>
+              <span class="hr35-cupo-dot taken"    title="Cupo ocupado"></span>
+              <span class="hr35-cupo-dot taken"    title="Cupo ocupado"></span>
+              <span class="hr35-cupo-dot taken"    title="Cupo ocupado"></span>
+              <span class="hr35-cupo-dot taken"    title="Cupo ocupado"></span>
+              <span class="hr35-cupo-dot taken"    title="Cupo ocupado"></span>
+              <span class="hr35-cupo-dot taken"    title="Cupo ocupado"></span>
+              <span class="hr35-cupo-dot taken"    title="Cupo ocupado"></span>
+              <!-- 2 available -->
+              <span class="hr35-cupo-dot available" title="Cupo disponible"></span>
+              <span class="hr35-cupo-dot available" title="Cupo disponible"></span>
+            </div>
+
+            <!-- Progress bar: 13/15 = 87% -->
+            <div class="hr35-cupos-bar-wrap">
+              <div class="hr35-cupos-bar-fill"></div>
+            </div>
+
+            <p class="hr35-cupos-count">13 <span>de 15 cupos ocupados</span></p>
+
+            <p class="hr35-cupos-alerta"><span class="hr35-cupos-alerta-dot"></span>Solo quedan 2 de 15 cupos</p>
+
+            <p class="hr35-cupos-available">✓ 2 cupos disponibles a precio de lanzamiento</p>
+
+            <p class="hr35-cupos-note">
+              Estamos cerrando la primera etapa del programa. Los primeros invernaderos ya están instalados y operativos.
+              Quedan solo <strong>2 cupos</strong> a precio de lanzamiento antes de cerrar esta etapa.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="postular" class="hr35-section hr35-form-section">
+  <div class="hr35-container">
+    <h2 class="section-title">Inscríbete al Programa Huerto Rentable 35</h2>
+    <p class="section-intro">
+      Completa este formulario y te contactaremos dentro de 24 horas hábiles para coordinar el pago ($990.000 CLP por transferencia bancaria) y la instalación. Este es un programa con inversión — no es gratuito ni subsidiado. Al inscribirte recibes además una <strong>guía digital gratuita</strong> para comenzar con más claridad.
+    </p>
+    <div class="hr35-form-card">
+      <iframe
+        data-tally-src="https://tally.so/r/9q1kvp"
+        loading="lazy"
+        width="100%"
+        height="700"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        title="Inscripción Programa Huerto Rentable 35">
+      </iframe>
+    </div>
+    <script>
+      // ----- GCLID capture: read from URL or sessionStorage, append to Tally src -----
+      (function() {
+        function getURLParam(name) {
+          var match = window.location.search.match(new RegExp('[?&]' + name + '=([^&]+)'));
+          return match ? decodeURIComponent(match[1]) : null;
+        }
+        // Capture Google Ads click identifiers from URL and persist in sessionStorage
+        ['gclid', 'gbraid', 'wbraid'].forEach(function(param) {
+          var val = getURLParam(param);
+          if (val) {
+            try { sessionStorage.setItem(param, val); } catch(e) {}
+          }
+        });
+      })();
+
+      // Helper to build the Tally URL with the gclid appended (if present)
+      function buildTallySrcWithGclid(baseSrc) {
+        var gclid = null;
+        try { gclid = sessionStorage.getItem('gclid'); } catch(e) {}
+        if (!gclid) return baseSrc;
+        var separator = baseSrc.indexOf('?') === -1 ? '?' : '&';
+        return baseSrc + separator + 'gclid=' + encodeURIComponent(gclid);
+      }
+      // ----- End GCLID capture -----
+
+      var d = document,
+          w = "https://tally.so/widgets/embed.js",
+          v = function() {
+            if (typeof Tally !== "undefined") {
+              // Modify the data-tally-src to include gclid BEFORE Tally loads the embed
+              d.querySelectorAll("iframe[data-tally-src]").forEach(function(e) {
+                e.dataset.tallySrc = buildTallySrcWithGclid(e.dataset.tallySrc);
+              });
+              Tally.loadEmbeds();
+            } else {
+              d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e) {
+                e.src = buildTallySrcWithGclid(e.dataset.tallySrc);
+              });
+            }
+          };
+      if (typeof Tally !== "undefined") {
+        v();
+      } else if (d.querySelector('script[src="' + w + '"]') == null) {
+        var s = d.createElement("script");
+        s.src = w;
+        s.onload = v;
+        s.onerror = v;
+        d.body.appendChild(s);
+      }
+    </script>
+  </div>
+</section>
+    
+    <section class="cta-section hr35-section">
+  <div class="cta-content">
+    <h2 class="section-title">No estás comprando solo un invernadero</h2>
+    <p class="cta-text">
+      Estás entrando a una implementación guiada para construir una unidad productiva más ordenada, más clara y mejor preparada para producir.
+    </p>
+    <p class="cta-text">
+      Si quieres acceder a este precio de lanzamiento, los cupos son limitados y no estarán disponibles en este valor más adelante.
+    </p>
+    <div class="hero-buttons">
+      <a href="#postular" class="button primary">Inscribirme ahora</a>
+      <a href="#" class="button secondary" id="wa-cta-btn" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
     </div>
   </div>
 </section>
-
-<!-- PILLARS -->
-<section class="pillars" id="programa">
-  <svg class="topo" viewBox="0 0 1440 480" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-  <path d="M-60 140 C 300 70 600 240 900 140 S 1500 60 1500 140"/>
-  <path d="M-60 260 C 320 180 620 360 920 260 S 1500 170 1500 260"/>
-  <path d="M-60 380 C 340 300 640 470 940 380 S 1500 290 1500 380"/>
-</svg>
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="mono eyebrow--ochre eyebrow">Qué hacemos</span>
-      <h2>Tres formas de hacer crecer un huerto que rinde.</h2>
-      <p>Conocimiento, implementación y equipamiento — pensados para el productor de pequeña escala que quiere vivir de su tierra.</p>
-    </div>
-    <div class="pcards">
-      <div class="pcard reveal">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M9 20h6M12 14v6"/><path d="M8 13l2 2 4-4"/>
-        </svg>
-        <h3>Seminarios online</h3>
-        <p>Seis seminarios para crear y hacer rentable tu huerto, desde el diseño hasta la monetización.</p>
-        <ul>
-          <li>Diseño del huerto</li>
-          <li>Suelo Vivo · disponible ahora</li>
-          <li>Clima, invernadero, orgánicos, cultivos, monetización</li>
-        </ul>
-        <a class="btn ghost-light pcard-cta" href="/seminario-suelo-vivo.html">Ver Suelo Vivo</a>
-      </div>
-      <div class="pcard reveal" id="huerto">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M3 21V8l9-5 9 5v13"/><path d="M3 21h18"/><path d="M9 21v-6h6v6"/><path d="M12 3v5"/>
-        </svg>
-        <h3>Programa Huerto Rentable</h3>
-        <p>Módulo productivo protegido, llave en mano, con acompañamiento técnico desde el suelo hasta la primera cosecha.</p>
-        <ul>
-          <li>Huerto Rentable 35 — módulo de 35 m²</li>
-          <li>Huerto Rentable 85 — unidad ampliada</li>
-          <li>Diseño, instalación y seguimiento</li>
-        </ul>
-        <!-- TODO: URL propia cuando el programa migre a este subdominio -->
-        <a class="btn ghost-light pcard-cta" href="https://www.spicelab.cl/huerto-rentable-35/" target="_blank" rel="noopener">Ver el programa</a>
-      </div>
-      <div class="pcard reveal" id="herramientas">
-        <span class="badge-soon">Próximamente</span>
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M14.5 5.5 19 10"/><path d="m3 21 6-6"/><path d="M11.5 8.5 4 16v4h4l7.5-7.5"/><path d="m14 6 4 4 3-3-4-4z"/>
-        </svg>
-        <h3>Herramientas de market garden</h3>
-        <p>Equipamiento especializado para el sistema bio-intensivo, seleccionado y adaptado para el mercado chileno.</p>
-        <ul>
-          <li>Flame weeder · wheel hoe · broadfork</li>
-          <li>Paper pot transplanter · direct seeder</li>
-          <li>Certificado y disponible en Chile</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CIENCIA -->
-<section class="ciencia" id="ciencia">
-  <div class="wrap">
-    <div class="sci-grid">
-      <div class="reveal">
-        <span class="mono eyebrow">El diferenciador</span>
-        <h2 style="font-family:var(--serif);font-weight:600;font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.04;letter-spacing:-.022em;margin:14px 0 20px">No vendemos fierros.<br>Vendemos <em class="em-ochre">precisión.</em></h2>
-        <p>Cualquiera puede importar herramientas. Lo que nadie más ofrece en la agricultura de pequeña escala en Chile es leer la tierra con el mismo rigor con que se lee una muestra de coral en un espectrómetro de masas.</p>
-        <p>SPICe Agro nace de SPICe Lab, un centro de geoquímica de isótopos y elementos traza. Esa herencia se traduce en una sola promesa: cada recomendación está respaldada por datos medibles.</p>
-        <div class="chip"><span>Sr/Ca</span><span>Mg/Ca</span><span>U&ndash;Th</span><span>LA-ICP-MS</span><span>Trazas</span><span>pH &middot; CIC</span></div>
-        <p style="margin-top:1.6rem"><a class="btn ghost" href="https://www.spicelab.cl/" target="_blank" rel="noopener">Conoce SPICe Lab &rsaquo;</a></p>
-      </div>
-      <div class="sci-card reveal">
-        <span class="mono">// Lectura de suelo — Lanco, Los Ríos</span>
-        <svg class="spectrum" viewBox="0 0 360 108" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Espectro simulado de análisis de suelo">
-          <line x1="0" y1="100" x2="360" y2="100" stroke="var(--line)" stroke-width="1"/>
-          <polyline points="0,96 26,92 44,95 60,63 76,93 104,90 120,42 138,91 168,88 186,18 206,89 238,83 256,55 276,85 312,79 332,48 352,77" style="color:var(--teal)"/>
-          <circle cx="120" cy="42" r="3" fill="var(--ochre)" stroke="none"/>
-          <circle cx="186" cy="18" r="3" fill="var(--teal)" stroke="none"/>
-        </svg>
-        <div class="readout">
-          <div><div class="k">6.2</div><div class="v">pH del suelo</div></div>
-          <div><div class="k">Alta</div><div class="v">Materia orgánica</div></div>
-          <div><div class="k">Óptimo</div><div class="v">Ca / Mg balance</div></div>
-          <div><div class="k">Bajo</div><div class="v">Disponibilidad de P</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA FINAL -->
-<section class="cta-final" id="contacto">
-  <div class="wrap">
-    <div class="cta-box reveal">
-      <svg class="ghostmark" viewBox="0 0 48 48" aria-hidden="true"><use href="#mark" style="color:var(--ochre)"/></svg>
-      <div class="inner">
-        <span class="mono eyebrow--ochre eyebrow">Empieza ahora</span>
-        <h2>Tu primer paso es el suelo.</h2>
-        <p>Inscríbete en Suelo Vivo y lleva la ciencia del subsuelo a tu huerto. ¿Tienes dudas? Escríbenos por WhatsApp.</p>
-        <div class="cta-actions">
-          <a class="btn ochre" href="/seminario-suelo-vivo.html">Inscribirse en Suelo Vivo</a>
-          <!-- TODO: número de WhatsApp real -->
-          <a class="btn ghost-light" href="https://wa.me/56971540665">Escribir por WhatsApp</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="wrap">
-    <div class="foot">
-      <div class="foot-brand">
-        <a class="brand" href="/" aria-label="SPICe Agro inicio">
-          <svg viewBox="0 0 48 48" width="32" height="32" aria-hidden="true">
-<g fill="none" stroke="#317286" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M24,17.54c-3.5-6.8-8.5-9.78-12.2-10.2,0,3.57,3.6,8.16,12.2,10.2Z"/>
-  <path d="M24,16.4c3.5-6.8,8.5-9.78,12.2-10.2,0,3.57-3.6,8.16-12.2,10.2Z"/>
-  <path d="M24,11.41v11.79"/>
-</g>
-<path fill="none" stroke="#cb9831" stroke-width="2.3" stroke-linecap="round" d="M11,23.2h26"/>
-<g fill="none" stroke="#cb9831" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M23.98,24.13v5.74"/><path d="M23.17,29.87l-8.39,.5"/>
-  <path d="M23.98,29.87l8.18,.25"/><path d="M24.03,31.38l-.1,6.51"/>
-  <path d="M23.84,37.9l-6,2.5"/><path d="M23.84,37.9l6.5,2"/>
-  <path d="M35.31,37.3l-4.94,2.6"/>
-</g>
-<g fill="#cb9831" stroke="none">
-  <circle cx="23.98" cy="29.87" r="2.6"/><circle cx="14.94" cy="30.29" r="2.1"/>
-  <circle cx="32.56" cy="30.12" r="2.1"/><circle cx="23.84" cy="37.9" r="2.4"/>
-  <circle cx="17.84" cy="40.4" r="1.9"/><circle cx="30.34" cy="39.9" r="1.9"/>
-</g></svg>
-          <div class="brand-text"><span class="brand-wm">SPICe <span>Agro</span></span></div>
-        </a>
-        <p>Ciencia geoquímica aplicada a la agricultura regenerativa de pequeña escala. Una rama de SPICe Lab.</p>
-        <span class="by">&#8599; <a href="https://www.spicelab.cl" style="color:inherit">spicelab.cl</a></span>
-      </div>
-      <div class="foot-cols">
-        <div class="foot-col">
-          <h4>Seminarios</h4>
-          <a href="/seminario-suelo-vivo.html">Suelo Vivo</a>
-          <a href="#seminarios">Ver todos</a>
-        </div>
-        <div class="foot-col">
-          <h4>Programa</h4>
-          <a href="#huerto">Huerto Rentable</a>
-          <a href="#herramientas">Herramientas</a>
-        </div>
-        <div class="foot-col">
-          <h4>Empresa</h4>
-          <a href="#ciencia">La ciencia</a>
-          <a href="https://www.spicelab.cl/">SPICe Lab</a>
-          <!-- TODO: correo real -->
-          <a href="mailto:contacto@spicelab.cl">Contacto</a>
-        </div>
-      </div>
-    </div>
-    <div class="legal">
-      <span>&copy; <span id="yr">2026</span> South Pacific Isotope Centre SpA &middot; RUT 78.237.797-3 &middot; Lanco, Regi&oacute;n de Los R&iacute;os, Chile</span>
-      <span>SPICe Agro &middot; del laboratorio al huerto</span>
-    </div>
-  </div>
-</footer>
-
-<!-- WhatsApp flotante — TODO: número real -->
-<a class="wa" href="https://wa.me/56971540665" aria-label="Escríbenos por WhatsApp" target="_blank" rel="noopener">
-  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.8 1 1-4.7-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C5 9.5 9.5 5 16 5s11 4.5 11 10-4.9 9.8-11 9.8zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.5 0-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.6.8.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
-</a>
 
 <script>
-(function(){
-  "use strict";
-  var yr=document.getElementById("yr");
-  if(yr) yr.textContent=new Date().getFullYear();
-  var hdr=document.querySelector("header");
-  if(hdr){ var f=function(){hdr.classList.toggle("scrolled",window.scrollY>6)};f();window.addEventListener("scroll",f,{passive:true}); }
-  var tog=document.querySelector(".nav-toggle"),menu=document.getElementById("nav-menu");
-  if(tog&&menu){
-    tog.addEventListener("click",function(){var o=menu.classList.toggle("open");tog.setAttribute("aria-expanded",String(o));});
-    menu.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){menu.classList.remove("open");tog.setAttribute("aria-expanded","false");});});
-  }
-  var els=document.querySelectorAll(".reveal");
-  if("IntersectionObserver" in window&&els.length){
-    var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.1,rootMargin:"0px 0px -36px 0px"});
-    els.forEach(function(el){io.observe(el);});
-  } else { els.forEach(function(el){el.classList.add("in");}); }
-})();
+  (function() {
+    var p1 = "569715";
+    var p2 = "40665";
+    var msg = encodeURIComponent("Hola SPICe Lab, quiero inscribirme al Programa Huerto Rentable 35");
+    var btn = document.getElementById("wa-cta-btn");
+    if (btn) {
+      btn.href = "https://wa.me/" + p1 + p2 + "?text=" + msg;
+    }
+  })();
 </script>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 South Pacific Isotope Centre — SPICe Lab</p>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+
 </body>
 </html>
