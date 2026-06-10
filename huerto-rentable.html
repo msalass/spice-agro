@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Huerto Rentable — Programas de invernadero productivo | SPICe Agro</title>
+<meta name="description" content="Huerto Rentable: programa de formación con los 6 seminarios incluidos, acompañamiento técnico y el invernadero para aplicarlo. Ciencia del suelo aplicada al huerto. HR25, HR35, HR75.">
+<link rel="canonical" href="https://agro.spicelab.cl/huerto-rentable.html">
+<meta property="og:title" content="Huerto Rentable — SPICe Agro">
+<meta property="og:description" content="Invernadero instalado + acompañamiento técnico. Del laboratorio al huerto.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://agro.spicelab.cl/huerto-rentable.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%23317286' stroke-width='2.3' stroke-linecap='round'%3E%3Cpath d='M24,17.54c-3.5-6.8-8.5-9.78-12.2-10.2,0,3.57,3.6,8.16,12.2,10.2Z'/%3E%3Cpath d='M24,16.4c3.5-6.8,8.5-9.78,12.2-10.2,0,3.57-3.6,8.16-12.2,10.2Z'/%3E%3Cpath d='M24,11.41v11.79'/%3E%3C/g%3E%3Cpath fill='none' stroke='%23cb9831' stroke-width='2.3' stroke-linecap='round' d='M11,23.2h26'/%3E%3Ccircle cx='23.98' cy='29.87' r='2.6' fill='%23cb9831'/%3E%3Ccircle cx='14.94' cy='30.29' r='2.1' fill='%23cb9831'/%3E%3Ccircle cx='32.56' cy='30.12' r='2.1' fill='%23cb9831'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles.css">
+<style>
+/* Huerto Rentable — estilos de página */
+.hr-hero{position:relative;background:linear-gradient(155deg,var(--navy-deep),var(--navy) 50%,var(--navy-soft));color:var(--cream);padding:clamp(4rem,8vw,6rem) 0 clamp(3.5rem,7vw,5rem);overflow:hidden}
+.hr-hero .topo{position:absolute;inset:0;stroke:var(--teal);opacity:.12;pointer-events:none}
+.hr-hero .wrap{position:relative;z-index:2}
+.hr-hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.4rem,5.5vw,4rem);line-height:1.02;letter-spacing:-.026em;max-width:16ch;margin:18px 0}
+.hr-hero h1 em{font-style:italic;color:var(--ochre)}
+.hr-hero .lead{font-size:clamp(1.05rem,1.5vw,1.22rem);color:rgba(255,251,220,.84);max-width:52ch;margin:0 0 1rem}
+.hr-hero .intro{font-size:1rem;color:rgba(255,251,220,.7);max-width:56ch;margin:0 0 2rem}
+.hr-steps{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:2.4rem}
+.hr-step{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:8px 16px;font-size:.84rem;color:rgba(255,251,220,.9)}
+.hr-step-num{width:22px;height:22px;border-radius:50%;background:var(--ochre);color:var(--navy-deep);font-weight:700;font-size:.78rem;display:flex;align-items:center;justify-content:center;flex:none}
+.hr-trust{display:flex;gap:11px;align-items:flex-start;background:rgba(49,114,134,.14);border-left:3px solid var(--teal);border-radius:0 10px 10px 0;padding:14px 18px;max-width:54ch}
+.hr-trust svg{width:20px;height:20px;color:var(--teal);flex:none;margin-top:2px}
+.hr-trust p{font-size:.88rem;color:rgba(255,251,220,.85);line-height:1.6}
+.hr-trust a{color:var(--ochre);font-weight:600}
+
+.hr-programs{padding:clamp(3.5rem,7vw,5.5rem) 0;background:var(--paper)}
+.hr-section-head{text-align:center;max-width:60ch;margin:0 auto clamp(2.5rem,5vw,3.5rem)}
+.hr-section-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,4vw,2.8rem);letter-spacing:-.022em;margin:12px 0;color:var(--navy)}
+.hr-section-head p{color:var(--ink-soft);font-size:1.05rem}
+.hr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+.hr-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(1.5rem,3vw,2rem);box-shadow:var(--shadow);display:flex;flex-direction:column;height:100%;transition:transform .22s,box-shadow .22s}
+.hr-card:hover{transform:translateY(-5px);box-shadow:0 1px 3px rgba(25,31,57,.06),0 28px 56px -28px rgba(25,31,57,.42)}
+.hr-card.featured{border:2px solid var(--ochre)}
+.hr-pill{display:inline-block;font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;background:var(--teal-dim);color:var(--teal);padding:.32rem .7rem;border-radius:100px;margin-bottom:.9rem;align-self:flex-start}
+.hr-pill.ochre{background:var(--ochre-dim);color:#a07825}
+.hr-card h3{font-family:var(--serif);font-weight:600;font-size:1.6rem;letter-spacing:-.014em;color:var(--navy);margin-bottom:.3rem}
+.hr-card-sub{font-size:.92rem;color:var(--ink-soft);margin-bottom:1.2rem;line-height:1.5}
+.hr-spec{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--teal);background:var(--teal-dim);border-radius:8px;padding:8px 12px;margin-bottom:1.2rem}
+.hr-desc{font-size:.92rem;color:var(--ink-soft);line-height:1.62;margin-bottom:1.2rem}
+.hr-includes{margin-bottom:1.5rem}
+.hr-includes h4{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);margin-bottom:.7rem}
+.hr-includes ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.hr-includes li{font-size:.86rem;color:var(--ink-soft);padding-left:22px;position:relative;line-height:1.45}
+.hr-includes li::before{content:"";position:absolute;left:0;top:6px;width:12px;height:12px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23317286' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");background-size:contain;background-repeat:no-repeat}
+.hr-quote{margin-top:auto;padding-top:1.3rem;border-top:1px dashed var(--line)}
+.hr-quote-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--ink-soft);margin-bottom:.9rem;display:block}
+.hr-quote .btn{width:100%;justify-content:center}
+@media(max-width:900px){.hr-grid{grid-template-columns:1fr}}
+
+.hr-note{padding:clamp(3rem,6vw,4.5rem) 0;background:linear-gradient(160deg,var(--navy-deep),var(--navy));color:var(--cream)}
+.hr-note-box{max-width:62ch;margin:0 auto;text-align:center}
+.hr-note-box .mono{color:var(--ochre);margin-bottom:1rem;display:inline-flex}
+.hr-note-box h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,3.5vw,2.4rem);letter-spacing:-.02em;margin-bottom:1rem;color:var(--cream)}
+.hr-note-box p{color:rgba(255,251,220,.78);font-size:1.02rem;line-height:1.7;margin-bottom:1rem}
+
+.hr-cta{padding:clamp(3rem,6vw,5rem) 0;background:var(--paper)}
+.hr-cta-box{background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:var(--cream);border-radius:28px;padding:clamp(2.5rem,5vw,4rem);text-align:center;position:relative;overflow:hidden}
+.hr-cta-box .ghostmark{position:absolute;right:-50px;bottom:-60px;width:280px;height:280px;color:var(--ochre);opacity:.09;pointer-events:none}
+.hr-cta-box .inner{position:relative;z-index:2;max-width:54ch;margin:0 auto}
+.hr-cta-box h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:-.022em;margin:12px 0 12px}
+.hr-cta-box p{color:var(--sage);margin-bottom:1.8rem;font-size:1.02rem;line-height:1.6}
+.hr-cta-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+</style>
+</head>
+<body>
+
+<svg style="position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 48 48">
+    <g fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M24,17.54c-3.5-6.8-8.5-9.78-12.2-10.2,0,3.57,3.6,8.16,12.2,10.2Z"/>
+      <path d="M24,16.4c3.5-6.8,8.5-9.78,12.2-10.2,0,3.57-3.6,8.16-12.2,10.2Z"/>
+      <path d="M24,11.41v11.79"/>
+    </g>
+    <path fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" d="M11,23.2h26"/>
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M23.98,24.13v5.74"/><path d="M23.17,29.87l-8.39,.5"/>
+      <path d="M23.98,29.87l8.18,.25"/><path d="M24.03,31.38l-.1,6.51"/>
+      <path d="M23.84,37.9l-6,2.5"/><path d="M23.84,37.9l6.5,2"/>
+      <path d="M35.31,37.3l-4.94,2.6"/>
+    </g>
+    <circle cx="23.98" cy="29.87" r="2.6" fill="currentColor" stroke="none"/>
+    <circle cx="14.94" cy="30.29" r="2.1" fill="currentColor" stroke="none"/>
+    <circle cx="32.56" cy="30.12" r="2.1" fill="currentColor" stroke="none"/>
+    <circle cx="23.84" cy="37.9"  r="2.4" fill="currentColor" stroke="none"/>
+    <circle cx="17.84" cy="40.4"  r="1.9" fill="currentColor" stroke="none"/>
+    <circle cx="30.34" cy="39.9"  r="1.9" fill="currentColor" stroke="none"/>
+  </symbol>
+</svg>
+
+<!-- HEADER -->
+<header id="top">
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="/" aria-label="SPICe Agro — inicio">
+        <svg viewBox="0 0 48 48" width="36" height="36" aria-hidden="true">
+          <g fill="none" stroke="#317286" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24,17.54c-3.5-6.8-8.5-9.78-12.2-10.2,0,3.57,3.6,8.16,12.2,10.2Z"/>
+            <path d="M24,16.4c3.5-6.8,8.5-9.78,12.2-10.2,0,3.57-3.6,8.16-12.2,10.2Z"/>
+            <path d="M24,11.41v11.79"/>
+          </g>
+          <path fill="none" stroke="#cb9831" stroke-width="2.3" stroke-linecap="round" d="M11,23.2h26"/>
+          <g fill="none" stroke="#cb9831" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23.98,24.13v5.74"/><path d="M23.17,29.87l-8.39,.5"/>
+            <path d="M23.98,29.87l8.18,.25"/><path d="M24.03,31.38l-.1,6.51"/>
+            <path d="M23.84,37.9l-6,2.5"/><path d="M23.84,37.9l6.5,2"/>
+            <path d="M35.31,37.3l-4.94,2.6"/>
+          </g>
+          <g fill="#cb9831" stroke="none">
+            <circle cx="23.98" cy="29.87" r="2.6"/><circle cx="14.94" cy="30.29" r="2.1"/>
+            <circle cx="32.56" cy="30.12" r="2.1"/><circle cx="23.84" cy="37.9" r="2.4"/>
+            <circle cx="17.84" cy="40.4" r="1.9"/><circle cx="30.34" cy="39.9" r="1.9"/>
+          </g>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-wm">SPICe <span>Agro</span></span>
+          <span class="brand-tag">del laboratorio al huerto</span>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <ul class="nav-links" id="nav-menu" role="list">
+        <li><a href="/#seminarios">Seminarios</a></li>
+        <li><a href="/huerto-rentable.html">Huerto Rentable</a></li>
+        <li><a href="/#herramientas">Herramientas</a></li>
+        <li><a href="/#ciencia">La ciencia</a></li>
+        <li><a class="btn ochre" href="/seminario-suelo-vivo.html">Suelo Vivo &rsaquo;</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hr-hero">
+  <svg class="topo" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+    <path d="M-60 120 C 280 60 580 200 880 120 S 1500 40 1500 120"/>
+    <path d="M-60 230 C 300 160 600 320 900 230 S 1500 140 1500 230"/>
+    <path d="M-60 340 C 320 260 620 420 920 340 S 1500 250 1500 340"/>
+    <path d="M-60 450 C 340 370 640 520 940 450 S 1500 360 1500 450"/>
+  </svg>
+  <div class="wrap">
+    <span class="mono eyebrow--ochre eyebrow">Programa de formación e implementación</span>
+    <h1>Huerto <em>Rentable</em></h1>
+    <p class="lead">No es un invernadero. Es un programa completo de formación con base científica — los 6 seminarios incluidos, acompañamiento técnico en terreno y la infraestructura para producir.</p>
+    <p class="intro">El conocimiento es el corazón del programa. Aprendes la ciencia del suelo, el diseño del huerto, el manejo del clima y la planificación de cultivos con el mismo rigor con que SPICe Lab analiza una muestra en el laboratorio. El invernadero es el lugar donde aplicas todo eso — no el producto en sí.</p>
+    <div class="hr-steps">
+      <div class="hr-step"><span class="hr-step-num">1</span>Conversamos tu espacio y objetivos</div>
+      <div class="hr-step"><span class="hr-step-num">2</span>Te recomendamos el programa</div>
+      <div class="hr-step"><span class="hr-step-num">3</span>Coordinamos instalación</div>
+    </div>
+    <div class="hr-trust">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      <p>Programas diseñados por <strong>Dr. Marcos Salas-Saavedra</strong> — PhD University of Queensland · Postdoc Princeton University. <a href="https://www.spicelab.cl/equipo/" target="_blank" rel="noopener">Conocer al equipo &rarr;</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMAS -->
+<section class="hr-programs" id="programas">
+  <div class="wrap">
+    <div class="hr-section-head">
+      <span class="mono eyebrow--ochre eyebrow" style="justify-content:center">Nuestros programas</span>
+      <h2>Formación científica + tu huerto, en marcha</h2>
+      <p>Los tres programas incluyen <strong>los 6 seminarios completos</strong> y una entrevista inicial de objetivos personalizados. Cambia la escala de la infraestructura — no el acceso al conocimiento.</p>
+    </div>
+    <div class="hr-grid">
+
+      <!-- HR25 -->
+      <article class="hr-card">
+        <span class="hr-pill">Primer paso</span>
+        <h3>Huerto Rentable 25</h3>
+        <p class="hr-card-sub">Formación completa + tu primera unidad productiva en casa</p>
+        <div class="hr-spec">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          6 seminarios incluidos &middot; invernadero 25 m&sup2;
+        </div>
+        <p class="hr-desc">Para quienes parten desde cero. Recibes toda la formación de SPICe Agro y una primera unidad funcional para aplicarla, en un espacio reducido. Ideal para huertos familiares y patios.</p>
+        <div class="hr-includes">
+          <h4>Formación y acompañamiento</h4>
+          <ul>
+            <li><strong>Los 6 seminarios completos</strong> — del diseño a la monetización</li>
+            <li>Entrevista inicial de objetivos personalizados</li>
+            <li>Acompañamiento técnico en la instalación</li>
+            <li>Guía de operación del sistema</li>
+          </ul>
+          <h4 style="margin-top:1rem">Infraestructura</h4>
+          <ul>
+            <li>Invernadero de 25 m&sup2; instalado en terreno</li>
+            <li>Implementación inicial en tu espacio</li>
+          </ul>
+        </div>
+        <div class="hr-quote">
+          <span class="hr-quote-label">Valor según terreno y ubicación</span>
+          <a class="btn ochre" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20me%20gustar%C3%ADa%20cotizar%20el%20programa%20Huerto%20Rentable%2025." target="_blank" rel="noopener">Cotizar HR25</a>
+        </div>
+      </article>
+
+      <!-- HR35 -->
+      <article class="hr-card featured">
+        <span class="hr-pill ochre">Más elegido</span>
+        <h3>Huerto Rentable 35</h3>
+        <p class="hr-card-sub">El equilibrio ideal entre formación, escala y precio</p>
+        <div class="hr-spec">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          6 seminarios incluidos &middot; invernadero 35 m&sup2;
+        </div>
+        <p class="hr-desc">Nuestro programa más elegido. Toda la formación científica de SPICe Agro más una unidad intensiva de producción con acompañamiento real en terreno — para pequeños productores y familias rurales.</p>
+        <div class="hr-includes">
+          <h4>Formación y acompañamiento</h4>
+          <ul>
+            <li><strong>Los 6 seminarios completos</strong> &mdash; incluidos con precio preferente</li>
+            <li>Entrevista inicial de objetivos personalizados</li>
+            <li>Acompañamiento técnico en la instalación (visita presencial)</li>
+            <li>Guía de organización y operación</li>
+            <li>Bonos de apoyo para la primera etapa</li>
+          </ul>
+          <h4 style="margin-top:1rem">Infraestructura</h4>
+          <ul>
+            <li>Invernadero de 35 m&sup2; instalado &middot; 2&ndash;3 semanas</li>
+            <li>Implementación inicial completa</li>
+          </ul>
+        </div>
+        <div class="hr-quote">
+          <span class="hr-quote-label">Ver detalles completos y cotizar</span>
+          <a class="btn ochre" href="/huerto-rentable-35.html">Ver HR35 &rsaquo;</a>
+        </div>
+      </article>
+
+      <!-- HR75 -->
+      <article class="hr-card">
+        <span class="hr-pill">Avanzado</span>
+        <h3>Huerto Rentable 75</h3>
+        <p class="hr-card-sub">Formación completa + escala comercial</p>
+        <div class="hr-spec">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          6 seminarios incluidos &middot; invernadero 75 m&sup2;
+        </div>
+        <p class="hr-desc">La misma formación científica completa, aplicada a una unidad de mayor escala e intención comercial. Para quienes quieren producir con proyección y construir una base sólida de crecimiento.</p>
+        <div class="hr-includes">
+          <h4>Formación y acompañamiento</h4>
+          <ul>
+            <li><strong>Los 6 seminarios completos</strong> — del diseño a la monetización</li>
+            <li>Entrevista inicial de objetivos personalizados</li>
+            <li>Acompañamiento técnico completo en la instalación</li>
+            <li>Diseño y organización del sistema productivo</li>
+          </ul>
+          <h4 style="margin-top:1rem">Infraestructura</h4>
+          <ul>
+            <li>Invernadero de 75 m&sup2; instalado &middot; 3&ndash;4 semanas</li>
+            <li>Mayor capacidad productiva y proyección comercial</li>
+          </ul>
+        </div>
+        <div class="hr-quote">
+          <span class="hr-quote-label">Valor según terreno y ubicación</span>
+          <a class="btn ochre" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20me%20gustar%C3%ADa%20cotizar%20el%20programa%20Huerto%20Rentable%2075." target="_blank" rel="noopener">Cotizar HR75</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- NOTA -->
+<section class="hr-note">
+  <div class="wrap">
+    <div class="hr-note-box">
+      <span class="mono eyebrow--ochre eyebrow" style="justify-content:center">Lo que de verdad importa</span>
+      <h2>Compras conocimiento, no fierros</h2>
+      <p>Un invernadero lo vende cualquiera. Lo que nadie más entrega en la agricultura de pequeña escala en Chile es la ciencia del suelo aplicada al huerto — la misma geoquímica que SPICe Lab usa en el laboratorio, traducida en una formación que te enseña a producir de verdad.</p>
+      <p>Por eso los 6 seminarios y la entrevista de objetivos van incluidos en todos los programas. El invernadero es donde aplicas lo que aprendes — el conocimiento es lo que te hace rentable.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="hr-cta">
+  <div class="wrap">
+    <div class="hr-cta-box">
+      <svg class="ghostmark" viewBox="0 0 48 48" aria-hidden="true"><use href="#mark" style="color:var(--ochre)"/></svg>
+      <div class="inner">
+        <span class="mono eyebrow--ochre eyebrow" style="justify-content:center">Siguiente paso</span>
+        <h2>Conversemos sobre el programa que mejor encaja contigo</h2>
+        <p>Te ayudamos a evaluar tu espacio, tus objetivos y cuál de estos programas tiene más sentido para tu etapa actual. Sin compromiso.</p>
+        <div class="hr-cta-actions">
+          <a class="btn ochre" href="/huerto-rentable-35.html">Ver Huerto Rentable 35</a>
+          <a class="btn ghost-light" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20me%20gustar%C3%ADa%20cotizar%20un%20programa%20Huerto%20Rentable." target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand">
+        <a class="brand" href="/" aria-label="SPICe Agro inicio">
+          <svg viewBox="0 0 48 48" width="32" height="32" aria-hidden="true"><use href="#mark" style="color:var(--ochre)"/></svg>
+          <div class="brand-text"><span class="brand-wm">SPICe <span>Agro</span></span></div>
+        </a>
+        <p>Ciencia geoquímica aplicada a la agricultura regenerativa de pequeña escala. Una rama de SPICe Lab.</p>
+        <span class="by">&#8599; <a href="https://www.spicelab.cl" style="color:inherit">spicelab.cl</a></span>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Huerto Rentable</h4>
+          <a href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20me%20gustar%C3%ADa%20cotizar%20el%20programa%20Huerto%20Rentable%2025." target="_blank" rel="noopener">HR25</a>
+          <a href="/huerto-rentable-35.html">HR35</a>
+          <a href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20me%20gustar%C3%ADa%20cotizar%20el%20programa%20Huerto%20Rentable%2075." target="_blank" rel="noopener">HR75</a>
+        </div>
+        <div class="foot-col">
+          <h4>SPICe Agro</h4>
+          <a href="/#seminarios">Seminarios</a>
+          <a href="/seminario-suelo-vivo.html">Suelo Vivo</a>
+          <a href="/#herramientas">Herramientas</a>
+        </div>
+        <div class="foot-col">
+          <h4>Empresa</h4>
+          <a href="/#ciencia">La ciencia</a>
+          <a href="https://www.spicelab.cl/">SPICe Lab</a>
+          <a href="mailto:contact@spicelab.cl">Contacto</a>
+        </div>
+      </div>
+    </div>
+    <div class="legal">
+      <span>&copy; <span id="yr">2026</span> South Pacific Isotope Centre SpA &middot; RUT 78.237.797-3 &middot; Lanco, Regi&oacute;n de Los R&iacute;os, Chile</span>
+      <span>SPICe Agro &middot; del laboratorio al huerto</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20me%20gustar%C3%ADa%20cotizar%20un%20programa%20Huerto%20Rentable." aria-label="Cotizar por WhatsApp" target="_blank" rel="noopener">
+  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.8 1 1-4.7-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C5 9.5 9.5 5 16 5s11 4.5 11 10-4.9 9.8-11 9.8zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.5 0-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.6.8.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
+</a>
+
+<script>
+(function(){
+  "use strict";
+  var yr=document.getElementById("yr");if(yr)yr.textContent=new Date().getFullYear();
+  var hdr=document.querySelector("header");
+  if(hdr){var f=function(){hdr.classList.toggle("scrolled",window.scrollY>6)};f();window.addEventListener("scroll",f,{passive:true});}
+  var tog=document.querySelector(".nav-toggle"),menu=document.getElementById("nav-menu");
+  if(tog&&menu){
+    tog.addEventListener("click",function(){var o=menu.classList.toggle("open");tog.setAttribute("aria-expanded",String(o));});
+    menu.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){menu.classList.remove("open");tog.setAttribute("aria-expanded","false");});});
+  }
+})();
+</script>
+</body>
+</html>
