@@ -14,12 +14,12 @@
 <style>
 .doc-hero{background:linear-gradient(160deg,var(--navy-deep),var(--navy) 60%,var(--navy-soft));color:var(--cream);padding:clamp(3rem,7vw,5rem) 0 clamp(2.5rem,5vw,3.5rem);position:relative;overflow:hidden}
 .doc-hero .topo{position:absolute;inset:0;stroke:var(--teal);opacity:.1;pointer-events:none}
-.doc-hero .wrap{position:relative;z-index:2;max-width:760px}
+.doc-hero .wrap{position:relative;z-index:2;max-width:780px}
 .doc-hero .eyebrow{justify-content:flex-start;margin-bottom:14px}
 .doc-hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(2rem,4.5vw,3.1rem);line-height:1.04;letter-spacing:-.024em;margin-bottom:1rem}
-.doc-hero .lead{font-size:clamp(1.05rem,1.6vw,1.2rem);color:rgba(255,251,220,.82);line-height:1.6;max-width:60ch}
+.doc-hero .lead{font-size:clamp(1.05rem,1.6vw,1.2rem);color:rgba(255,251,220,.82);line-height:1.6;max-width:62ch}
 .doc-body{padding:clamp(2.5rem,5vw,4rem) 0}
-.doc-body .wrap{max-width:760px}
+.doc-body .wrap{max-width:780px}
 .doc-body p{color:var(--ink-soft);line-height:1.75;margin-bottom:1.1rem;font-size:1.02rem}
 .doc-body p strong{color:var(--navy)}
 .doc-section{margin-bottom:2.6rem}
@@ -36,11 +36,30 @@
 .hl-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.6rem;margin:1.4rem 0}
 .hl-box p{margin-bottom:.7rem;font-size:.96rem}
 .hl-box p:last-child{margin-bottom:0}
+.comp-list{list-style:none;display:flex;flex-direction:column;gap:14px;margin:1.2rem 0}
+.comp-list li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.3rem;display:flex;gap:14px;align-items:flex-start}
+.comp-list .letter{flex:none;width:30px;height:30px;border-radius:8px;background:var(--teal);color:#fff;font-family:var(--mono);font-weight:600;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.comp-list .ctxt{font-size:.97rem;color:var(--ink-soft);line-height:1.55}
+.comp-list .ctxt strong{color:var(--navy)}
+.sem-list{counter-reset:sem;list-style:none;display:flex;flex-direction:column;gap:10px;margin:1.2rem 0}
+.sem-list li{counter-increment:sem;padding:11px 0 11px 44px;position:relative;border-bottom:1px solid var(--line);font-size:.98rem;color:var(--ink-soft);line-height:1.5}
+.sem-list li:last-child{border-bottom:none}
+.sem-list li::before{content:counter(sem);position:absolute;left:0;top:9px;width:28px;height:28px;border-radius:7px;background:var(--ochre-dim);color:var(--ochre);font-family:var(--serif);font-weight:600;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.sem-list li strong{color:var(--navy)}
+.cmp-table{width:100%;border-collapse:collapse;margin:1.3rem 0;font-size:.93rem}
+.cmp-table th,.cmp-table td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line)}
+.cmp-table thead th{background:var(--navy);color:var(--cream);font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+.cmp-table thead th:first-child{border-radius:10px 0 0 0}
+.cmp-table thead th:last-child{border-radius:0 10px 0 0}
+.cmp-table td:first-child{font-weight:600;color:var(--navy)}
+.cmp-table .yes{color:var(--teal);font-weight:600}
+.cmp-table .cond{color:var(--ochre);font-weight:600}
+.cmp-table .no{color:var(--sage)}
+.cmp-table tbody tr:nth-child(even){background:rgba(25,31,57,.02)}
 .doc-cta{background:linear-gradient(155deg,var(--navy),var(--navy-deep));color:var(--cream);border-radius:20px;padding:clamp(2rem,4vw,3rem);text-align:center;margin-top:3rem}
 .doc-cta h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.5rem,3vw,2.1rem);color:var(--cream);margin-bottom:.8rem;letter-spacing:-.018em}
 .doc-cta p{color:rgba(255,251,220,.82);max-width:54ch;margin:0 auto 1.6rem}
 .doc-cta .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.doc-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:1.6rem}
 </style>
 </head>
 <body>
@@ -111,124 +130,140 @@
       <path d="M-60 340 C 320 260 620 420 920 340 S 1500 250 1500 340"/>
     </svg>
     <div class="wrap">
-      <span class="mono eyebrow--ochre eyebrow">Huerto Rentable 35</span>
+      <span class="mono eyebrow--ochre eyebrow">Programa Huerto Rentable &middot; HR35 &middot; HR85</span>
       <h1>Información importante antes de avanzar</h1>
-      <p class="lead">Aquí te explicamos de forma clara cómo funciona esta implementación, qué incluye, cómo se organiza el proceso, la forma de pago y cuál es el enfoque técnico que diferencia a SPICe Agro.</p>
+      <p class="lead">Este documento resume de forma clara cómo funciona el Programa Huerto Rentable, qué incluye, cómo se organiza el proceso, los formatos y planes disponibles, los tiempos estimados, las formas de pago y el enfoque técnico que diferencia a SPICe Agro.</p>
       <div class="summary-grid">
-        <div class="summary-item"><span class="st">Programa pagado</span><span class="sv">Implementación privada con valor de <strong>$990.000 CLP</strong>.</span></div>
-        <div class="summary-item"><span class="st">Incluye</span><span class="sv">Invernadero de <strong>35 m² instalado</strong> + 6 seminarios + acompañamiento.</span></div>
-        <div class="summary-item"><span class="st">Enfoque</span><span class="sv">Base práctica, ordenada y mejor pensada desde el inicio.</span></div>
+        <div class="summary-item"><span class="st">Programa pagado</span><span class="sv">HR35 · Plan Completo: <strong>$990.000 CLP</strong> (original $1.690.000).</span></div>
+        <div class="summary-item"><span class="st">Incluye</span><span class="sv">Invernadero instalado + <strong>6 seminarios</strong> + acompañamiento + guía.</span></div>
+        <div class="summary-item"><span class="st">Formatos</span><span class="sv">HR35 y HR85, en planes <strong>Completo</strong> y <strong>Pro</strong>.</span></div>
       </div>
-      <div class="note-box"><strong>Importante:</strong> El envío del formulario o el primer contacto no tienen costo, pero <strong>Huerto Rentable 35 corresponde a una implementación privada pagada</strong>.</div>
     </div>
   </section>
   <section class="doc-body">
     <div class="wrap">
   <div class="doc-section">
     <span class="num">1</span>
-    <h2>¿Qué es Huerto Rentable 35?</h2>
-      <p>Huerto Rentable 35 es una implementación privada y acompañada, diseñada para personas que quieren comenzar o mejorar un sistema de producción de hortalizas con una base más sólida, más ordenada y mejor pensada desde el inicio.</p>
-      <p>No se trata solo de instalar un invernadero: se trata de ayudarte a construir un sistema productivo más eficiente, con una mirada práctica, técnica y moderna hacia la agricultura orgánica y regenerativa.</p>
-      <p>La idea es reducir errores comunes, aprovechar mejor el espacio disponible y comenzar con una base que tenga más sentido productivo y económico a largo plazo.</p>
-      
+    <h2>¿Qué es el Programa Huerto Rentable?</h2>
+      <p>El Programa Huerto Rentable es una implementación privada y acompañada, diseñada para personas que quieren comenzar o mejorar un sistema de producción de hortalizas con una base más sólida, ordenada y mejor pensada desde el inicio. No se trata solo de instalar un invernadero: se trata de ayudarte a construir un sistema productivo más eficiente y rentable, con una mirada práctica, técnica y moderna hacia la agricultura orgánica y regenerativa.</p>
+      <p>Hoy el programa está más estructurado que antes. Junto con la infraestructura instalada, incorpora un ciclo formativo de seis seminarios, acompañamiento técnico y una guía de organización con materiales de apoyo, para que reduzcas errores comunes, aproveches mejor el espacio y partas con una base que tenga real sentido productivo y económico a largo plazo.</p>
   </div>
   <div class="doc-section">
     <span class="num">2</span>
-    <h2>¿Qué incluye esta implementación?</h2>
-      <p>El programa incluye un <strong>invernadero base de 35 m² instalado</strong>, una reunión inicial online para revisar tu caso, tu espacio y tus objetivos, y una etapa de planificación inicial donde trabajamos una propuesta técnica de organización del sistema.</p>
-      <p>Esa propuesta considera criterios de distribución del terreno, uso estratégico del invernadero, lógica de sucesión y rotación de hortalizas, continuidad productiva, alternación de cultivos y optimización del trabajo del huerto, con una mirada más avanzada hacia la agricultura orgánica y regenerativa.</p>
-      <p>Además, incluye los 6 seminarios completos, orientación para preparar el espacio antes de la instalación, coordinación logística, una instancia presencial asociada a la implementación y una etapa inicial de acompañamiento para ayudarte a comenzar con más claridad.</p>
-      
+    <h2>¿Qué incluye el programa?</h2>
+      <p>El programa se organiza en cuatro componentes:</p>
+      <ul class="comp-list">
+        <li><span class="letter">A</span><span class="ctxt"><strong>Invernadero instalado.</strong> Provisión e instalación completa de un invernadero de uso hortícola protegido, listo para comenzar a producir bajo cubierta.</span></li>
+        <li><span class="letter">B</span><span class="ctxt"><strong>Implementación inicial — seis seminarios online.</strong> Un ciclo formativo que ordena la estrategia de partida y te entrega criterios técnicos modernos (detalle en la sección 3).</span></li>
+        <li><span class="letter">C</span><span class="ctxt"><strong>Acompañamiento técnico.</strong> Resolvemos dudas asociadas a la instalación y a otros aspectos del huerto, como sistemas de riego u otros elementos que surjan en tu caso.</span></li>
+        <li><span class="letter">D</span><span class="ctxt"><strong>Guía de organización.</strong> Diversos materiales de apoyo —además de los seminarios— con guías prácticas y consejos para sostener tu huerto rentable en el tiempo.</span></li>
+      </ul>
   </div>
   <div class="doc-section">
     <span class="num">3</span>
-    <h2>¿Qué valor tiene el programa y cómo se paga?</h2>
-      <p>El valor actual de los <strong>cupos de lanzamiento</strong> es de <strong>$990.000 CLP</strong>.</p>
-      <p>Para reservar el cupo e ingresar formalmente al proceso, se solicita un pago inicial equivalente al <strong>50% del valor total</strong>. El <strong>50% restante</strong> se coordina antes de la instalación del invernadero, según el calendario acordado con cada caso.</p>
-      <p>Este esquema se revisa <strong>caso a caso</strong>: si necesitas una modalidad de pago distinta, conversamos y llegamos a un acuerdo que se ajuste a tu situación.</p>
-      <p>La forma de pago puede realizarse por <strong>transferencia bancaria</strong> y, según disponibilidad, también mediante opciones de pago online. Una vez confirmado el ingreso, comenzamos la etapa de coordinación, planificación y preparación del caso.</p>
-      <div class="hl-box">
-        <p><strong>Importante:</strong> El primer contacto no tiene costo, pero el programa corresponde a una <strong>implementación privada pagada</strong>.</p>
-        <p><strong>Referencia útil:</strong> Solo un invernadero de calidad similar al que incluye esta implementación puede costar alrededor de <strong>$890.000 CLP o más</strong>, normalmente sin instalación.</p>
-        <p>En este caso, la propuesta no solo considera la infraestructura instalada, sino también la formación completa, la planificación inicial, la orientación técnica y el acompañamiento para partir mejor.</p>
-      </div>
+    <h2>Los seis seminarios online</h2>
+      <p>El ciclo formativo acompaña la implementación y ordena la estrategia desde el inicio:</p>
+      <ul class="sem-list">
+        <li><strong>Presentación del programa.</strong> Propuesta inicial y diseño preliminar de tu huerto.</li>
+        <li><strong>Monetización del huerto.</strong> Ejemplos exitosos en Estados Unidos, Canadá, Australia y Chile: market gardening, huerto de flores, modelos mixtos y Agricultura Soportada por la Comunidad (CSA).</li>
+        <li><strong>La salud del suelo y la agricultura regenerativa.</strong> Por qué un suelo vivo es la base de un huerto productivo.</li>
+        <li><strong>Pesticidas y fertilizantes orgánicos.</strong> Qué usar, cómo prepararlos y cuándo aplicarlos.</li>
+        <li><strong>Planificación y sucesión de cultivos.</strong> Incluye herramientas para ahorrar tiempo y optimizar el trabajo del huerto (farm optimization).</li>
+        <li><strong>El clima y el uso correcto del invernadero.</strong> Cómo leer el clima de tu zona y sacarle el máximo provecho a la cubierta.</li>
+      </ul>
   </div>
   <div class="doc-section">
     <span class="num">4</span>
-    <h2>¿Cómo funciona el proceso después de avanzar?</h2>
-      <p>Primero conversamos brevemente tu caso para entender tus objetivos, tu espacio y tu etapa actual.</p>
-      <p>Luego, una vez confirmado el ingreso, agendamos la reunión inicial online, donde revisamos el terreno, tus metas y el contexto general del proyecto.</p>
-      <p>A partir de esa reunión, desarrollamos una propuesta inicial de organización productiva del espacio: distribución del terreno, uso estratégico del invernadero, lógica de sucesión y rotación de hortalizas, alternación de cultivos, criterios de continuidad productiva y formas de optimizar el trabajo del huerto.</p>
-      <p>Después de eso, te orientamos para preparar el espacio, coordinamos la logística y programamos la instalación del invernadero. Finalmente, realizamos un seguimiento inicial para ayudarte a implementar mejor las primeras decisiones.</p>
-      
+    <h2>Formatos disponibles</h2>
+      <p>El programa está disponible en tres formatos según el espacio y los objetivos de cada caso. Todos comparten la misma estructura A–D; cambian el tamaño del invernadero y la escala de producción.</p>
+      <table class="cmp-table">
+        <thead><tr><th>Formato</th><th>HR25</th><th>HR35</th><th>HR75</th></tr></thead>
+        <tbody>
+          <tr><td>Enfoque</td><td>Unidad de entrada para partir con base sólida.</td><td>Unidad compacta e intensiva para iniciar o mejorar la producción.</td><td>Unidad ampliada para mayor volumen y diversificación.</td></tr>
+          <tr><td>Superficie</td><td>&asymp; 25 m²</td><td>&asymp; 35 m²</td><td>&asymp; 75 m²</td></tr>
+          <tr><td>Ideal para</td><td>Quienes comienzan y quieren aprender produciendo.</td><td>Familias y proyectos que parten o buscan ordenar lo que ya tienen.</td><td>Quienes buscan producción complementaria de mayor escala o venta.</td></tr>
+        </tbody>
+      </table>
+      <div class="note-box"><strong>Nota:</strong> existen formatos de mayor escala disponibles por cotización. La ficha técnica detallada de cada invernadero (dimensiones, cobertura, espesor) se entrega en la propuesta técnico-comercial.</div>
   </div>
   <div class="doc-section">
     <span class="num">5</span>
-    <h2>¿Cuánto demora normalmente el proceso?</h2>
-      <p>El tiempo puede variar según la ubicación, el estado del terreno, la disponibilidad logística y la coordinación de instalación.</p>
-      <p>En términos generales, el proceso comienza con una conversación inicial y luego una reunión online dentro de los primeros días una vez confirmado el ingreso. Después se trabaja la preparación del espacio y la coordinación logística para la instalación.</p>
-      <p>En la mayoría de los casos, el objetivo es avanzar de forma ágil y ordenada, priorizando que el sistema quede bien encaminado antes de instalar.</p>
-      <p>El programa está pensado para personas que realmente quieren avanzar pronto, pero sin improvisar.</p>
-      
+    <h2>Planes: Completo y Pro</h2>
+      <p>Dentro de cada formato puedes elegir entre dos planes, según cuánto quieras avanzar de una vez:</p>
+      <table class="cmp-table">
+        <thead><tr><th>Incluye</th><th>Completo</th><th>Pro</th></tr></thead>
+        <tbody>
+          <tr><td>A. Invernadero instalado</td><td class="yes">Sí</td><td class="yes">Sí</td></tr>
+          <tr><td>B. Seis seminarios online</td><td class="yes">Sí</td><td class="yes">Sí</td></tr>
+          <tr><td>C. Acompañamiento técnico</td><td class="yes">Sí</td><td class="cond">Ampliado</td></tr>
+          <tr><td>D. Guía de organización</td><td class="yes">Sí</td><td class="yes">Sí</td></tr>
+          <tr><td>Diseño de riego tecnificado</td><td class="no">—</td><td class="cond">Condicional</td></tr>
+          <tr><td>Análisis de suelo con respaldo científico</td><td class="no">—</td><td class="cond">Condicional</td></tr>
+        </tbody>
+      </table>
+      <p>El <strong>Plan Pro</strong> suma lo que diferencia a SPICe Agro del resto: diseño de riego y análisis de suelo con base científica, para quienes quieren producir en serio desde el primer día.</p>
   </div>
   <div class="doc-section">
     <span class="num">6</span>
-    <h2>¿Cuántas reuniones incluye y cómo es el acompañamiento?</h2>
-      <p>El programa contempla una <strong>reunión inicial online</strong> para revisar el caso y ordenar la estrategia de partida, además de una <strong>instancia posterior de seguimiento</strong> para revisar cómo quedó encaminado el sistema y resolver las primeras dudas importantes.</p>
-      <p>También existe una <strong>instancia presencial</strong> asociada a la implementación del invernadero.</p>
-      <p>Más allá de esas etapas, el valor del programa está en que no se trata de una sola conversación aislada, sino de una implementación acompañada, donde buscamos que la persona no quede sola frente a decisiones importantes al comenzar.</p>
-      
+    <h2>Valor, inversión y formas de pago</h2>
+      <p>El valor preferencial actual de los <strong>cupos de lanzamiento</strong> (HR35 · Plan Completo) es de <strong>$990.000 CLP</strong> (precio hasta agotar stock; precio original $1.690.000 CLP). El HR85 y el Plan Pro tienen un valor diferenciado según formato y alcance, que se detalla en la propuesta técnico-comercial de cada caso.</p>
+      <p>Para reservar el cupo e ingresar formalmente al proceso se solicita un pago inicial equivalente al <strong>50% del valor total</strong>. El <strong>50% restante</strong> se coordina con la instalación del invernadero, según el calendario acordado con cada caso. Este esquema se revisa caso a caso: si necesitas una modalidad de pago distinta, conversamos y llegamos a un acuerdo que se ajuste a tu situación.</p>
+      <p><strong>Formas de pago:</strong> transferencia bancaria, pagos online (Mercado Pago / Mercado Crédito), tarjetas de débito y crédito, y otros medios según disponibilidad. El primer contacto no tiene costo, pero el programa corresponde a una implementación privada pagada.</p>
+      <div class="hl-box"><p><strong>Nota importante.</strong> Solo un invernadero de calidad similar al que incluye esta implementación puede costar alrededor de <strong>$890.000 CLP o más</strong>, normalmente sin instalación. Aquí la propuesta no es solo la infraestructura instalada, sino también la formación, la orientación técnica y el acompañamiento para partir mejor.</p></div>
   </div>
   <div class="doc-section">
     <span class="num">7</span>
-    <h2>¿Qué debe tener listo la persona antes de la instalación?</h2>
-      <p>Idealmente, la persona debe contar con un espacio disponible o en proceso de preparación, con acceso razonable para la logística de traslado e instalación.</p>
-      <p>También es importante tener claridad básica sobre el lugar donde se quiere implementar el sistema, la orientación general del terreno y las condiciones mínimas para trabajar.</p>
-      <p>Si aún no está todo definido, no hay problema: justamente parte del proceso consiste en ayudarte a ordenar eso antes de avanzar.</p>
-      <p>Lo importante no es que el terreno esté perfecto desde el primer día, sino que exista una intención real de implementarlo y de prepararlo con criterio.</p>
-      
+    <h2>¿Cómo funciona el proceso?</h2>
+      <ul class="sem-list">
+        <li>Conversamos brevemente tu caso para entender tus objetivos, tu espacio y tu etapa actual.</li>
+        <li>Confirmado el ingreso, agendamos la reunión inicial online (Seminario 1), donde revisamos terreno, metas y contexto del proyecto.</li>
+        <li>Desarrollamos la propuesta inicial de organización productiva: distribución del terreno, uso estratégico del invernadero, sucesión y rotación de cultivos, continuidad productiva y optimización del trabajo.</li>
+        <li>Te orientamos para preparar el espacio, coordinamos la logística y programamos la instalación del invernadero.</li>
+        <li>Avanzamos con el ciclo de seminarios y el acompañamiento técnico, y hacemos seguimiento para que comiences con claridad y dirección.</li>
+      </ul>
   </div>
   <div class="doc-section">
     <span class="num">8</span>
-    <h2>¿Qué cosas no incluye esta etapa?</h2>
-      <p>Esta etapa no está pensada como un diseño agronómico completo de largo plazo, ni como una ejecución total de todas las obras adicionales que un proyecto pueda requerir.</p>
-      <p>Tampoco incluye sistemas especializados que requieran desarrollo aparte, como instalaciones hidropónicas, automatizaciones avanzadas, obras civiles complejas, riego tecnificado completo, electricidad, cierres perimetrales, movimiento mayor de suelo u otras soluciones fuera del alcance de esta implementación base.</p>
-      <p>Si durante la evaluación del caso aparecen necesidades más avanzadas, se conversan por separado para definir qué sí corresponde a esta etapa y qué podría abordarse después.</p>
-      
+    <h2>¿Cuánto demora el proceso?</h2>
+      <p>El tiempo varía según la ubicación, el estado del terreno, la disponibilidad logística y la coordinación de instalación. En general, el proceso parte con una conversación inicial y una reunión online dentro de los primeros días una vez confirmado el ingreso.</p>
+      <p>Después se trabaja la preparación del espacio y la logística para instalar. El objetivo es avanzar de forma ágil y ordenada, priorizando que el sistema quede bien encaminado antes de instalar. Está pensado para personas que quieren avanzar pronto, pero sin improvisar.</p>
   </div>
   <div class="doc-section">
     <span class="num">9</span>
-    <h2>¿Qué diferencia tiene el enfoque de SPICe Agro?</h2>
-      <p>La gran diferencia es que en SPICe Agro no vemos esto como una simple instalación de infraestructura ni como una asesoría agrícola tradicional.</p>
-      <p>Nos interesa trabajar con una mirada más moderna, más técnica y mejor fundamentada, usando criterios actuales de agricultura orgánica y regenerativa para diseñar sistemas más inteligentes desde el inicio.</p>
-      <p>Eso significa pensar en el uso real del espacio, la continuidad productiva, la organización del trabajo, la lógica de cultivos, la salud del sistema y la reducción de errores frecuentes que muchas veces hacen perder tiempo y dinero.</p>
-      <p>Nuestro interés no es solo que el huerto se vea bonito, sino que quede mejor pensado para producir, aprender y sostenerse en el tiempo.</p>
-      
+    <h2>¿Qué debes tener listo antes de la instalación?</h2>
+      <p>Idealmente, un espacio disponible o en preparación, con acceso razonable para la logística de traslado e instalación, y claridad básica sobre el lugar y la orientación general del terreno.</p>
+      <p>Si aún no está todo definido, no hay problema: parte del proceso consiste justamente en ayudarte a ordenar eso antes de avanzar. Lo importante no es que el terreno esté perfecto desde el primer día, sino que exista una intención real de implementarlo y prepararlo con criterio.</p>
   </div>
   <div class="doc-section">
     <span class="num">10</span>
-    <h2>¿Para quién está pensado Huerto Rentable 35?</h2>
-      <p>Este programa está pensado para personas que quieren producir de manera más seria, ya sea porque están comenzando y quieren partir bien, o porque ya tienen algo en marcha pero sienten que les falta orden, claridad o una mejor estrategia.</p>
-      <p>También está pensado para quienes valoran una implementación privada, acompañada y con criterio técnico, y entienden que una buena base puede ahorrar muchos errores futuros.</p>
-      <p>Es especialmente útil para quienes quieren combinar alimentación familiar, aprendizaje real y, en muchos casos, una posible fuente de ingreso complementaria a mediano plazo.</p>
-      
+    <h2>¿Qué no incluye esta etapa?</h2>
+      <p>Esta etapa no es un diseño agronómico completo de largo plazo ni la ejecución total de todas las obras que un proyecto pueda requerir. En el Plan Completo no se incluyen obras civiles complejas, electricidad, cierres perimetrales, movimiento mayor de suelo, sistemas hidropónicos ni riego tecnificado (el diseño de riego está disponible en el Plan Pro o como módulo adicional).</p>
+      <p>Si durante la evaluación aparecen necesidades más avanzadas, se conversan por separado para definir qué corresponde a esta etapa y qué se aborda después.</p>
   </div>
   <div class="doc-section">
     <span class="num">11</span>
-    <h2>¿Nuestro compromiso termina con la instalación?</h2>
-      <p>No. En SPICe Agro no nos interesa hacer una instalación y desaparecer.</p>
-      <p>Nos interesa que esta primera etapa te deje una base técnica real para comenzar o mejorar tu sistema con más claridad.</p>
-      <p>Por eso, además del seguimiento inicial, mantenemos abierta la comunicación por WhatsApp para que puedas seguir resolviendo dudas puntuales a medida que avanzas.</p>
-      <p>Durante los primeros <strong>30 días</strong>, el acompañamiento se enfoca especialmente en el seguimiento de los objetivos definidos al inicio.</p>
-      <p>Queremos que quienes comienzan con nosotros puedan seguir creciendo con mejores criterios, mejores decisiones y acceso a una mirada más avanzada en agricultura orgánica y regenerativa.</p>
-      
+    <h2>La diferencia SPICe Agro</h2>
+      <p>En SPICe Agro no vemos esto como una simple instalación de infraestructura ni como una asesoría agrícola tradicional. Trabajamos con una mirada moderna, técnica y mejor fundamentada, usando criterios actuales de agricultura orgánica y regenerativa para diseñar sistemas más inteligentes desde el inicio: uso real del espacio, continuidad productiva, organización del trabajo, lógica de cultivos, salud del sistema y reducción de errores que hacen perder tiempo y dinero.</p>
+      <p>Y a diferencia de cualquier otro proveedor, respaldamos las decisiones con ciencia aplicada —incluyendo análisis de suelo— porque ese es nuestro origen como centro científico.</p>
+  </div>
+  <div class="doc-section">
+    <span class="num">12</span>
+    <h2>¿Para quién está pensado?</h2>
+      <p>Para personas que quieren producir de manera más seria: ya sea porque están comenzando y quieren partir bien, o porque ya tienen algo en marcha pero les falta orden, claridad o estrategia.</p>
+      <p>También para quienes valoran una implementación privada, acompañada y con criterio técnico, y entienden que una buena base ahorra muchos errores futuros. Es especialmente útil para quienes quieren combinar alimentación familiar, aprendizaje real y, en muchos casos, una fuente de ingreso complementaria a mediano plazo.</p>
+  </div>
+  <div class="doc-section">
+    <span class="num">13</span>
+    <h2>Nuestro compromiso no termina con la instalación</h2>
+      <p>En SPICe Agro no nos interesa instalar y desaparecer. Además del seguimiento inicial, mantenemos comunicación abierta por WhatsApp para resolver dudas puntuales a medida que avanzas. Durante los primeros <strong>30 días</strong> el acompañamiento se enfoca en el seguimiento de los objetivos definidos al inicio.</p>
+      <p>A futuro, queremos que esto se transforme en una comunidad real de aprendizaje y acompañamiento, con acceso continuo a nuevos seminarios y a una mirada cada vez más avanzada en agricultura orgánica y regenerativa.</p>
   </div>
       <div class="doc-cta">
-        <h2>¿Sientes que este enfoque calza con lo que buscas?</h2>
-        <p>El siguiente paso es conversar brevemente tu caso, resolver dudas puntuales y definir si realmente tiene sentido avanzar con esta etapa.</p>
+        <h2>¿Te hace sentido este enfoque?</h2>
+        <p>El siguiente paso es conversar brevemente tu caso, resolver dudas puntuales y definir si tiene sentido avanzar con esta etapa.</p>
         <div class="actions">
-          <a class="btn ochre" href="/huerto-rentable-35.html">Inscribirme &rsaquo;</a>
-          <a class="btn ghost-light" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20le%C3%AD%20la%20informaci%C3%B3n%20de%20Huerto%20Rentable%2035%20y%20quiero%20resolver%20unas%20dudas." target="_blank" rel="noopener">Hablar por WhatsApp</a>
+          <a class="btn ochre" href="/huerto-rentable-35.html">Inscribirme a HR35 &rsaquo;</a>
+          <a class="btn ghost-light" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20le%C3%AD%20la%20informaci%C3%B3n%20del%20Programa%20Huerto%20Rentable%20y%20quiero%20resolver%20unas%20dudas." target="_blank" rel="noopener">Hablar por WhatsApp</a>
         </div>
       </div>
     </div>
