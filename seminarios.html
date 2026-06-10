@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seminarios — SPICe Agro</title>
+<meta name="description" content="Estamos preparando el catálogo completo de seminarios. Por ahora, el primero disponible es Suelo Vivo — salud del suelo y agricultura regenerativa.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%23317286' stroke-width='2.3' stroke-linecap='round'%3E%3Cpath d='M24,17.54c-3.5-6.8-8.5-9.78-12.2-10.2,0,3.57,3.6,8.16,12.2,10.2Z'/%3E%3Cpath d='M24,16.4c3.5-6.8,8.5-9.78,12.2-10.2,0,3.57-3.6,8.16-12.2,10.2Z'/%3E%3Cpath d='M24,11.41v11.79'/%3E%3C/g%3E%3Cpath fill='none' stroke='%23cb9831' stroke-width='2.3' stroke-linecap='round' d='M11,23.2h26'/%3E%3Ccircle cx='23.98' cy='29.87' r='2.6' fill='%23cb9831'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles.css">
+<style>
+.constr{min-height:62vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(160deg,var(--navy-deep),var(--navy) 60%,var(--navy-soft));color:var(--cream);padding:clamp(3rem,8vw,6rem) 0;position:relative;overflow:hidden}
+.constr .topo{position:absolute;inset:0;stroke:var(--teal);opacity:.1;pointer-events:none}
+.constr .inner{position:relative;z-index:2;max-width:54ch;padding:0 1.5rem}
+.constr .mark{width:64px;height:64px;color:var(--ochre);margin:0 auto 1.5rem;opacity:.9}
+.constr h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.024em;margin:10px 0 14px;line-height:1.05}
+.constr .lead{font-size:1.1rem;color:rgba(255,251,220,.82);line-height:1.6;margin-bottom:.6rem}
+.constr .badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);background:var(--ochre-dim);border:1px solid rgba(203,152,49,.3);border-radius:100px;padding:8px 18px;margin-bottom:1.5rem}
+.constr .pulse{width:8px;height:8px;border-radius:50%;background:var(--ochre);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+.constr .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+</style>
+</head>
+<body>
+<svg style="position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 48 48">
+    <g fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M24,17.54c-3.5-6.8-8.5-9.78-12.2-10.2,0,3.57,3.6,8.16,12.2,10.2Z"/>
+      <path d="M24,16.4c3.5-6.8,8.5-9.78,12.2-10.2,0,3.57-3.6,8.16-12.2,10.2Z"/>
+      <path d="M24,11.41v11.79"/>
+    </g>
+    <path fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" d="M11,23.2h26"/>
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M23.98,24.13v5.74"/><path d="M23.17,29.87l-8.39,.5"/><path d="M23.98,29.87l8.18,.25"/>
+      <path d="M24.03,31.38l-.1,6.51"/><path d="M23.84,37.9l-6,2.5"/><path d="M23.84,37.9l6.5,2"/><path d="M35.31,37.3l-4.94,2.6"/>
+    </g>
+    <circle cx="23.98" cy="29.87" r="2.6" fill="currentColor" stroke="none"/><circle cx="14.94" cy="30.29" r="2.1" fill="currentColor" stroke="none"/>
+    <circle cx="32.56" cy="30.12" r="2.1" fill="currentColor" stroke="none"/><circle cx="23.84" cy="37.9" r="2.4" fill="currentColor" stroke="none"/>
+    <circle cx="17.84" cy="40.4" r="1.9" fill="currentColor" stroke="none"/><circle cx="30.34" cy="39.9" r="1.9" fill="currentColor" stroke="none"/>
+  </symbol>
+</svg>
+<header id="top">
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="/" aria-label="SPICe Agro — inicio">
+        <svg viewBox="0 0 48 48" width="36" height="36" aria-hidden="true">
+          <g fill="none" stroke="#317286" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24,17.54c-3.5-6.8-8.5-9.78-12.2-10.2,0,3.57,3.6,8.16,12.2,10.2Z"/>
+            <path d="M24,16.4c3.5-6.8,8.5-9.78,12.2-10.2,0,3.57-3.6,8.16-12.2,10.2Z"/>
+            <path d="M24,11.41v11.79"/>
+          </g>
+          <path fill="none" stroke="#cb9831" stroke-width="2.3" stroke-linecap="round" d="M11,23.2h26"/>
+          <g fill="none" stroke="#cb9831" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23.98,24.13v5.74"/><path d="M23.17,29.87l-8.39,.5"/>
+            <path d="M23.98,29.87l8.18,.25"/><path d="M24.03,31.38l-.1,6.51"/>
+            <path d="M23.84,37.9l-6,2.5"/><path d="M23.84,37.9l6.5,2"/>
+            <path d="M35.31,37.3l-4.94,2.6"/>
+          </g>
+          <g fill="#cb9831" stroke="none">
+            <circle cx="23.98" cy="29.87" r="2.6"/><circle cx="14.94" cy="30.29" r="2.1"/>
+            <circle cx="32.56" cy="30.12" r="2.1"/><circle cx="23.84" cy="37.9" r="2.4"/>
+            <circle cx="17.84" cy="40.4" r="1.9"/><circle cx="30.34" cy="39.9" r="1.9"/>
+          </g>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-wm">SPICe <span>Agro</span></span>
+          <span class="brand-tag">del laboratorio al huerto</span>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <ul class="nav-links" id="nav-menu" role="list">
+        <li><a href="/seminarios.html" class="active">Seminarios</a></li>
+        <li><a href="/huerto-rentable.html">Huerto Rentable</a></li>
+        <li><a href="/herramientas.html">Herramientas</a></li>
+        <li><a href="/la-ciencia.html">La ciencia</a></li>
+        <li><a class="nav-ext" href="https://www.spicelab.cl" target="_blank" rel="noopener">SPICe Lab &#8599;</a></li>
+        <li><a class="btn ochre" href="/seminario-suelo-vivo.html">Suelo Vivo &rsaquo;</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="constr">
+    <svg class="topo" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+      <path d="M-60 120 C 280 60 580 200 880 120 S 1500 40 1500 120"/>
+      <path d="M-60 230 C 300 160 600 320 900 230 S 1500 140 1500 230"/>
+      <path d="M-60 340 C 320 260 620 420 920 340 S 1500 250 1500 340"/>
+    </svg>
+    <div class="inner">
+      <svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><use href="#mark"/></svg>
+      <span class="badge"><span class="pulse"></span>Próximamente</span>
+      <h1>Seminarios SPICe Agro</h1>
+      <p class="lead">Estamos preparando el catálogo completo de seminarios. Por ahora, el primero disponible es Suelo Vivo — salud del suelo y agricultura regenerativa.</p>
+      <div class="actions">
+        <a class="btn ochre" href="/seminario-suelo-vivo.html">Ver seminario Suelo Vivo &rsaquo;</a>
+        <a class="btn ghost-light" href="/huerto-rentable.html">Conocer Huerto Rentable</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand">
+        <a class="brand" href="/" aria-label="SPICe Agro inicio">
+          <svg viewBox="0 0 48 48" width="32" height="32" aria-hidden="true"><use href="#mark" style="color:var(--ochre)"/></svg>
+          <div class="brand-text"><span class="brand-wm">SPICe <span>Agro</span></span></div>
+        </a>
+        <p>Ciencia geoquímica aplicada a la agricultura regenerativa de pequeña escala. Una rama de SPICe Lab.</p>
+        <span class="by">&#8599; <a href="https://www.spicelab.cl" style="color:inherit">spicelab.cl</a></span>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Programas</h4>
+          <a href="/huerto-rentable.html">Huerto Rentable</a>
+          <a href="/seminarios.html">Seminarios</a>
+          <a href="/seminario-suelo-vivo.html">Suelo Vivo</a>
+        </div>
+        <div class="foot-col">
+          <h4>SPICe Agro</h4>
+          <a href="/herramientas.html">Herramientas</a>
+          <a href="/la-ciencia.html">La ciencia</a>
+        </div>
+        <div class="foot-col">
+          <h4>Empresa</h4>
+          <a href="https://www.spicelab.cl/">SPICe Lab</a>
+          <a href="mailto:contact@spicelab.cl">Contacto</a>
+        </div>
+      </div>
+    </div>
+    <div class="legal">
+      <span>&copy; <span id="yr">2026</span> South Pacific Isotope Centre SpA &middot; RUT 78.237.797-3 &middot; Lanco, Regi&oacute;n de Los R&iacute;os, Chile</span>
+      <span>SPICe Agro &middot; del laboratorio al huerto</span>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){"use strict";
+var yr=document.getElementById("yr");if(yr)yr.textContent=new Date().getFullYear();
+var hdr=document.querySelector("header");if(hdr){var f=function(){hdr.classList.toggle("scrolled",window.scrollY>6)};f();window.addEventListener("scroll",f,{passive:true});}
+var tog=document.querySelector(".nav-toggle"),menu=document.getElementById("nav-menu");
+if(tog&&menu){tog.addEventListener("click",function(){var o=menu.classList.toggle("open");tog.setAttribute("aria-expanded",String(o));});menu.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){menu.classList.remove("open");tog.setAttribute("aria-expanded","false");});});}
+})();
+</script>
+</body>
+</html>

@@ -56,6 +56,10 @@ nav{display:flex;align-items:center;justify-content:space-between;height:70px;ga
 .nav-links{display:flex;align-items:center;gap:24px;list-style:none}
 .nav-links a{font-size:.92rem;color:var(--ink-soft);transition:color .2s}
 .nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--teal);font-weight:600}
+.nav-links a.active::after{content:"";display:block;height:2px;background:var(--ochre);border-radius:2px;margin-top:3px}
+.nav-links a.nav-ext{color:var(--teal);font-weight:500}
+.nav-links a.nav-ext:hover{color:var(--navy)}
 .nav-toggle{display:none;background:none;border:0;cursor:pointer;padding:.3rem;color:var(--ink)}
 .nav-toggle svg{width:24px;height:24px}
 @media(max-width:780px){
@@ -63,6 +67,7 @@ nav{display:flex;align-items:center;justify-content:space-between;height:70px;ga
   .nav-links.open{clip-path:inset(0 0 0 0)}
   .nav-links li{border-top:1px solid var(--line)}
   .nav-links a,.nav-links .btn{display:block;padding:.9rem .2rem}
+  .nav-links a.active::after{display:none}
   .nav-links .btn{text-align:center;border-radius:100px;margin:.4rem 0 0}
   .nav-toggle{display:inline-flex}
 }
