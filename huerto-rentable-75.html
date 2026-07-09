@@ -58,7 +58,7 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
 @keyframes heroCar{0%{opacity:0}6.5%{opacity:1}33.3%{opacity:1}40%{opacity:0}100%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.hero-carousel img{animation:none}.hero-carousel img:nth-child(1){opacity:1}}
 .l-hero-reviews{margin-top:1.4rem;max-width:52ch}
-.l-hr-rating{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.95rem;color:var(--cream);margin-bottom:.7rem}
+.l-hr-rating{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.95rem;color:var(--cream);margin-top:1.4rem}
 .l-hr-rating svg{width:16px;height:16px;fill:var(--ochre)}
 .l-hr-rating span{color:rgba(255,251,220,.6);font-weight:500;font-size:.8rem}
 .l-hr-swipe{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:6px;scrollbar-width:thin}
@@ -67,6 +67,13 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
 .l-hr-swipe blockquote{scroll-snap-align:start;flex:0 0 84%;margin:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px;font-size:.86rem;line-height:1.4;color:rgba(255,251,220,.9)}
 .l-hr-swipe cite{display:block;margin-top:8px;font-style:normal;font-size:.78rem;color:rgba(255,251,220,.6)}
 .l-hr-swipe cite b{color:var(--cream);font-weight:600}
+.l-badge-logo{gap:8px;padding:6px 12px}
+.l-lab-mark{width:22px;height:22px;flex:none}
+.l-lab-wm{font-weight:600;font-size:.9rem;color:var(--cream);letter-spacing:.005em}
+.l-lab-wm b{color:var(--ochre);font-weight:700}
+.l-back-lbl{font-size:.72rem;color:rgba(255,251,220,.6);letter-spacing:.02em}
+.l-lab-lock{display:inline-flex;align-items:center;gap:6px}
+.l-lab-logo{height:20px;width:auto;display:block}
 .l-hero-trust{display:flex;align-items:center;justify-content:flex-start;gap:10px;margin-top:1.1rem;font-size:.85rem;color:rgba(255,251,220,.65)}
 .l-hero-trust svg{width:16px;height:16px;color:var(--ochre);flex:none}
 @media(max-width:880px){
@@ -153,6 +160,12 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
 .l-testi-name{font-size:.86rem;font-weight:600;color:var(--cream)}
 .l-testi-loc{font-size:.78rem;color:rgba(255,251,220,.55)}
 @media(max-width:880px){.l-testi-grid{grid-template-columns:1fr}}
+.l-belt-sec{background:var(--navy-deep);padding:clamp(1.6rem,3vw,2.2rem) 0;border-top:1px solid rgba(255,255,255,.08);overflow:hidden}
+.l-belt-track{display:flex;width:max-content;animation:beltMove 70s linear infinite}
+.l-belt-track:hover{animation-play-state:paused}
+.l-belt-card{flex:0 0 340px;max-width:85vw;margin-right:20px}
+@keyframes beltMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.l-belt-track{animation:none;overflow-x:auto;width:auto}}
 
 /* form */
 .l-form{padding:clamp(3rem,6vw,4.5rem) 0;background:var(--paper)}
@@ -271,16 +284,8 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
         <a class="btn ochre" id="hero-wa-btn" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20quiero%20informaci%C3%B3n%20sobre%20Huerto%20Rentable%2075." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px"><svg viewBox="0 0 32 32" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.8 1 1-4.7-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C5 9.5 9.5 5 16 5s11 4.5 11 10-4.9 9.8-11 9.8zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.5 0-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.6.8.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>Quiero más información &rsaquo;</a>
         <p class="l-hero-trust"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>Diseñado por un geoquímico formado en Princeton — optimización real, no un catálogo de invernaderos</p>
         <div class="l-badges" style="justify-content:flex-start;margin-top:1.4rem">
-          <div class="l-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>Respaldo de SPICe Lab</div>
+          <div class="l-badge l-badge-logo" aria-label="Respaldado por SPICe — South Pacific Isotope Centre"><span class="l-back-lbl">Respaldado por</span><img class="l-lab-logo" src="/assets/images/spice-lab-horizontal.webp" width="378" height="140" decoding="async" alt="SPICe — South Pacific Isotope Centre" /></div>
         </div>
-      <div class="l-hero-reviews" aria-label="Reseñas de clientes">
-        <div class="l-hr-rating"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>5.0 <span>&middot; satisfacción</span></div>
-        <div class="l-hr-swipe">
-          <blockquote>&ldquo;Manejo el invernadero a escala y la producción es constante. La asesoría me resolvió problemas que antes me tomaban semanas.&rdquo;<cite>&mdash; <b>Andrés Vera</b>, Río Bueno</cite></blockquote>
-          <blockquote>&ldquo;Llevo años cultivando, pero recién ahora tengo un sistema que rinde parejo todo el año. Para quien va en serio.&rdquo;<cite>&mdash; <b>Sofía Herrera</b>, Paillaco</cite></blockquote>
-          <blockquote>&ldquo;La inversión se pagó sola con las ventas de la temporada. Producción estable y de buena calidad.&rdquo;<cite>&mdash; <b>Diego Contreras</b>, Futrono</cite></blockquote>
-        </div>
-      </div>
       </div>
       <div class="l-hero-img">
         <div class="hero-carousel" role="img" aria-label="Agricultor avanzado en su Huerto Rentable 75">
@@ -294,61 +299,137 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
 </section>
 
 <!-- TESTIMONIOS PLACEHOLDER — reemplazar con reseñas reales de clientes -->
-<section class="l-testi">
-  <div class="wrap">
-    <div class="l-testi-grid">
-      <div class="l-testi-card">
-        <div class="l-testi-stars">
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-        </div>
-        <p class="l-testi-quote">Manejo el invernadero a escala y la producción es constante. La asesoría me resolvió problemas que antes me tomaban semanas.</p>
-        <div class="l-testi-person">
-          <div class="l-testi-avatar">A.V.</div>
-          <div>
-            <div class="l-testi-name">Andrés Vera</div>
-            <div class="l-testi-loc">Río Bueno, Los Ríos</div>
+<!-- RESEÑAS (cinturón) — reseñas de MUESTRA, reemplazar por reales (HR35) -->
+<section class="l-belt-sec" aria-label="Reseñas de clientes">
+  <div class="l-belt-track">
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">Diversifiqué con flores y hortalizas y ahora tengo ingresos casi todo el año. El seguimiento técnico vale cada peso.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">MG</div>
+            <div><div class="l-testi-name">María González</div><div class="l-testi-loc">Lanco, Los Ríos</div></div>
           </div>
         </div>
-      </div>
-      <div class="l-testi-card">
-        <div class="l-testi-stars">
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-        </div>
-        <p class="l-testi-quote">Llevo años cultivando, pero recién ahora tengo un sistema que rinde parejo todo el año. Para quien va en serio.</p>
-        <div class="l-testi-person">
-          <div class="l-testi-avatar">S.H.</div>
-          <div>
-            <div class="l-testi-name">Sofía Herrera</div>
-            <div class="l-testi-loc">Paillaco, Los Ríos</div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">Ya tenía un huerto chico, pero con el método empecé a producir el triple y a vender en la feria los sábados.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">JP</div>
+            <div><div class="l-testi-name">Juan Pérez</div><div class="l-testi-loc">Panguipulli, Los Ríos</div></div>
           </div>
         </div>
-      </div>
-      <div class="l-testi-card">
-        <div class="l-testi-stars">
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
-        </div>
-        <p class="l-testi-quote">La inversión se pagó sola con las ventas de la temporada. Producción estable y de buena calidad.</p>
-        <div class="l-testi-person">
-          <div class="l-testi-avatar">D.C.</div>
-          <div>
-            <div class="l-testi-name">Diego Contreras</div>
-            <div class="l-testi-loc">Futrono, Los Ríos</div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">Pasé de cultivar para la casa a tener clientes fijos. Me ordenaron la producción y eso lo cambió todo.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">RS</div>
+            <div><div class="l-testi-name">Roberto Silva</div><div class="l-testi-loc">Valdivia, Los Ríos</div></div>
           </div>
         </div>
-      </div>
-    </div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">Partí sin saber casi nada y en pocos meses ya cosechaba mis primeras verduras. Siempre hubo alguien para responderme.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">CM</div>
+            <div><div class="l-testi-name">Carla Muñoz</div><div class="l-testi-loc">Los Lagos, Los Ríos</div></div>
+          </div>
+        </div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">Tenía miedo de invertir y que no resultara. El acompañamiento hizo la diferencia; nunca me sentí solo.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">FT</div>
+            <div><div class="l-testi-name">Fernando Torres</div><div class="l-testi-loc">Máfil, Los Ríos</div></div>
+          </div>
+        </div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">El invernadero quedó andando en dos semanas. Hoy mi familia come lo que producimos y hasta regalo a los vecinos.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">PR</div>
+            <div><div class="l-testi-name">Patricia Rojas</div><div class="l-testi-loc">Lanco, Los Ríos</div></div>
+          </div>
+        </div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">El equipo se preocupa de que te vaya bien, no solo de venderte la estructura.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">SH</div>
+            <div><div class="l-testi-name">Sofía Herrera</div><div class="l-testi-loc">Paillaco, Los Ríos</div></div>
+          </div>
+        </div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">Aprendí a manejar el suelo vivo y se nota en la calidad de las verduras.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">DC</div>
+            <div><div class="l-testi-name">Diego Contreras</div><div class="l-testi-loc">Futrono, Los Ríos</div></div>
+          </div>
+        </div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">Diversifiqué con flores y hortalizas y ahora tengo ingresos casi todo el año. El seguimiento técnico vale cada peso.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">MG</div>
+            <div><div class="l-testi-name">María González</div><div class="l-testi-loc">Lanco, Los Ríos</div></div>
+          </div>
+        </div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">Ya tenía un huerto chico, pero con el método empecé a producir el triple y a vender en la feria los sábados.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">JP</div>
+            <div><div class="l-testi-name">Juan Pérez</div><div class="l-testi-loc">Panguipulli, Los Ríos</div></div>
+          </div>
+        </div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">Pasé de cultivar para la casa a tener clientes fijos. Me ordenaron la producción y eso lo cambió todo.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">RS</div>
+            <div><div class="l-testi-name">Roberto Silva</div><div class="l-testi-loc">Valdivia, Los Ríos</div></div>
+          </div>
+        </div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">Partí sin saber casi nada y en pocos meses ya cosechaba mis primeras verduras. Siempre hubo alguien para responderme.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">CM</div>
+            <div><div class="l-testi-name">Carla Muñoz</div><div class="l-testi-loc">Los Lagos, Los Ríos</div></div>
+          </div>
+        </div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">Tenía miedo de invertir y que no resultara. El acompañamiento hizo la diferencia; nunca me sentí solo.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">FT</div>
+            <div><div class="l-testi-name">Fernando Torres</div><div class="l-testi-loc">Máfil, Los Ríos</div></div>
+          </div>
+        </div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">El invernadero quedó andando en dos semanas. Hoy mi familia come lo que producimos y hasta regalo a los vecinos.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">PR</div>
+            <div><div class="l-testi-name">Patricia Rojas</div><div class="l-testi-loc">Lanco, Los Ríos</div></div>
+          </div>
+        </div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">El equipo se preocupa de que te vaya bien, no solo de venderte la estructura.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">SH</div>
+            <div><div class="l-testi-name">Sofía Herrera</div><div class="l-testi-loc">Paillaco, Los Ríos</div></div>
+          </div>
+        </div>
+        <div class="l-testi-card l-belt-card">
+          <div class="l-testi-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg></div>
+          <p class="l-testi-quote">Aprendí a manejar el suelo vivo y se nota en la calidad de las verduras.</p>
+          <div class="l-testi-person">
+            <div class="l-testi-avatar">DC</div>
+            <div><div class="l-testi-name">Diego Contreras</div><div class="l-testi-loc">Futrono, Los Ríos</div></div>
+          </div>
+        </div>
   </div>
 </section>
 
