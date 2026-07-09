@@ -131,6 +131,16 @@ gtag('config', 'AW-18018765001');
   .navlinks a.nav-ext{color:rgba(255,251,220,.95);}
   .navlinks a.nav-ext:hover{color:var(--ochre);}
 
+  /* dropdown Huerto Rentable en el nav */
+  .hr-nav-dd{position:relative;display:inline-flex;align-items:center}
+  .hr-nav-dd>a{display:inline-flex;align-items:center;gap:5px}
+  .hr-nav-dd .dd-caret{width:9px;height:9px;transition:transform .18s}
+  .hr-nav-dd:hover .dd-caret,.hr-nav-dd.open .dd-caret{transform:rotate(180deg)}
+  .hr-nav-dd-menu{position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);background:var(--navy);border:1px solid rgba(255,251,220,.15);border-radius:14px;box-shadow:0 24px 50px -18px rgba(0,0,0,.5);padding:8px;min-width:190px;display:none;z-index:50;text-transform:none;letter-spacing:normal}
+  .hr-nav-dd:hover .hr-nav-dd-menu,.hr-nav-dd.open .hr-nav-dd-menu{display:block}
+  .hr-nav-dd-menu a{display:block;padding:10px 14px;border-radius:9px;font-size:12.5px;font-family:var(--font-mono);color:rgba(255,251,220,.85);text-decoration:none;white-space:nowrap;text-transform:uppercase;letter-spacing:.06em}
+  .hr-nav-dd-menu a:hover{background:rgba(203,152,49,.15);color:var(--ochre)}
+
 
   .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:60px 0 120px;}
   .hero h1{font-size:clamp(2.9rem,6.4vw,5rem);color:var(--cream);margin:20px 0 6px;}
@@ -309,7 +319,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
       <div class="navlinks">
         <a href="/seminarios.html">Seminarios</a>
-        <a href="/huerto-rentable.html">Huerto Rentable</a>
+        <span class="hr-nav-dd" id="hr-nav-dd">
+          <a href="/huerto-rentable.html">Huerto Rentable<svg class="dd-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="hr-nav-dd-menu">
+            <a href="/huerto-rentable.html">Ver los 3 programas</a>
+            <a href="/huerto-rentable-25.html">HR25</a>
+            <a href="/huerto-rentable-35.html">HR35</a>
+            <a href="/huerto-rentable-75.html">HR75</a>
+          </div>
+        </span>
         <a href="/herramientas.html">Herramientas</a>
         <a href="/la-ciencia.html">La ciencia</a>
         <a href="https://www.spicelab.cl" target="_blank" rel="noopener" class="nav-ext">SPICe Lab &#8599;</a>
