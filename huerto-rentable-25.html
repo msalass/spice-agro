@@ -50,6 +50,13 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
 .l-hero .btn{font-size:1.02rem;padding:15px 34px}
 .l-hero-img{border-radius:18px;overflow:hidden;box-shadow:0 30px 70px -25px rgba(0,0,0,.55)}
 .l-hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-carousel{position:relative;width:100%;aspect-ratio:1/1}
+.hero-carousel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;animation:heroCar 15s infinite}
+.hero-carousel img:nth-child(1){animation-delay:0s}
+.hero-carousel img:nth-child(2){animation-delay:5s}
+.hero-carousel img:nth-child(3){animation-delay:10s}
+@keyframes heroCar{0%{opacity:0}6.5%{opacity:1}33.3%{opacity:1}40%{opacity:0}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.hero-carousel img{animation:none}.hero-carousel img:nth-child(1){opacity:1}}
 .l-hero-trust{display:flex;align-items:center;justify-content:flex-start;gap:10px;margin-top:1.1rem;font-size:.85rem;color:rgba(255,251,220,.65)}
 .l-hero-trust svg{width:16px;height:16px;color:var(--ochre);flex:none}
 @media(max-width:880px){
@@ -260,10 +267,11 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
         </div>
       </div>
       <div class="l-hero-img">
-        <picture>
-          <source srcset="/assets/images/hr-puerta-01.webp" type="image/webp">
-          <img src="/assets/images/hr-puerta-01.jpg" width="1600" height="900" fetchpriority="high" decoding="async" alt="Invernadero Huerto Rentable 25 instalado, puerta de madera terminada, listo para producir" />
-        </picture>
+        <div class="hero-carousel" role="img" aria-label="Agricultora principiante en su Huerto Rentable 25">
+          <img src="/assets/images/hr25-01.webp" width="1080" height="1080" fetchpriority="high" decoding="async" alt="Agricultora cosechando acelga fresca en su huerto" />
+          <img src="/assets/images/hr25-02.webp" width="1080" height="1080" loading="lazy" decoding="async" alt="Agricultora recogiendo verduras de hoja al amanecer" />
+          <img src="/assets/images/hr25-03.webp" width="1080" height="1080" loading="lazy" decoding="async" alt="Agricultora con canasta de acelga junto al invernadero" />
+        </div>
       </div>
     </div>
   </div>
