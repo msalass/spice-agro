@@ -52,6 +52,23 @@ gtag('config', 'AW-18018765001');
 .constr .pulse{width:8px;height:8px;border-radius:50%;background:var(--ochre);animation:pulse 1.6s infinite}
 @keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
 .constr .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+
+/* dropdown Huerto Rentable en el nav */
+.hr-nav-dd{position:relative}
+.hr-nav-dd>a{display:inline-flex;align-items:center;gap:5px}
+.hr-nav-dd::after{content:"";position:absolute;left:0;right:0;top:100%;height:16px}
+.hr-nav-dd .dd-caret{width:9px;height:9px;transition:transform .18s}
+.hr-nav-dd:hover .dd-caret{transform:rotate(180deg)}
+.hr-nav-dd-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);background:var(--card,#fff);border:1px solid var(--line,#e5e2d8);border-radius:14px;box-shadow:0 20px 45px -18px rgba(25,31,57,.28);padding:8px;min-width:180px;display:none;z-index:50}
+.hr-nav-dd:hover .hr-nav-dd-menu{display:block}
+.hr-nav-dd-menu a{display:block;padding:10px 14px;border-radius:9px;font-size:.9rem;color:var(--navy,#1b2b3a);text-decoration:none;white-space:nowrap}
+.hr-nav-dd-menu a:hover{background:var(--ochre-dim,#f6e8c8);color:#a07825}
+.hr-nav-dd-menu a.current{color:var(--ochre,#cb9831);font-weight:600}
+@media(max-width:880px){
+  .hr-nav-dd-menu{position:static;transform:none;box-shadow:none;border:none;padding:0 0 0 14px;display:block;min-width:0}
+  .hr-nav-dd .dd-caret{display:none}
+  .hr-nav-dd::after{display:none}
+}
 </style>
 </head>
 <body>
@@ -110,7 +127,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </button>
       <ul class="nav-links" id="nav-menu" role="list">
         <li><a href="/seminarios.html">Seminarios</a></li>
-        <li><a href="/huerto-rentable.html">Huerto Rentable</a></li>
+        <li class="hr-nav-dd" id="hr-nav-dd">
+          <a href="/huerto-rentable.html">Huerto Rentable<svg class="dd-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="hr-nav-dd-menu" role="list">
+            <a href="/huerto-rentable-25.html">HR25</a>
+            <a href="/huerto-rentable-35.html">HR35</a>
+            <a href="/huerto-rentable-75.html">HR75</a>
+          </div>
+        </li>
         <li><a href="/herramientas.html">Herramientas</a></li>
         <li><a href="/la-ciencia.html" class="active">La ciencia</a></li>
         <li><a class="nav-ext" href="https://www.spicelab.cl" target="_blank" rel="noopener">SPICe Lab &#8599;</a></li>
@@ -179,7 +203,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 var yr=document.getElementById("yr");if(yr)yr.textContent=new Date().getFullYear();
 var hdr=document.querySelector("header");if(hdr){var f=function(){hdr.classList.toggle("scrolled",window.scrollY>6)};f();window.addEventListener("scroll",f,{passive:true});}
 var tog=document.querySelector(".nav-toggle"),menu=document.getElementById("nav-menu");
-if(tog&&menu){tog.addEventListener("click",function(){var o=menu.classList.toggle("open");tog.setAttribute("aria-expanded",String(o));});menu.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){menu.classList.remove("open");tog.setAttribute("aria-expanded","false");});});}
+if(tog&&menu){
+  tog.addEventListener("click",function(){var o=menu.classList.toggle("open");tog.setAttribute("aria-expanded",String(o));});
+  menu.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){menu.classList.remove("open");tog.setAttribute("aria-expanded","false");});});
+}
 })();
 </script>
 </body>
