@@ -63,6 +63,19 @@ gtag('config', 'AW-18018765001');
 .hr-trust p{font-size:.88rem;color:rgba(255,251,220,.85);line-height:1.6}
 .hr-trust a{color:var(--ochre);font-weight:600}
 
+/* testimonios */
+.l-testi{background:var(--navy-deep);padding:clamp(1.6rem,3vw,2.2rem) 0;border-top:1px solid rgba(255,255,255,.08)}
+.l-testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.l-testi-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:1.4rem}
+.l-testi-stars{display:flex;gap:3px;margin-bottom:.8rem}
+.l-testi-stars svg{width:15px;height:15px;fill:var(--ochre);stroke:none}
+.l-testi-quote{font-size:.92rem;color:rgba(255,251,220,.85);line-height:1.55;margin-bottom:1.1rem}
+.l-testi-person{display:flex;align-items:center;gap:10px}
+.l-testi-avatar{width:38px;height:38px;border-radius:50%;background:var(--ochre-dim);color:#a07825;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:600;font-size:.78rem;flex:none}
+.l-testi-name{font-size:.86rem;font-weight:600;color:var(--cream)}
+.l-testi-loc{font-size:.78rem;color:rgba(255,251,220,.55)}
+@media(max-width:880px){.l-testi-grid{grid-template-columns:1fr}}
+
 .hr-programs{padding:clamp(3.5rem,7vw,5.5rem) 0;background:var(--paper)}
 .hr-section-head{text-align:center;max-width:60ch;margin:0 auto clamp(2.5rem,5vw,3.5rem)}
 .hr-section-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,4vw,2.8rem);letter-spacing:-.022em;margin:12px 0;color:var(--navy)}
@@ -100,6 +113,23 @@ gtag('config', 'AW-18018765001');
 .hr-cta-box h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:-.022em;margin:12px 0 12px}
 .hr-cta-box p{color:var(--sage);margin-bottom:1.8rem;font-size:1.02rem;line-height:1.6}
 .hr-cta-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+
+/* dropdown Huerto Rentable en el nav */
+.hr-nav-dd{position:relative}
+.hr-nav-dd>a{display:inline-flex;align-items:center;gap:5px}
+.hr-nav-dd::after{content:"";position:absolute;left:0;right:0;top:100%;height:16px}
+.hr-nav-dd .dd-caret{width:9px;height:9px;transition:transform .18s}
+.hr-nav-dd:hover .dd-caret{transform:rotate(180deg)}
+.hr-nav-dd-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);background:var(--card,#fff);border:1px solid var(--line,#e5e2d8);border-radius:14px;box-shadow:0 20px 45px -18px rgba(25,31,57,.28);padding:8px;min-width:180px;display:none;z-index:50}
+.hr-nav-dd:hover .hr-nav-dd-menu{display:block}
+.hr-nav-dd-menu a{display:block;padding:10px 14px;border-radius:9px;font-size:.9rem;color:var(--navy,#1b2b3a);text-decoration:none;white-space:nowrap}
+.hr-nav-dd-menu a:hover{background:var(--ochre-dim,#f6e8c8);color:#a07825}
+.hr-nav-dd-menu a.current{color:var(--ochre,#cb9831);font-weight:600}
+@media(max-width:880px){
+  .hr-nav-dd-menu{position:static;transform:none;box-shadow:none;border:none;padding:0 0 0 14px;display:block;min-width:0}
+  .hr-nav-dd .dd-caret{display:none}
+  .hr-nav-dd::after{display:none}
+}
 </style>
 </head>
 <body>
@@ -166,7 +196,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </button>
       <ul class="nav-links" id="nav-menu" role="list">
         <li><a href="/seminarios.html">Seminarios</a></li>
-        <li><a href="/huerto-rentable.html" class="active">Huerto Rentable</a></li>
+        <li class="hr-nav-dd" id="hr-nav-dd">
+          <a href="/huerto-rentable.html" class="active">Huerto Rentable<svg class="dd-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="hr-nav-dd-menu" role="list">
+            <a href="/huerto-rentable-25.html">HR25</a>
+            <a href="/huerto-rentable-35.html">HR35</a>
+            <a href="/huerto-rentable-75.html">HR75</a>
+          </div>
+        </li>
         <li><a href="/herramientas.html">Herramientas</a></li>
         <li><a href="/la-ciencia.html">La ciencia</a></li>
         <li><a class="nav-ext" href="https://www.spicelab.cl" target="_blank" rel="noopener">SPICe Lab &#8599;</a></li>
@@ -197,6 +234,65 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hr-trust">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
       <p>Programas diseñados por <strong>Dr. Marcos Salas-Saavedra</strong> — PhD University of Queensland · Postdoc Princeton University. <a href="https://www.spicelab.cl/equipo/" target="_blank" rel="noopener">Conocer al equipo &rarr;</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS PLACEHOLDER — reemplazar con reseñas reales de clientes -->
+<section class="l-testi">
+  <div class="wrap">
+    <div class="l-testi-grid">
+      <div class="l-testi-card">
+        <div class="l-testi-stars">
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+        </div>
+        <p class="l-testi-quote">[Reseña de cliente — reemplazar con testimonio real]</p>
+        <div class="l-testi-person">
+          <div class="l-testi-avatar">J.P.</div>
+          <div>
+            <div class="l-testi-name">Juan Pérez</div>
+            <div class="l-testi-loc">Panguipulli, Los Ríos</div>
+          </div>
+        </div>
+      </div>
+      <div class="l-testi-card">
+        <div class="l-testi-stars">
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+        </div>
+        <p class="l-testi-quote">[Reseña de cliente — reemplazar con testimonio real]</p>
+        <div class="l-testi-person">
+          <div class="l-testi-avatar">M.G.</div>
+          <div>
+            <div class="l-testi-name">María González</div>
+            <div class="l-testi-loc">Lanco, Los Ríos</div>
+          </div>
+        </div>
+      </div>
+      <div class="l-testi-card">
+        <div class="l-testi-stars">
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2-5.6-3.4-5.6 3.4 1.4-6.2L1 7.5l6.4-.6z"/></svg>
+        </div>
+        <p class="l-testi-quote">[Reseña de cliente — reemplazar con testimonio real]</p>
+        <div class="l-testi-person">
+          <div class="l-testi-avatar">R.S.</div>
+          <div>
+            <div class="l-testi-name">Roberto Silva</div>
+            <div class="l-testi-loc">Valdivia, Los Ríos</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -236,8 +332,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </ul>
         </div>
         <div class="hr-quote">
-          <span class="hr-quote-label">Valor según terreno y ubicación</span>
-          <a class="btn ochre" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20me%20gustar%C3%ADa%20cotizar%20el%20programa%20Huerto%20Rentable%2025." target="_blank" rel="noopener">Cotizar HR25</a>
+          <span class="hr-quote-label">Ver detalles completos y cotizar</span>
+          <a class="btn ochre" href="/huerto-rentable-25.html">Ver HR25 &rsaquo;</a>
         </div>
       </article>
 
@@ -297,8 +393,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </ul>
         </div>
         <div class="hr-quote">
-          <span class="hr-quote-label">Valor según terreno y ubicación</span>
-          <a class="btn ochre" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20me%20gustar%C3%ADa%20cotizar%20el%20programa%20Huerto%20Rentable%2075." target="_blank" rel="noopener">Cotizar HR75</a>
+          <span class="hr-quote-label">Ver detalles completos y cotizar</span>
+          <a class="btn ochre" href="/huerto-rentable-75.html">Ver HR75 &rsaquo;</a>
         </div>
       </article>
 
@@ -351,9 +447,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="foot-cols">
         <div class="foot-col">
           <h4>Huerto Rentable</h4>
-          <a href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20me%20gustar%C3%ADa%20cotizar%20el%20programa%20Huerto%20Rentable%2025." target="_blank" rel="noopener">HR25</a>
+          <a href="/huerto-rentable-25.html">HR25</a>
           <a href="/huerto-rentable-35.html">HR35</a>
-          <a href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20me%20gustar%C3%ADa%20cotizar%20el%20programa%20Huerto%20Rentable%2075." target="_blank" rel="noopener">HR75</a>
+          <a href="/huerto-rentable-75.html">HR75</a>
         </div>
         <div class="foot-col">
           <h4>SPICe Agro</h4>
