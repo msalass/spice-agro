@@ -31,6 +31,25 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# --- Redirects de programas retirados (301, preservan SEO) ---
+[[redirects]]
+  from = "/huerto-rentable-25.html"
+  to = "/huerto-rentable-35.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/huerto-rentable-75.html"
+  to = "/spice-partner.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/huerto-rentable-35-info.html"
+  to = "/huerto-rentable-35.html"
+  status = 301
+  force = true
+
 # --- Página 404 propia ---
 [[redirects]]
   from = "/*"
