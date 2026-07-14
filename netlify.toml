@@ -50,6 +50,18 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/seminarios.html"
+  to = "/academia.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/seminarios"
+  to = "/academia.html"
+  status = 301
+  force = true
+
 # --- Página 404 propia ---
 [[redirects]]
   from = "/*"
