@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style id="lms-veil">x-dc{display:none}</style>
+<script>
+const SUPABASE_URL = "https://simpksmjwgvihrahifpv.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXBrc21qd2d2aWhyYWhpZnB2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3MjMyODEsImV4cCI6MjA5OTI5OTI4MX0.bYVxqrmDdJ11W1j6yMRkeCwSjwybweALMGHlAyh4p88";
+const MODULO = 1;
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+(async () => {
+  try {
+    const { data: { session } } = await db.auth.getSession();
+    if (!session) { location.href = "./index.html"; return; }
+    const { data: compra } = await db.from("purchases").select("activated").eq("email", session.user.email).maybeSingle();
+    if (!compra || !compra.activated) { location.href = "./index.html"; return; }
+    const uid = session.user.id;
+    const [prog, quiz] = await Promise.all([
+      db.from("lesson_progress").select("lesson").eq("user_id", uid).eq("module", MODULO),
+      db.from("quiz_results").select("passed").eq("user_id", uid).eq("module", MODULO).eq("passed", true)
+    ]);
+    const done = [false, false, false, false, false];
+    (prog.data || []).forEach(r => { if (r.lesson >= 1 && r.lesson <= 5) done[r.lesson - 1] = true; });
+    if ((quiz.data || []).length) done[4] = true;
+    window.LMS_INITIAL = { done };
+    window.LMS_SAVE = {
+      lesson: i => { db.from("lesson_progress").upsert({ user_id: uid, module: MODULO, lesson: i + 1 }).then(() => {}); },
+      quiz: (score, ok) => { db.from("quiz_results").insert({ user_id: uid, module: MODULO, score: score }).then(() => {}); }
+    };
+  } catch (e) { window.LMS_INITIAL = null; window.LMS_SAVE = null; }
+  const s = document.createElement("script");
+  s.src = "./support.js";
+  s.onload = () => { const v = document.getElementById("lms-veil"); if (v) v.remove(); };
+  document.head.appendChild(s);
+})();
+</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Hanken+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#e8e6dd}
+a{color:#317286}a:hover{color:#cb9831}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<div style="max-width:430px;margin:0 auto;min-height:100dvh;background:#faf8f2;font-family:'Hanken Grotesk',system-ui,sans-serif;color:#1d2233;box-shadow:0 0 60px rgba(25,31,57,0.18);position:relative;display:flex;flex-direction:column">
+
+<!-- ============ 1 · PORTADA ============ -->
+<sc-if value="{{ isCover }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Portada del módulo" style="background:#191f39;min-height:100dvh;display:flex;flex-direction:column;position:relative;overflow:hidden">
+  <svg style="position:absolute;left:0;top:70px;width:100%;height:420px;pointer-events:none" viewBox="0 0 430 420" fill="none" stroke="#317286" stroke-width="1.2" opacity="0.25" preserveAspectRatio="none">
+    <path d="M-20 60 C 90 30 180 90 270 60 S 460 20 460 60"></path>
+    <path d="M-20 130 C 95 100 185 160 275 130 S 460 90 460 130"></path>
+    <path d="M-20 200 C 100 170 190 230 280 200 S 460 160 460 200"></path>
+    <path d="M-20 270 C 105 240 195 300 285 270 S 460 230 460 270"></path>
+  </svg>
+  <div style="display:flex;align-items:center;gap:10px;padding:22px 24px 0;position:relative">
+    <svg viewBox="0 0 48 48" style="width:34px;height:34px;flex:none">
+      <g fill="none" stroke="#4a9cb5" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M24,17.54c-3.5-6.8-8.5-9.78-12.2-10.2,0,3.57,3.6,8.16,12.2,10.2Z"></path>
+        <path d="M24,16.4c3.5-6.8,8.5-9.78,12.2-10.2,0,3.57-3.6,8.16-12.2,10.2Z"></path>
+        <path d="M24,11.41v11.79"></path>
+      </g>
+      <path fill="none" stroke="#cb9831" stroke-width="2.3" stroke-linecap="round" d="M11,23.2h26"></path>
+      <g fill="none" stroke="#cb9831" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M23.98,24.13v5.74"></path><path d="M23.17,29.87l-8.39,.5"></path>
+        <path d="M23.98,29.87l8.18,.25"></path><path d="M24.03,31.38l-.1,6.51"></path>
+        <path d="M23.84,37.9l-6,2.5"></path><path d="M23.84,37.9l6.5,2"></path>
+      </g>
+      <g fill="#cb9831" stroke="none">
+        <circle cx="23.98" cy="29.87" r="2.6"></circle><circle cx="14.94" cy="30.29" r="2.1"></circle>
+        <circle cx="32.56" cy="30.12" r="2.1"></circle><circle cx="23.84" cy="37.9" r="2.4"></circle>
+        <circle cx="17.84" cy="40.4" r="1.9"></circle><circle cx="30.34" cy="39.9" r="1.9"></circle>
+      </g>
+    </svg>
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.22em;color:#fffbdc;font-weight:600">ACADEMIA SPICE AGRO</span>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:40px 28px;position:relative;animation:fadeUp 0.5s ease both">
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.25em;color:#cb9831;font-weight:600;margin:0 0 14px">MÓDULO 01 · 5 LECCIONES</p>
+    <h1 style="font-family:'Fraunces',Georgia,serif;font-weight:900;font-size:58px;line-height:1.0;color:#fffbdc;margin:0 0 18px">Suelo<br>Vivo</h1>
+    <p style="font-size:16px;line-height:1.6;color:#a8a894;margin:0 0 36px;max-width:320px">Qué hace que un suelo produzca — y por qué los suelos del sur fallan. La base científica de todo tu huerto.</p>
+    <div style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:baseline">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#a8a894">TU AVANCE</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#fffbdc;font-weight:600">{{ doneCount }} / 5</span>
+    </div>
+    <div style="height:6px;background:rgba(255,251,220,0.14);border-radius:100px;overflow:hidden;margin-bottom:32px">
+      <div style="height:100%;background:#cb9831;border-radius:100px;transition:width 0.5s ease;width:{{ donePct }}%"></div>
+    </div>
+    <button onClick="{{ goList }}" style="width:100%;padding:17px;background:#cb9831;color:#191f39;border:none;border-radius:100px;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:16px;cursor:pointer" style-hover="background:#d9a83e" style-active="transform:scale(0.98)">{{ coverCta }}</button>
+  </div>
+  <svg style="width:100%;height:64px;display:block;position:relative" viewBox="0 0 430 64" preserveAspectRatio="none">
+    <path d="M0,30 C90,8 160,8 215,24 C290,46 350,46 430,26 L430,64 L0,64 Z" fill="#cb9831" opacity="0.35"></path>
+    <path d="M0,44 C90,26 160,26 215,40 C290,56 350,56 430,42 L430,64 L0,64 Z" fill="#cb9831"></path>
+  </svg>
+</div>
+</sc-if>
+
+<!-- ============ 2 · LISTA DE LECCIONES ============ -->
+<sc-if value="{{ isList }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Lista de lecciones" style="min-height:100dvh;display:flex;flex-direction:column;animation:fadeUp 0.4s ease both">
+  <div style="background:#191f39;padding:20px 24px 26px;position:relative">
+    <button onClick="{{ goCover }}" style="background:none;border:none;padding:0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.15em;color:#a8a894;cursor:pointer;margin-bottom:16px" style-hover="color:#fffbdc">← PORTADA</button>
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.22em;color:#cb9831;font-weight:600;margin:0 0 6px">MÓDULO 01</p>
+    <h2 style="font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:30px;color:#fffbdc;margin:0 0 16px">Suelo Vivo</h2>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="flex:1;height:5px;background:rgba(255,251,220,0.14);border-radius:100px;overflow:hidden">
+        <div style="height:100%;background:#cb9831;border-radius:100px;transition:width 0.5s ease;width:{{ donePct }}%"></div>
+      </div>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#a8a894">{{ doneCount }}/5</span>
+    </div>
+  </div>
+  <div style="flex:1;padding:20px 18px 32px;display:flex;flex-direction:column;gap:12px">
+    <sc-for list="{{ lessons }}" as="ls" hint-placeholder-count="5">
+      <div onClick="{{ ls.open }}" data-screen-label="Fila de lección" style="{{ ls.rowStyle }}">
+        <div style="{{ ls.badgeStyle }}">
+          <sc-if value="{{ ls.sDone }}" hint-placeholder-val="{{ false }}">
+            <svg viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fffbdc" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </sc-if>
+          <sc-if value="{{ ls.sCurrent }}" hint-placeholder-val="{{ false }}">
+            <svg viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M8 5.5v13l10-6.5z" fill="#191f39"></path></svg>
+          </sc-if>
+          <sc-if value="{{ ls.sLocked }}" hint-placeholder-val="{{ false }}">
+            <svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="#7a7868" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+          </sc-if>
+        </div>
+        <div style="flex:1;min-width:0">
+          <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:{{ ls.numColor }};font-weight:600;margin:0 0 3px">LECCIÓN {{ ls.num }} · {{ ls.dur }}</p>
+          <p style="font-size:15px;font-weight:600;line-height:1.35;margin:0;color:{{ ls.titleColor }}">{{ ls.title }}</p>
+          <sc-if value="{{ ls.tag }}" hint-placeholder-val="{{ false }}">
+            <span style="display:inline-block;margin-top:7px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.12em;padding:3px 9px;border:1px solid #cb9831;color:#8a6516;border-radius:100px">{{ ls.tag }}</span>
+          </sc-if>
+        </div>
+        <sc-if value="{{ ls.sCurrent }}" hint-placeholder-val="{{ false }}">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#cb9831;font-weight:600;flex:none;align-self:center">SIGUE →</span>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ 3 · LECCIÓN ============ -->
+<sc-if value="{{ isLesson }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Pantalla de lección" style="min-height:100dvh;display:flex;flex-direction:column;animation:fadeUp 0.4s ease both">
+  <div style="padding:16px 20px 12px">
+    <button onClick="{{ goList }}" style="background:none;border:none;padding:0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.15em;color:#7a7868;cursor:pointer" style-hover="color:#191f39">← LECCIONES</button>
+  </div>
+  <div style="margin:0 18px;border-radius:14px;overflow:hidden;background:#191f39;aspect-ratio:16/9;position:relative;display:flex;align-items:center;justify-content:center">
+    <div style="position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(49,114,134,0.12) 0 10px,transparent 10px 20px)"></div>
+    <div style="width:62px;height:62px;border-radius:50%;background:#fffbdc;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.35)" style-hover="transform:scale(1.06)">
+      <svg viewBox="0 0 24 24" style="width:24px;height:24px;margin-left:3px"><path d="M8 5.5v13l10-6.5z" fill="#191f39"></path></svg>
+    </div>
+    <span style="position:absolute;left:14px;bottom:12px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.15em;color:#a8a894">VIDEO · {{ L.dur }}</span>
+  </div>
+  <div style="flex:1;padding:22px 24px 28px;display:flex;flex-direction:column">
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.22em;color:#cb9831;font-weight:600;margin:0 0 8px">LECCIÓN {{ L.num }}</p>
+    <h2 style="font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:26px;line-height:1.15;color:#191f39;margin:0 0 24px">{{ L.title }}</h2>
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.2em;color:#7a7868;margin:0 0 14px;border-bottom:1px solid #e2ddc8;padding-bottom:10px">IDEAS CLAVE</p>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px">
+      <sc-for list="{{ L.ideas }}" as="idea" hint-placeholder-count="3">
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:#cb9831;flex:none;padding-top:2px">{{ idea.n }}</span>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#1d2233">{{ idea.text }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <div style="margin-top:auto">
+      <sc-if value="{{ L.done }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;border:1.5px solid #317286;border-radius:100px;color:#317286;font-weight:700;font-size:15px">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#317286" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Lección completada
+        </div>
+      </sc-if>
+      <sc-if value="{{ L.notDone }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ completeLesson }}" style="width:100%;padding:17px;background:#191f39;color:#fffbdc;border:none;border-radius:100px;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:16px;cursor:pointer" style-hover="background:#317286" style-active="transform:scale(0.98)">Marcar como completada</button>
+      </sc-if>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ 4 · EXPERIMENTOS ============ -->
+<sc-if value="{{ isExperiment }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Experimentos en casa" style="min-height:100dvh;display:flex;flex-direction:column;animation:fadeUp 0.4s ease both">
+  <div style="background:#cb9831;padding:16px 20px 18px">
+    <button onClick="{{ goList }}" style="background:none;border:none;padding:0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.15em;color:rgba(25,31,57,0.6);cursor:pointer;margin-bottom:16px" style-hover="color:#191f39">← LECCIONES</button>
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.22em;color:#191f39;font-weight:600;margin:0 0 12px">LECCIÓN 05 · EXPERIMENTOS EN CASA</p>
+    <div style="display:flex;gap:8px;background:rgba(25,31,57,0.1);padding:4px;border-radius:100px">
+      <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="2">
+        <button onClick="{{ tab.select }}" style="{{ tab.style }}">
+          <sc-if value="{{ tab.done }}" hint-placeholder-val="{{ false }}">
+            <svg viewBox="0 0 24 24" style="width:13px;height:13px;flex:none"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="{{ tab.checkColor }}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </sc-if>
+          {{ tab.label }}
+        </button>
+      </sc-for>
+    </div>
+  </div>
+  <div style="flex:1;padding:20px 18px 28px;display:flex;flex-direction:column">
+    <h2 style="font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:26px;line-height:1.1;color:#191f39;margin:0 0 8px">{{ E.title }}</h2>
+    <p style="margin:0 0 20px;font-size:14px;line-height:1.55;color:#3a3f52">{{ E.subtitle }}</p>
+    <div style="background:#fffbdc;border:1.5px solid #e2ddc8;border-radius:12px;padding:14px 16px;margin-bottom:20px">
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;color:#7a7868;margin:0 0 6px">MATERIALES · {{ E.time }}</p>
+      <p style="margin:0;font-size:13.5px;line-height:1.6;color:#1d2233">{{ E.materials }}</p>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px">
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.2em;color:#7a7868;margin:0">PASO A PASO</p>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#317286;font-weight:600">{{ E.checksDone }} / {{ E.total }}</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:26px">
+      <sc-for list="{{ E.steps }}" as="step" hint-placeholder-count="6">
+        <div onClick="{{ step.toggle }}" style="{{ step.rowStyle }}">
+          <div style="{{ step.boxStyle }}">
+            <sc-if value="{{ step.done }}" hint-placeholder-val="{{ false }}">
+              <svg viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fffbdc" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </sc-if>
+          </div>
+          <div style="flex:1">
+            <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#cb9831;font-weight:600;margin:0 0 3px">PASO {{ step.n }}</p>
+            <p style="{{ step.textStyle }}">{{ step.text }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background:#eef2f0;border-left:3px solid #317286;border-radius:0 10px 10px 0;padding:12px 14px;margin-bottom:24px">
+      <p style="margin:0;font-size:13px;line-height:1.6;color:#1d2233"><strong style="color:#317286">{{ E.readingLead }}</strong> {{ E.readingText }}</p>
+    </div>
+    <button onClick="{{ toQuiz }}" style="{{ quizCtaStyle }}" style-active="transform:scale(0.98)">{{ quizCtaLabel }}</button>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ 5 · QUIZ ============ -->
+<sc-if value="{{ isQuiz }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Quiz final" style="min-height:100dvh;display:flex;flex-direction:column;animation:fadeUp 0.4s ease both">
+  <div style="padding:16px 24px 0">
+    <button onClick="{{ backToExperiment }}" style="background:none;border:none;padding:0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.15em;color:#7a7868;cursor:pointer;margin-bottom:18px" style-hover="color:#191f39">← EXPERIMENTO</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.22em;color:#cb9831;font-weight:600;margin:0">QUIZ FINAL</p>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#7a7868">{{ qPos }} de {{ total }}</span>
+    </div>
+    <div style="height:5px;background:#e2ddc8;border-radius:100px;overflow:hidden;margin-bottom:24px">
+      <div style="height:100%;background:#cb9831;border-radius:100px;transition:width 0.35s ease;width:{{ quizPct }}%"></div>
+    </div>
+  </div>
+  <div style="flex:1;padding:0 24px 28px;display:flex;flex-direction:column">
+    <h2 style="font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:22px;line-height:1.3;color:#191f39;margin:0 0 22px">{{ qText }}</h2>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ opts }}" as="opt" hint-placeholder-count="3">
+        <div onClick="{{ opt.pick }}" style="{{ opt.style }}">
+          <span style="{{ opt.chipStyle }}">{{ opt.letter }}</span>
+          <p style="margin:0;font-size:14.5px;line-height:1.5;flex:1;font-weight:600">{{ opt.text }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ answered }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ fbStyle }}">
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;font-weight:600;margin:0 0 6px;color:{{ fbColor }}">{{ fbTitle }}</p>
+        <p style="margin:0;font-size:13.5px;line-height:1.6;color:#1d2233">{{ fbExp }}</p>
+      </div>
+      <button onClick="{{ nextQ }}" style="width:100%;margin-top:auto;padding:17px;background:#191f39;color:#fffbdc;border:none;border-radius:100px;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:16px;cursor:pointer" style-hover="background:#317286" style-active="transform:scale(0.98)">{{ nextLabel }}</button>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ 6 · RESULTADO ============ -->
+<sc-if value="{{ isResult }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Resultado del quiz" style="background:#191f39;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;position:relative;overflow:hidden;animation:fadeUp 0.4s ease both">
+  <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.25em;color:#a8a894;margin:0 0 28px">RESULTADO · QUIZ MÓDULO 01</p>
+  <div style="{{ ringStyle }}">
+    <div style="width:128px;height:128px;border-radius:50%;background:#191f39;display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:34px;font-weight:600;color:#fffbdc;line-height:1">{{ score }}/{{ total }}</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;color:#a8a894;margin-top:6px">CORRECTAS</span>
+    </div>
+  </div>
+  <h2 style="font-family:'Fraunces',Georgia,serif;font-weight:900;font-size:36px;color:#fffbdc;margin:30px 0 10px;text-align:center">{{ resultTitle }}</h2>
+  <p style="font-size:15px;line-height:1.6;color:#a8a894;margin:0 0 30px;text-align:center;max-width:300px">{{ resultMsg }}</p>
+  <sc-if value="{{ passed }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;align-items:center;gap:10px;border:1.5px solid #317286;border-radius:100px;padding:12px 22px;margin-bottom:30px">
+      <svg viewBox="0 0 24 24" style="width:16px;height:16px" fill="none" stroke="#cb9831" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0"></path></svg>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#fffbdc">MÓDULO 02 DESBLOQUEADO</span>
+    </div>
+    <button onClick="{{ goList }}" style="width:100%;max-width:340px;padding:17px;background:#cb9831;color:#191f39;border:none;border-radius:100px;font-weight:700;font-size:16px;font-family:'Hanken Grotesk',sans-serif;cursor:pointer" style-hover="background:#d9a83e" style-active="transform:scale(0.98)">Volver al módulo</button>
+  </sc-if>
+  <sc-if value="{{ failed }}" hint-placeholder-val="{{ false }}">
+    <button onClick="{{ retryQuiz }}" style="width:100%;max-width:340px;padding:17px;background:#cb9831;color:#191f39;border:none;border-radius:100px;font-weight:700;font-size:16px;font-family:'Hanken Grotesk',sans-serif;cursor:pointer;margin-bottom:12px" style-hover="background:#d9a83e" style-active="transform:scale(0.98)">Reintentar quiz</button>
+    <button onClick="{{ goList }}" style="width:100%;max-width:340px;padding:15px;background:none;color:#a8a894;border:1.5px solid rgba(168,168,148,0.4);border-radius:100px;font-weight:600;font-size:14px;font-family:'Hanken Grotesk',sans-serif;cursor:pointer" style-hover="color:#fffbdc;border-color:#a8a894">Repasar lecciones</button>
+  </sc-if>
+  <svg style="position:absolute;left:0;bottom:0;width:100%;height:56px" viewBox="0 0 430 56" preserveAspectRatio="none">
+    <path d="M0,26 C90,6 160,6 215,20 C290,40 350,40 430,22 L430,56 L0,56 Z" fill="#cb9831" opacity="0.3"></path>
+    <path d="M0,40 C90,22 160,22 215,36 C290,50 350,50 430,38 L430,56 L0,56 Z" fill="#cb9831"></path>
+  </svg>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;modoLibre&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Modo profesor&quot;},&quot;notaMinima&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:4,&quot;min&quot;:1,&quot;max&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Modo profesor&quot;}}">
+class Component extends DCLogic {
+  state = {
+    screen: 'cover',
+    done: (window.LMS_INITIAL && window.LMS_INITIAL.done.slice()) || [false, false, false, false, false],
+    lesson: 0,
+    expTab: 0,
+    checks1: [false, false, false, false, false, false],
+    checks2: [false, false, false, false, false],
+    qi: 0,
+    sel: null,
+    score: 0
+  };
+
+  LESSONS = [
+    { title: 'Qué es un suelo vivo y por qué los suelos del sur fallan', dur: '12 MIN', ideas: [
+      'Un suelo vivo es un ecosistema: miles de millones de organismos por gramo reciclando nutrientes para tus plantas.',
+      'Los trumaos del sur parecen fértiles, pero son ácidos y fijan el fósforo: la planta no lo puede tomar.',
+      'Sin biología activa, el fertilizante se pierde. Primero se alimenta al suelo; después, a la planta.'
+    ]},
+    { title: 'Materia orgánica y vida microbiana', dur: '9 MIN', ideas: [
+      'La materia orgánica es el combustible del sistema: alimenta a hongos y bacterias que liberan nutrientes.',
+      'Los microbios construyen agregados — la "miga" que deja al suelo respirar y drenar.',
+      'Cada 1% más de MO, el suelo retiene ~160.000 litros más de agua por hectárea. En el sur, eso es sobrevivir enero.'
+    ]},
+    { title: 'Lo que un análisis de laboratorio te dice', dur: '11 MIN', ideas: [
+      'Cuatro números primero: pH, materia orgánica, fósforo disponible y aluminio de intercambio.',
+      'pH bajo 5,5 en trumaos enciende la alarma: aluminio tóxico para raíces y fósforo bloqueado.',
+      'El análisis no es un gasto: es el mapa que te ahorra años de ensayo y error (y plata en fertilizante).'
+    ]},
+    { title: 'Compost y enmiendas', dur: '10 MIN', ideas: [
+      'Compost maduro: frío, oscuro y con olor a bosque. El inmaduro roba nitrógeno y quema raíces.',
+      'Cal o conchilla para subir el pH — pero la dosis sale del análisis, no del ojo.',
+      'Las enmiendas trabajan lento: aplica en otoño para ver el efecto en primavera.'
+    ]},
+    { title: 'Experimento en casa + Quiz final', dur: '15 MIN', ideas: [] }
+  ];
+
+  EXPERIMENTS = [
+    {
+      tab: 'Infiltración',
+      title: 'Test de infiltración',
+      subtitle: 'Mide qué tan rápido tu suelo absorbe el agua. Es el diagnóstico más simple — y más revelador — que puedes hacer sin laboratorio.',
+      time: '30 MIN',
+      materials: 'Tubo de PVC o tarro sin fondo (10–15 cm de diámetro) · regla · botella con agua · celular para cronometrar',
+      steps: [
+        'Consigue un tubo de PVC o tarro sin fondo, de 10 a 15 cm de diámetro.',
+        'Entiérralo unos 5 cm en el suelo, firme y sin romper la estructura alrededor.',
+        'Marca 2,5 cm de altura por dentro del tubo, desde el nivel del suelo.',
+        'Vierte agua hasta la marca y cronometra cuánto tarda en infiltrarse por completo.',
+        'Repite la medición: la segunda pasada (suelo ya húmedo) es la que vale.',
+        'Anota el tiempo y compáralo: <10 min bueno · 10–30 regular · >30 compactado.'
+      ],
+      readingLead: '¿Cómo leer el resultado?',
+      readingText: 'Menos de 10 min: suelo con buena estructura. 10–30 min: regular. Más de 30 min: compactación. Este dato aparece en el quiz.'
+    },
+    {
+      tab: 'Algodón',
+      title: 'Test del algodón',
+      subtitle: 'Entierra un trozo de tela de algodón y déjalo trabajar. Mientras más se lo coman los microbios, más viva está tu tierra: es una radiografía de la biología del suelo.',
+      time: '6–8 SEMANAS',
+      materials: 'Un trozo de tela 100% algodón sin teñir (~20×20 cm) · pala · una estaca para marcar el lugar · agua para lavar al final',
+      steps: [
+        'Corta un trozo de tela 100% algodón (idealmente sin teñir), de unos 20×20 cm.',
+        'Entiérralo horizontal a unos 10 cm de profundidad, en la zona que quieres evaluar.',
+        'Marca el lugar con una estaca para reencontrarlo sin cavar de más.',
+        'Riega normalmente y deja pasar entre 6 y 8 semanas.',
+        'Desentierra la tela con cuidado y lávala suavemente con agua.'
+      ],
+      readingLead: '¿Cómo leer el resultado?',
+      readingText: 'La tela es celulosa: el alimento favorito de los microbios. Casi intacta = suelo "dormido", poca vida. Deshecha en jirones o con hoyos = alta actividad biológica. Este dato aparece en el quiz.'
+    }
+  ];
+
+  QUIZ = [
+    { q: '¿Qué es lo que define a un suelo "vivo"?', correct: 1, exp: 'El color oscuro ayuda como pista, pero lo que define un suelo vivo es su biología activa: es la que recicla nutrientes y construye estructura.', opts: [
+      'Su color oscuro y su textura suelta',
+      'La actividad biológica: microbios, hongos y fauna trabajando',
+      'Tener una alta proporción de arena'
+    ]},
+    { q: '¿Por qué muchos suelos del sur "fallan" aunque se fertilicen?', correct: 0, exp: 'Los trumaos (suelos volcánicos) retienen el fósforo con mucha fuerza. Sin corregir pH y biología, fertilizar es tirar la plata.', opts: [
+      'Son trumaos ácidos que fijan el fósforo y lo dejan no disponible',
+      'Llueve demasiado y todos los nutrientes se lavan',
+      'Les falta arena para drenar bien'
+    ]},
+    { q: 'En un trumao con pH bajo 5,5, ¿qué problema principal aparece?', correct: 2, exp: 'Con pH ácido el aluminio se solubiliza y se vuelve tóxico para las raíces, mientras el fósforo queda bloqueado. Por eso subir el pH es la primera jugada.', opts: [
+      'El suelo se vuelve demasiado salino',
+      'Se acumula demasiado nitrógeno',
+      'El aluminio se vuelve tóxico para las raíces y el fósforo se bloquea'
+    ]},
+    { q: 'Según el módulo, ¿en qué orden conviene pensar la nutrición?', correct: 0, exp: 'Primero alimentas al suelo (biología y materia orgánica); un suelo vivo entrega los nutrientes a la planta. Al revés, el fertilizante se pierde.', opts: [
+      'Primero al suelo, después a la planta',
+      'Primero a la planta, el suelo se arregla solo',
+      'Da lo mismo el orden, lo que importa es la dosis'
+    ]},
+    { q: '¿Qué papel cumple la materia orgánica (MO) en el suelo?', correct: 1, exp: 'La MO es el combustible del sistema: alimenta a hongos y bacterias que a su vez liberan nutrientes para la planta.', opts: [
+      'Solo le da color oscuro a la tierra',
+      'Es el combustible que alimenta a hongos y bacterias',
+      'Reemplaza por completo al fertilizante'
+    ]},
+    { q: '¿Quién construye los agregados, la "miga" que deja respirar y drenar al suelo?', correct: 2, exp: 'Los microbios (sobre todo hongos y bacterias) pegan las partículas formando agregados. Esa estructura porosa es la que permite aire y drenaje.', opts: [
+      'La lluvia al compactar el terreno',
+      'El arado al voltear la tierra',
+      'Los microbios: hongos y bacterias'
+    ]},
+    { q: 'Subir 1% la materia orgánica de una hectárea, ¿qué efecto tiene sobre el agua?', correct: 0, exp: 'Cada 1% más de MO permite retener del orden de 160.000 litros más de agua por hectárea. En el sur, eso es sobrevivir el verano.', opts: [
+      'Retiene decenas de miles de litros más de agua',
+      'No cambia la retención de agua',
+      'El suelo pierde capacidad de retener agua'
+    ]},
+    { q: '¿Para qué le sirven a la planta los hongos micorrízicos?', correct: 1, exp: 'Las micorrizas extienden la red de raíces y ayudan a captar agua y fósforo desde zonas que la raíz sola no alcanza.', opts: [
+      'Para nada, son plagas del suelo',
+      'Extienden las raíces y ayudan a captar agua y fósforo',
+      'Solo aparecen en suelos enfermos'
+    ]},
+    { q: '¿Cuáles son los cuatro números que conviene mirar primero en un análisis?', correct: 3, exp: 'pH, materia orgánica, fósforo disponible y aluminio de intercambio: con esos cuatro ya tienes el diagnóstico base de un trumao.', opts: [
+      'Color, olor, textura y humedad',
+      'Solo el nitrógeno total',
+      'Precio, marca, fecha y laboratorio',
+      'pH, materia orgánica, fósforo disponible y aluminio'
+    ]},
+    { q: 'El módulo dice que un análisis de laboratorio es, sobre todo…', correct: 0, exp: 'No es un gasto: es el mapa que te ahorra años de ensayo y error (y plata en fertilizante mal aplicado).', opts: [
+      'Un mapa que ahorra años de ensayo y error',
+      'Un trámite sin mayor utilidad práctica',
+      'Algo que solo sirve para grandes agricultores'
+    ]},
+    { q: 'En el análisis aparece "fósforo disponible". ¿Qué significa?', correct: 1, exp: 'El fósforo disponible es la fracción que la planta realmente puede tomar. En trumaos gran parte del fósforo total está fijado y no disponible.', opts: [
+      'Todo el fósforo que existe en el suelo',
+      'La parte del fósforo que la planta sí puede absorber',
+      'El fósforo que se perdió por lavado'
+    ]},
+    { q: '¿Cómo reconoces un compost maduro, listo para usar?', correct: 0, exp: 'Calor y olor a amoníaco = compost inmaduro. Maduro = frío, oscuro y con olor a tierra de bosque.', opts: [
+      'Huele a tierra de bosque, está frío y no se distinguen los restos',
+      'Está caliente y con vapor: señal de que tiene potencia',
+      'Tiene un olor fuerte a amoníaco'
+    ]},
+    { q: '¿Qué riesgo tiene aplicar compost inmaduro?', correct: 2, exp: 'El compost inmaduro sigue descomponiéndose: consume (roba) nitrógeno del suelo y puede quemar las raíces jóvenes.', opts: [
+      'Ninguno, mientras más fresco mejor',
+      'Solo que huele mal un par de días',
+      'Roba nitrógeno del suelo y puede quemar las raíces'
+    ]},
+    { q: 'Para subir el pH de un trumao ácido, lo correcto es…', correct: 1, exp: 'Se aplica cal o conchilla para subir el pH, pero la dosis sale del análisis, no del ojo: pasarse también hace daño.', opts: [
+      'Echar cal a ojo, mientras más mejor',
+      'Aplicar cal o conchilla en la dosis que indica el análisis',
+      'Agregar más fertilizante nitrogenado'
+    ]},
+    { q: '¿Cuándo conviene aplicar las enmiendas para ver efecto en primavera?', correct: 0, exp: 'Las enmiendas trabajan lento: aplicadas en otoño, tienen tiempo de reaccionar en el suelo y se notan en la primavera siguiente.', opts: [
+      'En otoño, para que reaccionen antes de la temporada',
+      'Justo al momento de la cosecha',
+      'En pleno verano, con el suelo seco'
+    ]},
+    { q: 'En el test de infiltración, el agua tarda más de 30 minutos en bajar 2,5 cm. ¿Qué indica?', correct: 1, exp: 'Infiltración lenta = poros colapsados. Es la señal típica de compactación: toca descompactar y sumar materia orgánica.', opts: [
+      'Suelo perfecto: retiene muy bien el agua',
+      'Suelo compactado o con mala estructura',
+      'El test quedó mal hecho, hay que repetirlo'
+    ]},
+    { q: 'En el test de infiltración, ¿cuál medición es la que vale?', correct: 2, exp: 'La segunda medición, con el suelo ya húmedo, refleja la infiltración real; la primera se distorsiona porque el suelo seco absorbe de golpe.', opts: [
+      'La primera, con el suelo bien seco',
+      'El promedio de tres tomas al azar',
+      'La segunda, con el suelo ya húmedo'
+    ]},
+    { q: '¿Qué mide, en el fondo, el test de infiltración?', correct: 0, exp: 'Mide la velocidad a la que el suelo absorbe el agua, que depende directamente de su estructura y porosidad.', opts: [
+      'La velocidad con que el suelo absorbe el agua',
+      'La cantidad de nutrientes del suelo',
+      'El pH del suelo'
+    ]},
+    { q: 'En el test del algodón, desentierras la tela hecha jirones. ¿Qué significa?', correct: 1, exp: 'La tela (celulosa) es alimento de los microbios: mientras más deshecha, mayor la actividad biológica. Jirones = suelo muy vivo.', opts: [
+      'Que el suelo está contaminado',
+      'Que hay mucha vida microbiana: suelo biológicamente activo',
+      'Que la tela era de mala calidad'
+    ]},
+    { q: 'En el test del algodón, la tela sale casi intacta tras 8 semanas. ¿Qué indica?', correct: 2, exp: 'Si casi nada se descompuso, hay poca vida trabajando: es un suelo "dormido" que necesita materia orgánica y biología.', opts: [
+      'Que el suelo es excelente y no necesita nada',
+      'Que enterraste la tela muy profundo',
+      'Poca actividad biológica: un suelo "dormido"'
+    ]}
+  ];
+
+  quizTotal() { return this.QUIZ.length; }
+  notaMin() { return this.props.notaMinima ?? 4; }
+
+  renderVals() {
+    const s = this.state;
+    const modoLibre = this.props.modoLibre ?? false;
+    const total = this.QUIZ.length;
+    const doneCount = s.done.filter(Boolean).length;
+    const firstPending = s.done.findIndex(d => !d);
+    const current = firstPending === -1 ? -1 : firstPending;
+
+    const lessons = this.LESSONS.map((l, i) => {
+      const sDone = s.done[i];
+      const sCurrent = !sDone && (i === current);
+      const unlocked = modoLibre || sDone || sCurrent;
+      const sLocked = !unlocked;
+      return {
+        num: '0' + (i + 1),
+        title: l.title,
+        dur: l.dur,
+        sDone, sCurrent, sLocked,
+        tag: i === 4 ? 'EXPERIMENTO + QUIZ' : false,
+        numColor: sLocked ? '#a8a894' : '#7a7868',
+        titleColor: sLocked ? '#7a7868' : '#191f39',
+        rowStyle: {
+          display: 'flex', gap: 14, alignItems: 'flex-start',
+          padding: '16px 16px', borderRadius: 14, background: '#fff',
+          border: sCurrent ? '2px solid #cb9831' : '1.5px solid #e2ddc8',
+          boxShadow: sCurrent ? '0 4px 16px rgba(203,152,49,0.18)' : 'none',
+          opacity: sLocked ? 0.55 : 1,
+          cursor: sLocked ? 'default' : 'pointer',
+          transition: 'transform 0.15s ease, box-shadow 0.15s ease'
+        },
+        badgeStyle: {
+          width: 34, height: 34, borderRadius: '50%', flex: 'none',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          background: sDone ? '#317286' : (sCurrent ? '#cb9831' : '#eceade')
+        },
+        open: () => {
+          if (sLocked) return;
+          if (i === 4) this.setState({ screen: 'experiment' });
+          else this.setState({ screen: 'lesson', lesson: i });
+        }
+      };
+    });
+
+    const L0 = this.LESSONS[s.lesson];
+    const L = {
+      num: '0' + (s.lesson + 1),
+      title: L0.title,
+      dur: L0.dur,
+      done: s.done[s.lesson],
+      notDone: !s.done[s.lesson],
+      ideas: L0.ideas.map((t, i) => ({ n: '0' + (i + 1), text: t }))
+    };
+
+    const checksKey = s.expTab === 0 ? 'checks1' : 'checks2';
+    const curChecks = s[checksKey];
+    const E0 = this.EXPERIMENTS[s.expTab];
+    const checksDone = curChecks.filter(Boolean).length;
+    const stepTotal = E0.steps.length;
+    const steps = E0.steps.map((t, i) => ({
+      n: i + 1,
+      text: t,
+      done: curChecks[i],
+      rowStyle: {
+        display: 'flex', gap: 13, alignItems: 'flex-start', padding: '13px 14px',
+        background: curChecks[i] ? '#f2f0e4' : '#fff',
+        border: '1.5px solid ' + (curChecks[i] ? '#d5d0b8' : '#e2ddc8'),
+        borderRadius: 12, cursor: 'pointer', transition: 'background 0.2s ease'
+      },
+      boxStyle: {
+        width: 24, height: 24, borderRadius: 7, flex: 'none', marginTop: 2,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: curChecks[i] ? '#317286' : '#fff',
+        border: '2px solid ' + (curChecks[i] ? '#317286' : '#c9c4ae'),
+        transition: 'background 0.15s ease'
+      },
+      textStyle: {
+        margin: 0, fontSize: 14, lineHeight: 1.5,
+        color: curChecks[i] ? '#7a7868' : '#1d2233',
+        textDecoration: curChecks[i] ? 'line-through' : 'none'
+      },
+      toggle: () => {
+        const checks = this.state[checksKey].slice();
+        checks[i] = !checks[i];
+        this.setState({ [checksKey]: checks });
+      }
+    }));
+    const allChecked = checksDone === stepTotal;
+
+    const tabs = this.EXPERIMENTS.map((ex, i) => {
+      const active = s.expTab === i;
+      const tabChecks = i === 0 ? s.checks1 : s.checks2;
+      const tabDone = tabChecks.every(Boolean);
+      return {
+        label: ex.tab,
+        done: tabDone,
+        checkColor: active ? '#191f39' : '#317286',
+        select: () => this.setState({ expTab: i }),
+        style: {
+          flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+          padding: '10px 8px', border: 'none', borderRadius: 100, cursor: 'pointer',
+          fontFamily: "'Hanken Grotesk',sans-serif", fontWeight: 700, fontSize: 13,
+          background: active ? '#fffbdc' : 'transparent',
+          color: active ? '#191f39' : 'rgba(25,31,57,0.6)',
+          transition: 'all 0.2s ease'
+        }
+      };
+    });
+
+    const E = {
+      title: E0.title,
+      subtitle: E0.subtitle,
+      time: E0.time,
+      materials: E0.materials,
+      steps,
+      checksDone,
+      total: stepTotal,
+      readingLead: E0.readingLead,
+      readingText: E0.readingText
+    };
+
+    const Q = this.QUIZ[s.qi];
+    const answered = s.sel !== null;
+    const opts = Q.opts.map((t, i) => {
+      const isSel = s.sel === i;
+      const isCorrect = i === Q.correct;
+      let border = '1.5px solid #e2ddc8', bg = '#fff', color = '#1d2233';
+      let chipBg = '#eceade', chipColor = '#7a7868';
+      if (answered) {
+        if (isCorrect) { border = '2px solid #317286'; bg = 'rgba(49,114,134,0.08)'; chipBg = '#317286'; chipColor = '#fffbdc'; }
+        else if (isSel) { border = '2px solid #b0503c'; bg = 'rgba(176,80,60,0.07)'; chipBg = '#b0503c'; chipColor = '#fffbdc'; }
+        else { color = '#7a7868'; }
+      }
+      return {
+        letter: String.fromCharCode(65 + i),
+        text: t,
+        style: {
+          display: 'flex', gap: 12, alignItems: 'flex-start', padding: '14px 15px',
+          border, background: bg, color, borderRadius: 13,
+          cursor: answered ? 'default' : 'pointer', transition: 'all 0.2s ease'
+        },
+        chipStyle: {
+          width: 26, height: 26, borderRadius: '50%', flex: 'none',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontFamily: "'IBM Plex Mono',monospace", fontSize: 12, fontWeight: 600,
+          background: chipBg, color: chipColor, transition: 'all 0.2s ease'
+        },
+        pick: () => {
+          if (this.state.sel !== null) return;
+          this.setState({ sel: i, score: this.state.score + (i === Q.correct ? 1 : 0) });
+        }
+      };
+    });
+    const wasCorrect = answered && s.sel === Q.correct;
+
+    const dots = this.QUIZ.map((_, i) => ({
+      style: {
+        flex: 1, height: 4, borderRadius: 100,
+        background: i < s.qi ? '#317286' : (i === s.qi ? '#cb9831' : '#e2ddc8'),
+        transition: 'background 0.3s ease'
+      }
+    }));
+
+    const grade = 1 + (s.score / total) * 4;
+    const passed = grade >= this.notaMin();
+    const pct = s.score / total * 360;
+
+    return {
+      isCover: s.screen === 'cover',
+      isList: s.screen === 'list',
+      isLesson: s.screen === 'lesson',
+      isExperiment: s.screen === 'experiment',
+      isQuiz: s.screen === 'quiz',
+      isResult: s.screen === 'result',
+
+      doneCount,
+      donePct: doneCount * 20,
+      coverCta: doneCount === 0 ? 'Comenzar el módulo' : (doneCount === 5 ? 'Repasar el módulo' : 'Continuar'),
+      goList: () => this.setState({ screen: 'list' }),
+      goCover: () => this.setState({ screen: 'cover' }),
+
+      lessons,
+      L,
+      completeLesson: () => {
+        const done = this.state.done.slice();
+        done[this.state.lesson] = true;
+        if (window.LMS_SAVE) window.LMS_SAVE.lesson(this.state.lesson);
+        this.setState({ done, screen: 'list' });
+      },
+
+      tabs, E,
+      quizCtaStyle: {
+        width: '100%', padding: 17, border: 'none', borderRadius: 100,
+        fontFamily: "'Hanken Grotesk',sans-serif", fontWeight: 700, fontSize: 16,
+        background: allChecked ? '#191f39' : '#d5d0b8',
+        color: allChecked ? '#fffbdc' : '#8f8b78',
+        cursor: allChecked ? 'pointer' : 'default',
+        transition: 'all 0.25s ease', marginTop: 'auto'
+      },
+      quizCtaLabel: allChecked ? 'Continuar al quiz final →' : ('Completa los ' + stepTotal + ' pasos para seguir'),
+      toQuiz: () => {
+        if (!allChecked) return;
+        this.setState({ screen: 'quiz', qi: 0, sel: null, score: 0 });
+      },
+      backToExperiment: () => this.setState({ screen: 'experiment' }),
+
+      total,
+      quizPct: ((s.qi + 1) / total) * 100,
+      qPos: s.qi + 1,
+      qText: Q.q,
+      opts, dots, answered,
+      fbTitle: wasCorrect ? '✓ CORRECTO' : '✗ INCORRECTO',
+      fbColor: wasCorrect ? '#317286' : '#b0503c',
+      fbExp: Q.exp,
+      fbStyle: {
+        marginTop: 18, marginBottom: 20, padding: '14px 16px', borderRadius: 12,
+        background: wasCorrect ? 'rgba(49,114,134,0.08)' : 'rgba(176,80,60,0.07)',
+        border: '1.5px solid ' + (wasCorrect ? 'rgba(49,114,134,0.35)' : 'rgba(176,80,60,0.3)'),
+        animation: 'fadeUp 0.3s ease both'
+      },
+      nextLabel: s.qi === total - 1 ? 'Ver mi resultado' : 'Siguiente pregunta',
+      nextQ: () => {
+        if (this.state.qi === total - 1) {
+          const finalGrade = 1 + (this.state.score / total) * 4;
+          const ok = finalGrade >= this.notaMin();
+          const done = this.state.done.slice();
+          if (ok) done[4] = true;
+          if (window.LMS_SAVE) window.LMS_SAVE.quiz(this.state.score, ok);
+          this.setState({ screen: 'result', done });
+        } else {
+          this.setState({ qi: this.state.qi + 1, sel: null });
+        }
+      },
+
+      score: s.score,
+      passed, failed: !passed,
+      ringStyle: {
+        width: 148, height: 148, borderRadius: '50%',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: 'conic-gradient(' + (passed ? '#cb9831' : '#b0503c') + ' ' + pct + 'deg, rgba(255,251,220,0.12) ' + pct + 'deg)'
+      },
+      resultTitle: passed ? '¡Aprobaste!' : 'Casi lo logras',
+      resultMsg: passed
+        ? 'Dominas la base científica del suelo vivo. El Módulo 02 — El clima y el invernadero — ya está disponible.'
+        : 'Tu nota fue ' + grade.toFixed(1) + ' y necesitas al menos ' + this.notaMin().toFixed(1) + ' para aprobar. Repasa las ideas clave y vuelve a intentarlo — el quiz no tiene límite de intentos.',
+      retryQuiz: () => this.setState({ screen: 'quiz', qi: 0, sel: null, score: 0 })
+    };
+  }
+}
+</script>
+</body>
+</html>

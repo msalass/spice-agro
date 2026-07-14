@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Academia SPICe Agro — Mi curso</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ===== PEGAR AQUÍ LOS VALORES DE SUPABASE (Settings → API) =====
+const SUPABASE_URL = "https://simpksmjwgvihrahifpv.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXBrc21qd2d2aWhyYWhpZnB2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3MjMyODEsImV4cCI6MjA5OTI5OTI4MX0.bYVxqrmDdJ11W1j6yMRkeCwSjwybweALMGHlAyh4p88";
+// ================================================================
+</script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,'Hanken Grotesk',sans-serif; background:#faf8f2; color:#1d2233; min-height:100vh; }
+.wrap { max-width:520px; margin:0 auto; padding:24px 18px 60px; }
+.brand { font-family:Georgia,'Fraunces',serif; font-weight:900; font-size:1.3rem; color:#191f39; padding:18px 0; }
+.brand span { color:#cb9831; }
+.card { background:#fff; border:1px solid #e2ddc8; border-radius:14px; padding:24px; margin-bottom:14px; }
+h1 { font-family:Georgia,'Fraunces',serif; font-size:1.6rem; color:#191f39; margin-bottom:8px; }
+p.sub { color:#7a7868; font-size:.95rem; line-height:1.5; margin-bottom:18px; }
+input { width:100%; padding:13px 14px; border:1.5px solid #e2ddc8; border-radius:10px; font-size:1rem; margin-bottom:10px; }
+button { width:100%; padding:14px; border:0; border-radius:10px; background:#cb9831; color:#fff; font-size:1rem; font-weight:700; cursor:pointer; }
+button:disabled { opacity:.5; }
+.msg { font-size:.9rem; margin-top:10px; color:#317286; }
+.msg.err { color:#b3261e; }
+.mod { display:flex; align-items:center; gap:14px; }
+.mod .num { font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:1.1rem; color:#cb9831; width:38px; height:38px; border:2px solid #cb9831; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; }
+.mod.locked { opacity:.45; }
+.mod.locked .num { color:#7a7868; border-color:#a8a894; }
+.mod h3 { font-size:1.05rem; color:#191f39; }
+.mod .state { font-size:.8rem; color:#7a7868; }
+.logout { background:none; color:#7a7868; font-size:.85rem; font-weight:400; width:auto; padding:6px 0; text-decoration:underline; }
+#app { display:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">SPICe <span>Agro</span> · Academia</div>
+
+  <!-- ============ VISTA LOGIN ============ -->
+  <div id="login">
+    <div class="card">
+      <h1>Entra a tu curso</h1>
+      <p class="sub">Escribe el correo con el que compraste. Te enviaremos un código de 6 dígitos — sin contraseñas.</p>
+      <input id="email" type="email" placeholder="tu@correo.cl" autocomplete="email">
+      <button id="btn-send">Enviarme el código</button>
+      <div id="otp-zone" style="display:none;margin-top:14px;">
+        <input id="otp" type="text" inputmode="numeric" placeholder="Código de 6 dígitos">
+        <button id="btn-verify">Entrar</button>
+      </div>
+      <div class="msg" id="login-msg"></div>
+    </div>
+  </div>
+
+  <!-- ============ VISTA CURSO ============ -->
+  <div id="app">
+    <div class="card">
+      <h1 id="hola">Hola</h1>
+      <p class="sub" id="acceso-info">Tu curso parte el lunes 14 de septiembre.</p>
+    </div>
+    <div class="card mod" data-mod="1"><div class="num">01</div><div><h3>Suelo Vivo</h3><div class="state"></div></div></div>
+    <div class="card mod" data-mod="2"><div class="num">02</div><div><h3>El clima y el invernadero</h3><div class="state"></div></div></div>
+    <div class="card mod" data-mod="3"><div class="num">03</div><div><h3>Orgánicos que funcionan</h3><div class="state"></div></div></div>
+    <div class="card mod" data-mod="4"><div class="num">04</div><div><h3>Planificación y sucesión</h3><div class="state"></div></div></div>
+    <button class="logout" id="btn-logout">Cerrar sesión</button>
+  </div>
+</div>
+
+<script>
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const $ = id => document.getElementById(id);
+
+// --- Login por código al email (OTP) ---
+$("btn-send").onclick = async () => {
+  const email = $("email").value.trim().toLowerCase();
+  if (!email) return;
+  $("btn-send").disabled = true;
+  const { error } = await db.auth.signInWithOtp({ email });
+  $("login-msg").textContent = error ? "Error: " + (error.message || error.code || JSON.stringify(error)) + (error.status ? " (HTTP " + error.status + ")" : "") : "Código enviado — revisa tu correo (y spam).";
+  $("login-msg").className = "msg" + (error ? " err" : "");
+  if (!error) $("otp-zone").style.display = "block";
+  $("btn-send").disabled = false;
+};
+
+$("btn-verify").onclick = async () => {
+  const email = $("email").value.trim().toLowerCase();
+  const token = $("otp").value.trim();
+  const { error } = await db.auth.verifyOtp({ email, token, type: "email" });
+  if (error) { $("login-msg").textContent = "Código incorrecto o vencido."; $("login-msg").className = "msg err"; return; }
+  init();
+};
+
+$("btn-logout").onclick = async () => { await db.auth.signOut(); location.reload(); };
+
+// --- Al entrar: verificar compra y pintar módulos ---
+async function init() {
+  const { data: { session } } = await db.auth.getSession();
+  if (!session) return;
+  const email = session.user.email;
+
+  // ¿Tiene compra activa? (RLS solo le muestra la suya)
+  const { data: compra } = await db.from("purchases").select("activated").eq("email", email).maybeSingle();
+  if (!compra || !compra.activated) {
+    $("login-msg").textContent = "Este correo no tiene una compra registrada. Escríbenos por WhatsApp +56 9 7154 0665.";
+    $("login-msg").className = "msg err";
+    await db.auth.signOut();
+    return;
+  }
+
+  $("login").style.display = "none";
+  $("app").style.display = "block";
+  $("hola").textContent = "Hola, " + email.split("@")[0];
+
+  // Estado de módulos: 1 abierto; los demás se abren al aprobar el quiz anterior
+  const { data: quizzes } = await db.from("quiz_results").select("module,passed").eq("user_id", session.user.id);
+  const aprobados = new Set((quizzes || []).filter(q => q.passed).map(q => q.module));
+  document.querySelectorAll(".mod").forEach(el => {
+    const m = +el.dataset.mod;
+    const abierto = m === 1 || aprobados.has(m - 1);
+    el.classList.toggle("locked", !abierto);
+    el.querySelector(".state").textContent =
+      aprobados.has(m) ? "✓ Aprobado" : abierto ? "Disponible" : "Se abre al aprobar el módulo anterior";
+    if (abierto && m === 1) {
+      el.style.cursor = "pointer";
+      el.onclick = () => { location.href = "./modulo-1.html"; };
+    }
+    // Módulos 2-4: se conectan cuando existan sus prototipos
+  });
+}
+init();
+</script>
+</body>
+</html>
