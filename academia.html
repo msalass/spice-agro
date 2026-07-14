@@ -49,6 +49,7 @@ gtag('config', 'AW-18018765001');
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="/assets/images/academia-hero.webp">
 
 <style>
   :root{
@@ -108,7 +109,8 @@ gtag('config', 'AW-18018765001');
   .hero{
     position:relative;
     background:
-      radial-gradient(900px 500px at 75% 0%, rgba(49,114,134,.38), transparent 60%),
+      linear-gradient(100deg, rgba(16,20,42,.95) 0%, rgba(16,20,42,.86) 40%, rgba(16,20,42,.55) 72%, rgba(16,20,42,.74) 100%),
+      url('/assets/images/academia-hero.webp') center center/cover no-repeat,
       linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 70%);
     color:var(--cream);
     padding:34px 0 0;
@@ -310,13 +312,11 @@ gtag('config', 'AW-18018765001');
 
     <div class="hero-grid">
       <div>
-        <span class="kicker">Preventa abierta · Curso online</span>
-        <h1><em>Academia</em> SPICe Agro</h1>
-        <p class="lead">La ciencia del laboratorio, convertida en un curso para tu huerto: micro-lecciones, experimentos prácticos y certificado — <strong>a tu ritmo, desde tu teléfono</strong>.</p>
+        <span class="kicker">Academia SPICe Agro · Curso online</span>
+        <h1>Aprende a hacer producir tu huerto, <em>con ciencia y a tu ritmo.</em></h1>
+        <p class="lead">4 módulos con micro-lecciones y experimentos prácticos que llevan la ciencia del suelo del laboratorio directo a tu huerto — <strong>a tu ritmo, desde tu teléfono.</strong></p>
         <div class="chips">
-          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Parte el lunes 14 de septiembre</span>
-          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Micro-lecciones de 5&ndash;10 min + experimentos</span>
-          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1 2.5 3 6 3s6-2 6-3v-5"/></svg>Certificado · acceso de por vida</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Empieza el lunes 14 de septiembre</span>
         </div>
       </div>
 
