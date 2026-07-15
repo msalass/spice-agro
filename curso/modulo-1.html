@@ -19,7 +19,7 @@ const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     if (!compra || !compra.activated) { location.href = "./index.html"; return; }
     // Apertura del curso: antes del 14-sep solo entran beta testers
     const LAUNCH = new Date("2026-09-14T00:00:00-03:00");
-    const BETA = ["msalas@spicelab.cl"];
+    const BETA = ["msalassaavedra.e@gmail.com"];
     if (Date.now() < LAUNCH.getTime() && !BETA.includes((session.user.email||"").toLowerCase())) { location.href = "./index.html"; return; }
     const uid = session.user.id;
     const [prog, quiz] = await Promise.all([
