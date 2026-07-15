@@ -8,6 +8,9 @@
   publish = "."
   command = ""
 
+[functions]
+  directory = "netlify/functions"
+
 # --- Cabeceras de seguridad (todas las rutas) ---
 [[headers]]
   for = "/*"

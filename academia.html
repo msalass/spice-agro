@@ -38,13 +38,9 @@ gtag('config', 'AW-18018765001');
 <meta name="robots" content="index,follow">
 <title>Academia SPICe Agro · Curso online de agricultura regenerativa | Preventa</title>
 
-<!-- ============================================================
-     ANTES DE PUBLICAR:
-       • LINK DE PAGO MERCADOPAGO ($79.000): crear en panel MP y
-         reemplazar los href de los botones .btn-pago (2 lugares,
-         buscar TODO-MERCADOPAGO). Mientras tanto apuntan a WhatsApp.
-       • Fecha comprometida: lunes 14 de septiembre 2026.
-     ============================================================ -->
+<!-- Pago: los botones .btn-pago crean el cobro via /.netlify/functions/crear-pago (MercadoPago API).
+     Webhook: /.netlify/functions/mp-webhook -> Supabase (purchases.activated) + correo Brevo.
+     Env vars en Netlify: MP_ACCESS_TOKEN, SUPABASE_SERVICE_KEY, BREVO_API_KEY. -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -330,8 +326,7 @@ gtag('config', 'AW-18018765001');
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>Acceso de por vida, con actualizaciones incluidas</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><b style="color:var(--ochre)">El 100% de lo pagado se descuenta</b>&nbsp;si después tomas un programa Huerto Rentable</li>
         </ul>
-        <!-- TODO-MERCADOPAGO: reemplazar href por el link de pago de $79.000 -->
-        <a class="btn btn-pago" href="https://wa.me/56971540665?text=Hola%2C%20quiero%20comprar%20la%20preventa%20de%20la%20Academia%20SPICe%20Agro%20(%2479.000)" target="_blank" rel="noopener">Reservar mi cupo &rsaquo;</a>
+        <a class="btn btn-pago" href="/.netlify/functions/crear-pago">Reservar mi cupo &rsaquo;</a>
         <a href="/curso/" target="_blank" rel="noopener" data-curso-entry style="display:block;text-align:center;margin-top:10px;font-size:.85rem;color:var(--ink-soft);text-decoration:underline">¿Ya tienes tu cupo? Entrar al curso &rsaquo;</a>
       </aside>
     </div>
@@ -408,8 +403,7 @@ gtag('config', 'AW-18018765001');
         <div class="badge">Solo hasta el domingo 13 de septiembre</div>
       </div>
       <div class="price-body">
-        <!-- TODO-MERCADOPAGO: reemplazar href por el link de pago de $79.000 -->
-        <a class="btn btn-pago" id="pago-flow" href="https://wa.me/56971540665?text=Hola%2C%20quiero%20comprar%20la%20preventa%20de%20la%20Academia%20SPICe%20Agro%20(%2479.000)" target="_blank" rel="noopener">
+        <a class="btn btn-pago" id="pago-flow" href="/.netlify/functions/crear-pago">
           <span>Reservar mi cupo</span><span class="price">$79.000</span>
         </a>
         <div class="reassure">
@@ -466,7 +460,7 @@ gtag('config', 'AW-18018765001');
     <span class="kicker" style="justify-content:center;color:var(--ochre);">Del laboratorio al huerto</span>
     <h2>Tu huerto con ciencia parte el <em>14 de septiembre</em>.</h2>
     <p>Cupos de preventa a $79.000 — el precio sube a $119.000 en el lanzamiento.</p>
-    <a class="btn btn-pago" href="https://wa.me/56971540665?text=Hola%2C%20quiero%20comprar%20la%20preventa%20de%20la%20Academia%20SPICe%20Agro%20(%2479.000)" target="_blank" rel="noopener"><span>Reservar mi cupo</span><span class="price">$79.000</span></a>
+    <a class="btn btn-pago" href="/.netlify/functions/crear-pago"><span>Reservar mi cupo</span><span class="price">$79.000</span></a>
   </div>
   <svg class="strata" viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M0,34 C300,8 540,8 720,28 C960,52 1180,52 1440,30 L1440,70 L0,70 Z" fill="#cb9831" opacity="0.18"/>
