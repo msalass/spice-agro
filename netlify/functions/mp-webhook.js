@@ -53,9 +53,10 @@ exports.handler = async (event) => {
       return { statusCode: 500, body: "Supabase error: " + t.slice(0, 200) }; // 500 => MP reintenta
     }
 
-    // 2) Correo de bienvenida por Brevo (best-effort)
+    // 2) Correo de bienvenida por Brevo (best-effort, con log del resultado)
+    if (!BREVO) { console.log("Brevo: falta BREVO_API_KEY"); }
     if (BREVO) {
-      await fetch("https://api.brevo.com/v3/smtp/email", {
+      const br = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: { "api-key": BREVO, "Content-Type": "application/json", "accept": "application/json" },
         body: JSON.stringify({
@@ -67,11 +68,13 @@ exports.handler = async (event) => {
             "<p>Gracias por sumarte a la <b>Academia SPICe Agro</b>.</p>" +
             "<p>Tu acceso ya esta <b>activo</b>. El curso parte el <b>lunes 14 de septiembre</b>.</p>" +
             "<p>Ese dia entra a <a href=\"" + SITE + "/curso/\">agro.spicelab.cl/curso</a> con <b>este mismo correo</b> — te llegara un codigo de 6 digitos, sin contrasenas.</p>" +
-            "<p>Incluye 4 modulos con micro-lecciones y experimentos, quiz, certificado y acceso de por vida.</p>" +
+            "<p>Incluye 4 modulos con lecciones cortas y experimentos, quiz, certificado y acceso de por vida.</p>" +
             "<p>Cualquier duda, escribenos por WhatsApp +56 9 7154 0665.</p>" +
             "<p>— Equipo SPICe Agro</p></div>"
         })
-      }).catch(function (e) {});
+      });
+      const btxt = await br.text();
+      console.log("Brevo status:", br.status, "para", email, "->", btxt.slice(0, 300));
     }
 
     return { statusCode: 200, body: "ok" };

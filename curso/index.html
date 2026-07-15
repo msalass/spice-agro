@@ -73,6 +73,10 @@ button:disabled { opacity:.5; }
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const $ = id => document.getElementById(id);
 
+// ===== Apertura del curso =====
+const LAUNCH = new Date("2026-09-14T00:00:00-03:00"); // se abre para TODOS este dia
+const BETA = ["msalas@spicelab.cl"];                  // acceso anticipado (tu + beta testers). Correos en minuscula.
+
 // --- Login por código al email (OTP) ---
 $("btn-send").onclick = async () => {
   const email = $("email").value.trim().toLowerCase();
@@ -113,6 +117,25 @@ async function init() {
   $("login").style.display = "none";
   $("app").style.display = "block";
   $("hola").textContent = "Hola, " + email.split("@")[0];
+
+  // ¿El curso ya está abierto para este usuario?
+  const emailLc = email.toLowerCase();
+  const esBeta = BETA.includes(emailLc);
+  const abiertoCurso = Date.now() >= LAUNCH.getTime() || esBeta;
+
+  if (!abiertoCurso) {
+    $("acceso-info").innerHTML = "Tu acceso está <b>activo</b>. El curso se abre el <b>lunes 14 de septiembre</b> — ese día aparece aquí la primera clase.";
+    document.querySelectorAll(".mod").forEach(el => {
+      el.classList.add("locked");
+      el.querySelector(".state").textContent = "Se abre el 14 de septiembre";
+      el.onclick = null; el.style.cursor = "default";
+    });
+    return;
+  }
+
+  $("acceso-info").innerHTML = (esBeta && Date.now() < LAUNCH.getTime())
+    ? "<b>Acceso anticipado (beta).</b> Estás viendo el curso antes del lanzamiento del 14 de septiembre."
+    : "Tu curso está disponible. Empieza por la primera clase.";
 
   // Estado de módulos: 1 abierto; los demás se abren al aprobar el quiz anterior
   const { data: quizzes } = await db.from("quiz_results").select("module,passed").eq("user_id", session.user.id);
