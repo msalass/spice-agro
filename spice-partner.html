@@ -1013,5 +1013,40 @@ if(shortForm){shortForm.addEventListener("submit",function(e){
 });}
 })();
 </script>
+
+<!-- Meta Pixel: eventos de conversion (Lead / Contact) -->
+<script>
+(function(){
+  if(typeof fbq!=="function") return;
+  var ultimos={};
+  function track(evento,datos){
+    var clave=evento+"|"+((datos&&datos.content_name)||"");
+    var ahora=Date.now();
+    if(ultimos[clave]&&ahora-ultimos[clave]<5000) return; // evita doble disparo por doble clic
+    ultimos[clave]=ahora;
+    try{fbq('track',evento,datos);}catch(e){}
+  }
+
+  // 1) Formulario corto -> Lead
+  var form=document.getElementById("partner-short-form");
+  if(form){
+    form.addEventListener("submit",function(){
+      track('Lead',{content_name:'SPICe Partner - formulario',content_category:'programa',content_ids:['PARTNER'],origen:'formulario_web'});
+    });
+  }
+
+  // 2) Clics a WhatsApp -> Lead (CTAs de diagnostico) / Contact (boton flotante)
+  document.addEventListener("click",function(e){
+    var t=e.target;
+    var a=(t&&t.closest)?t.closest('a[href*="wa.me"]'):null;
+    if(!a) return;
+    if(a.classList.contains('wa')){
+      track('Contact',{content_name:'SPICe Partner - WhatsApp flotante',content_category:'programa'});
+    }else{
+      track('Lead',{content_name:'SPICe Partner - WhatsApp '+(a.id||'CTA'),content_category:'programa',content_ids:['PARTNER'],origen:'whatsapp'});
+    }
+  },true);
+})();
+</script>
 </body>
 </html>
