@@ -81,6 +81,7 @@ gtag('config', 'AW-18018765001');
  .kicker::before{content:"";width:22px;height:1px;background:var(--ochre);display:inline-block;}
 
  /* ---------- Countdown Banner ---------- */
+ .countdown-banner.is-live { display: flex; }
  .countdown-banner {
  background: var(--ochre);
  color: var(--navy-deep);
@@ -93,7 +94,7 @@ gtag('config', 'AW-18018765001');
  top: 0;
  z-index: 1000;
  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
- display: flex;
+ display: none;
  justify-content: center;
  align-items: center;
  gap: 10px;
@@ -587,6 +588,7 @@ gtag('config', 'AW-18018765001');
      document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
      document.getElementById('mins').innerText = mins.toString().padStart(2, '0');
      document.getElementById('secs').innerText = secs.toString().padStart(2, '0');
+     document.getElementById('countdown-banner').classList.add('is-live');
    };
    setInterval(updateTimer, 1000);
    updateTimer();
