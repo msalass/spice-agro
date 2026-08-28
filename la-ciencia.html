@@ -116,8 +116,14 @@ gtag('config', 'AW-18018765001');
 .lista-form--ciencia{margin:0 auto;max-width:28rem}
 .lista-form form{display:flex!important;flex-direction:column!important;gap:.9rem!important}
 .lista-form label{display:flex!important;flex-direction:column!important;width:100%!important}
-.lista-form input,.lista-form select,.lista-form button.btn{width:100%!important;max-width:100%!important}
-.lista-form__hp,.lista-form__hp label,.lista-form__hp input{display:none!important;position:absolute!important;left:-9999px!important;height:0!important;width:0!important;overflow:hidden!important;clip:rect(0,0,0,0)!important}
+.lista-form input[type="text"],.lista-form input[type="email"],.lista-form select{
+  width:100%!important;max-width:100%!important;height:48px!important;min-height:48px!important;
+  padding:12px 14px!important;font-size:16px!important;line-height:1.25!important;
+  box-sizing:border-box!important;-webkit-appearance:none!important;appearance:none!important
+}
+.lista-form select{padding-right:2.4rem!important}
+.lista-form button.btn{width:100%!important;max-width:100%!important;min-height:48px!important;padding:13px 22px!important}
+.lista-form p.lista-form__hp,.lista-form p.lista-form__hp *{display:none!important;position:absolute!important;left:-9999px!important;height:0!important;width:0!important;overflow:hidden!important}
 </style>
 </head>
 <body>

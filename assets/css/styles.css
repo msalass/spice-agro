@@ -210,15 +210,18 @@ footer{border-top:1px solid var(--line);padding:clamp(2.5rem,5vw,3.5rem) 0}
 .lista-form input[type="email"],
 .lista-form select{
   font-family:var(--sans);
-  font-size:1rem;
+  font-size:16px;
   font-weight:400;
   color:var(--ink);
   background:var(--card);
   border:1.5px solid var(--line);
   border-radius:10px;
-  padding:.72rem .9rem;
+  padding:12px 14px;
   width:100%;
-  min-height:46px;
+  height:48px;
+  min-height:48px;
+  line-height:1.25;
+  box-sizing:border-box;
   -webkit-appearance:none;
   appearance:none;
 }
