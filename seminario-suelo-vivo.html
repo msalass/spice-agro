@@ -256,6 +256,45 @@ gtag('config', 'AW-18018765001');
   .foot-legal{border-top:1px solid rgba(255,251,220,.1);margin-top:34px;padding-top:20px;font-size:.82rem;color:rgba(255,251,220,.45);line-height:1.7;}
   .foot-legal b{color:rgba(255,251,220,.7);font-weight:500;}
 
+
+  /* Lista regenerativa */
+  .lista-form{
+    max-width:420px;margin:8px 0 0;color:var(--ink);text-align:left;
+    background:#fff;border:1px solid rgba(25,31,57,.12);border-radius:12px;
+    padding:22px 22px 18px;position:relative;scroll-margin-top:24px;width:100%;
+  }
+  .lista-form__heading{
+    font-family:var(--font-heading);font-weight:600;font-size:1.22rem;
+    line-height:1.18;letter-spacing:-.018em;color:var(--navy);margin:0 0 .45rem;
+  }
+  .lista-form__sub{font-size:.92rem;line-height:1.55;color:#555b6b;margin:0 0 1.1rem}
+  .lista-form form{display:flex;flex-direction:column;gap:.85rem}
+  .lista-form label{display:flex;flex-direction:column;gap:.32rem;font-size:.82rem;font-weight:600;color:var(--navy)}
+  .lista-form input[type="text"],
+  .lista-form input[type="email"],
+  .lista-form select{
+    font-family:var(--font-body);font-size:1rem;font-weight:400;color:var(--ink);
+    background:#fdfbf5;border:1.5px solid rgba(25,31,57,.14);border-radius:10px;
+    padding:.72rem .9rem;width:100%;min-height:46px;-webkit-appearance:none;appearance:none;
+  }
+  .lista-form select{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23191f39' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right .8rem center;padding-right:2.4rem;
+  }
+  .lista-form input:focus,
+  .lista-form select:focus{outline:none;border-color:var(--ochre);box-shadow:0 0 0 3px rgba(203,152,49,.22)}
+  .lista-form button.btn,
+  .lista-form .btn.ochre{
+    width:100%;justify-content:center;margin-top:.1rem;
+    background:var(--ochre);border:1.5px solid var(--ochre);color:var(--navy-deep);
+    border-radius:100px;font-weight:700;font-size:.94rem;padding:13px 22px;
+    -webkit-appearance:none;appearance:none;cursor:pointer;font-family:var(--font-body);
+  }
+  .lista-form button.btn:hover,
+  .lista-form .btn.ochre:hover{background:#d9a128;border-color:#d9a128;transform:none}
+  .lista-form__fine{font-size:.75rem;color:#6a7080;line-height:1.5;margin:0}
+  .lista-form__hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
   /* ---------- responsive ---------- */
   @media (max-width:880px){
     .hero-grid{grid-template-columns:1fr;gap:34px;padding:44px 0 110px;}
@@ -321,10 +360,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="kicker">Masterclass online</span>
         <h1><em>Suelo Vivo</em></h1>
         <p class="lead">Estamos preparando una <strong>nueva fecha</strong>.</p>
-        <p style="max-width:560px;opacity:.88;margin:16px 0 0;font-size:1.06rem;line-height:1.65">Decidimos posponer la sesión de julio para darle a este seminario la difusión y la calidad que merece. Déjanos tu WhatsApp y serás de los primeros en saber cuándo abren las inscripciones.</p>
+        <p style="max-width:560px;opacity:.88;margin:16px 0 0;font-size:1.06rem;line-height:1.65">Decidimos posponer la sesión de julio para darle a este seminario la difusión y la calidad que merece. Déjanos tu correo y serás de los primeros en saber cuándo abren las inscripciones.</p>
         <div class="hero-cta" style="margin-top:30px;">
-          <a class="btn btn-pago" href="https://wa.me/56971540665?text=Hola%2C%20quiero%20que%20me%20avisen%20de%20la%20nueva%20fecha%20del%20seminario%20Suelo%20Vivo" target="_blank" rel="noopener"><span>Avísame de la nueva fecha</span></a>
-          <span class="micro">Sin spam — solo el aviso de apertura</span>
+          <div class="lista-form" id="lista">
+            <h2 class="lista-form__heading">Si te interesa la agricultura regenerativa en Chile, déjanos tu correo.</h2>
+            <p class="lista-form__sub">Te escribimos cuando hay un artículo, un seminario o algo útil para tu huerto. Sin spam.</p>
+            <form name="lista-regenerativa" method="POST" action="/gracias-lista.html" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="lista-regenerativa">
+              <p class="lista-form__hp" aria-hidden="true">
+                <label>No llenar este campo <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label>
+              </p>
+              <label>
+                Nombre
+                <input type="text" name="nombre" required autocomplete="name" maxlength="120">
+              </label>
+              <label>
+                Correo
+                <input type="email" name="email" required autocomplete="email" maxlength="160">
+              </label>
+              <label>
+                Región
+                <select name="region" required>
+                  <option value="" disabled selected>Elige tu región</option>
+                  <option value="Arica y Parinacota">Arica y Parinacota</option>
+                  <option value="Tarapacá">Tarapacá</option>
+                  <option value="Antofagasta">Antofagasta</option>
+                  <option value="Atacama">Atacama</option>
+                  <option value="Coquimbo">Coquimbo</option>
+                  <option value="Valparaíso">Valparaíso</option>
+                  <option value="Metropolitana">Metropolitana</option>
+                  <option value="O’Higgins">O’Higgins</option>
+                  <option value="Maule">Maule</option>
+                  <option value="Ñuble">Ñuble</option>
+                  <option value="Biobío">Biobío</option>
+                  <option value="La Araucanía">La Araucanía</option>
+                  <option value="Los Ríos">Los Ríos</option>
+                  <option value="Los Lagos">Los Lagos</option>
+                  <option value="Aysén">Aysén</option>
+                  <option value="Magallanes">Magallanes</option>
+                  <option value="Vivo fuera de Chile">Vivo fuera de Chile</option>
+                </select>
+              </label>
+              <button type="submit" class="btn ochre">Quiero que me escriban</button>
+              <p class="lista-form__fine">Usamos tu correo solo para escribirte desde SPICe Agro.</p>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -359,7 +439,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="kicker" style="justify-content:center;color:var(--ochre);">Del laboratorio al huerto</span>
     <h2>Tu próxima cosecha empieza en el <em>suelo</em>.</h2>
     <p>Te avisamos apenas la nueva fecha esté confirmada.</p>
-    <a class="btn btn-pago" href="https://wa.me/56971540665?text=Hola%2C%20quiero%20que%20me%20avisen%20de%20la%20nueva%20fecha%20del%20seminario%20Suelo%20Vivo" target="_blank" rel="noopener"><span>Quiero el aviso</span></a>
+    <a class="btn btn-pago" href="#lista"><span>Quiero el aviso</span></a>
   </div>
   <svg class="strata" viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M0,34 C300,8 540,8 720,28 C960,52 1180,52 1440,30 L1440,70 L0,70 Z" fill="#cb9831" opacity="0.18"/>

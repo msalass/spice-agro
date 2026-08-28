@@ -173,3 +173,99 @@ footer{border-top:1px solid var(--line);padding:clamp(2.5rem,5vw,3.5rem) 0}
 
 @media(max-width:580px){.sem-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}.reveal{opacity:1;transform:none}}
+
+/* Lista regenerativa — Netlify form */
+.lista-form{
+  max-width:420px;
+  margin:2.4rem 0 0;
+  color:var(--ink);
+  position:relative;
+  scroll-margin-top:92px;
+}
+.lista-form__heading{
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:clamp(1.22rem,2.4vw,1.5rem);
+  line-height:1.18;
+  letter-spacing:-.018em;
+  color:var(--navy);
+  margin:0 0 .45rem;
+}
+.lista-form__sub{
+  font-size:.92rem;
+  line-height:1.55;
+  color:var(--ink-soft);
+  margin:0 0 1.15rem;
+}
+.lista-form form{display:flex;flex-direction:column;gap:.85rem}
+.lista-form label{
+  display:flex;
+  flex-direction:column;
+  gap:.32rem;
+  font-size:.82rem;
+  font-weight:600;
+  color:var(--navy);
+}
+.lista-form input[type="text"],
+.lista-form input[type="email"],
+.lista-form select{
+  font-family:var(--sans);
+  font-size:1rem;
+  font-weight:400;
+  color:var(--ink);
+  background:var(--card);
+  border:1.5px solid var(--line);
+  border-radius:10px;
+  padding:.72rem .9rem;
+  width:100%;
+  min-height:46px;
+  -webkit-appearance:none;
+  appearance:none;
+}
+.lista-form select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23191f39' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right .8rem center;
+  padding-right:2.4rem;
+}
+.lista-form input:focus,
+.lista-form select:focus{
+  outline:none;
+  border-color:var(--ochre);
+  box-shadow:0 0 0 3px var(--ochre-dim);
+}
+.lista-form button.btn{
+  width:100%;
+  justify-content:center;
+  margin-top:.1rem;
+  -webkit-appearance:none;
+  appearance:none;
+  font:inherit;
+  font-weight:600;
+  font-size:.94rem;
+}
+.lista-form__fine{
+  font-size:.75rem;
+  color:var(--ink-soft);
+  line-height:1.5;
+  margin:0;
+}
+.lista-form__hp{
+  position:absolute;
+  left:-9999px;
+  width:1px;height:1px;
+  overflow:hidden;
+}
+.lista-form--card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:clamp(1.2rem,3vw,1.7rem);
+  box-shadow:var(--shadow);
+}
+.lista-form--compact{margin:0;max-width:none}
+.lista-form--compact .lista-form__heading{font-size:1.12rem}
+.lista-form--compact .lista-form__sub{font-size:.85rem;margin-bottom:.9rem}
+.ticket .lista-form{margin-top:.15rem}
+.ticket .lista-form .btn{width:100%;margin-top:.1rem}
+@media(max-width:480px){.lista-form{max-width:100%}}

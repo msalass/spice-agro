@@ -220,6 +220,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </noscript>
 
+
+      <div class="lista-form lista-form--card" id="lista">
+        <h2 class="lista-form__heading">Si te interesa la agricultura regenerativa en Chile, déjanos tu correo.</h2>
+        <p class="lista-form__sub">Te escribimos cuando hay un artículo, un seminario o algo útil para tu huerto. Sin spam.</p>
+        <form name="lista-regenerativa" method="POST" action="/gracias-lista.html" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="lista-regenerativa">
+          <p class="lista-form__hp" aria-hidden="true">
+            <label>No llenar este campo <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label>
+          </p>
+          <label>
+            Nombre
+            <input type="text" name="nombre" required autocomplete="name" maxlength="120">
+          </label>
+          <label>
+            Correo
+            <input type="email" name="email" required autocomplete="email" maxlength="160">
+          </label>
+          <label>
+            Región
+            <select name="region" required>
+              <option value="" disabled selected>Elige tu región</option>
+              <option value="Arica y Parinacota">Arica y Parinacota</option>
+              <option value="Tarapacá">Tarapacá</option>
+              <option value="Antofagasta">Antofagasta</option>
+              <option value="Atacama">Atacama</option>
+              <option value="Coquimbo">Coquimbo</option>
+              <option value="Valparaíso">Valparaíso</option>
+              <option value="Metropolitana">Metropolitana</option>
+              <option value="O’Higgins">O’Higgins</option>
+              <option value="Maule">Maule</option>
+              <option value="Ñuble">Ñuble</option>
+              <option value="Biobío">Biobío</option>
+              <option value="La Araucanía">La Araucanía</option>
+              <option value="Los Ríos">Los Ríos</option>
+              <option value="Los Lagos">Los Lagos</option>
+              <option value="Aysén">Aysén</option>
+              <option value="Magallanes">Magallanes</option>
+              <option value="Vivo fuera de Chile">Vivo fuera de Chile</option>
+            </select>
+          </label>
+          <button type="submit" class="btn ochre">Quiero que me escriban</button>
+          <p class="lista-form__fine">Usamos tu correo solo para escribirte desde SPICe Agro.</p>
+        </form>
+      </div>
+
       <p class="blog-note">SPICe Agro &middot; del laboratorio al huerto</p>
     </div>
   </section>
