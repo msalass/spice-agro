@@ -2,16 +2,22 @@
 // Requiere env var: MP_ACCESS_TOKEN (credencial de producción de MercadoPago)
 const SITE = "https://agro.spicelab.cl";
 
-exports.handler = async () => {
+exports.handler = async (event) => {
   const MP = process.env.MP_ACCESS_TOKEN;
   if (!MP) return { statusCode: 500, body: "Falta MP_ACCESS_TOKEN" };
+  const promo = ((event.queryStringParameters || {}).promo || "").trim();
+  const isLista = promo === "lista10";
+  const price = isLista ? 71100 : 79000;
+  const title = isLista
+    ? "Academia SPICe Agro — Preventa lista 10%"
+    : "Academia SPICe Agro — Preventa";
   try {
     const pref = {
       items: [{
-        title: "Academia SPICe Agro — Preventa",
+        title,
         quantity: 1,
         currency_id: "CLP",
-        unit_price: 79000
+        unit_price: price
       }],
       back_urls: {
         success: SITE + "/gracias-academia.html",
@@ -21,7 +27,7 @@ exports.handler = async () => {
       auto_return: "approved",
       notification_url: SITE + "/.netlify/functions/mp-webhook",
       statement_descriptor: "SPICE AGRO",
-      metadata: { product: "academia" }
+      metadata: { product: "academia", ...(isLista ? { promo: "lista10" } : {}) }
     };
     const r = await fetch("https://api.mercadopago.com/checkout/preferences", {
       method: "POST",
