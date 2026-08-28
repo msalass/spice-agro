@@ -65,6 +65,13 @@
   status = 301
   force = true
 
+# --- Checkout 10% lista (no está en el menú; solo se manda por correo) ---
+[[redirects]]
+  from = "/lista10"
+  to = "/.netlify/functions/crear-pago?promo=lista10"
+  status = 302
+  force = true
+
 # --- Página 404 propia ---
 [[redirects]]
   from = "/*"
