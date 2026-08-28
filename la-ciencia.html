@@ -110,6 +110,14 @@ gtag('config', 'AW-18018765001');
 .cta-band h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.1;letter-spacing:-.02em;margin:12px 0 10px;max-width:24ch}
 .cta-band p{color:rgba(255,251,220,.8);max-width:56ch}
 .cta-band .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:1.5rem}
+
+/* ── Lista de correo (aislada del embed Soro) ───────── */
+.lista-band{background:var(--paper-2);padding:clamp(2.2rem,5vw,3.4rem) 0;border-top:1px solid var(--line)}
+.lista-form--ciencia{margin:0 auto;max-width:28rem}
+.lista-form form{display:flex!important;flex-direction:column!important;gap:.9rem!important}
+.lista-form label{display:flex!important;flex-direction:column!important;width:100%!important}
+.lista-form input,.lista-form select,.lista-form button.btn{width:100%!important;max-width:100%!important}
+.lista-form__hp,.lista-form__hp label,.lista-form__hp input{display:none!important;position:absolute!important;left:-9999px!important;height:0!important;width:0!important;overflow:hidden!important;clip:rect(0,0,0,0)!important}
 </style>
 </head>
 <body>
@@ -220,13 +228,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </noscript>
 
+      <p class="blog-note">SPICe Agro &middot; del laboratorio al huerto</p>
+    </div>
+  </section>
 
-      <div class="lista-form lista-form--card" id="lista">
+  <!-- ═══ Lista de correo ═══ -->
+  <section class="lista-band" id="lista" aria-label="Lista de correo">
+    <div class="wrap">
+      <div class="lista-form lista-form--card lista-form--ciencia">
+
         <h2 class="lista-form__heading">Si te interesa la agricultura regenerativa en Chile, déjanos tu correo.</h2>
         <p class="lista-form__sub">Te escribimos cuando hay un artículo, un seminario o algo útil para tu huerto. Sin spam.</p>
         <form name="lista-regenerativa" method="POST" action="/gracias-lista.html" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="lista-regenerativa">
-          <p class="lista-form__hp" aria-hidden="true">
+          <p class="lista-form__hp" hidden aria-hidden="true" style="display:none">
             <label>No llenar este campo <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label>
           </p>
           <label>
@@ -264,8 +279,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p class="lista-form__fine">Usamos tu correo solo para escribirte desde SPICe Agro.</p>
         </form>
       </div>
-
-      <p class="blog-note">SPICe Agro &middot; del laboratorio al huerto</p>
     </div>
   </section>
 
