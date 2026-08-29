@@ -35,10 +35,11 @@ exports.handler = async (event) => {
       body: JSON.stringify(pref)
     });
     const data = await r.json();
-    if (!r.ok || !data.init_point) {
+    if (!r.ok || !data.id) {
       return { statusCode: 500, body: "No se pudo crear el cobro: " + JSON.stringify(data).slice(0, 300) };
     }
-    return { statusCode: 302, headers: { Location: data.init_point } };
+    const checkout = "https://www.mercadopago.cl/checkout/v1/payment/redirect/?preference-id=" + encodeURIComponent(data.id);
+    return { statusCode: 302, headers: { Location: checkout } };
   } catch (e) {
     return { statusCode: 500, body: "Error: " + e.message };
   }
