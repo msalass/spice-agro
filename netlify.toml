@@ -69,7 +69,7 @@
 [[redirects]]
   from = "/lista10"
   to = "/.netlify/functions/crear-pago?promo=lista10"
-  status = 302
+  status = 200
   force = true
 
 # --- Página 404 propia ---
