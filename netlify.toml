@@ -68,7 +68,7 @@
 # --- Checkout 10% lista (no está en el menú; solo se manda por correo) ---
 [[redirects]]
   from = "/lista10"
-  to = "/.netlify/functions/crear-pago?promo=lista10"
+  to = "/.netlify/functions/lista10"
   status = 200
   force = true
 
