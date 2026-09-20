@@ -72,6 +72,91 @@
   status = 200
   force = true
 
+# --- Clean URL → .html (GSC: avoid duplicate crawl signals) ---
+[[redirects]]
+  from = "/huerto-rentable"
+  to = "/huerto-rentable.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/huerto-rentable-35"
+  to = "/huerto-rentable-35.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/huerto-rentable-55"
+  to = "/huerto-rentable-55.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/spice-partner"
+  to = "/spice-partner.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/academia"
+  to = "/academia.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/seminario-suelo-vivo"
+  to = "/seminario-suelo-vivo.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/herramientas"
+  to = "/herramientas.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/la-ciencia"
+  to = "/la-ciencia.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/analisis-de-suelo"
+  to = "/analisis-de-suelo.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacidad"
+  to = "/privacidad.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/gracias"
+  to = "/gracias.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/gracias-academia"
+  to = "/gracias-academia.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/gracias-hr35"
+  to = "/gracias-hr35.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/gracias-lista"
+  to = "/gracias-lista.html"
+  status = 301
+  force = true
+
 # --- Página 404 propia ---
 [[redirects]]
   from = "/*"
