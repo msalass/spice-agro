@@ -65,6 +65,13 @@
   status = 301
   force = true
 
+# URL limpia para Ads / PMax (sin .html)
+[[redirects]]
+  from = "/analisis-de-suelo"
+  to = "/analisis-de-suelo.html"
+  status = 200
+  force = true
+
 # --- Checkout 10% lista (no está en el menú; solo se manda por correo) ---
 [[redirects]]
   from = "/lista10"
