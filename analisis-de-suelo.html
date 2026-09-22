@@ -342,15 +342,24 @@ if(tog&&menu){tog.addEventListener("click",function(){var o=menu.classList.toggl
 })();
 </script>
 
-<!-- Conversiones: WhatsApp + formulario (GTM dataLayer + gtag + Meta) -->
+<!-- Conversiones: WhatsApp (Ads label) + formulario (dataLayer/Meta; label form pendiente) -->
 <script>
 (function(){
+  var ADS_WA = "AW-18018765001/wov4ClqGuMAcEMmRgpBD";
+  var ADS_FORM = "AW-18018765001/Tnc5CNmonMAcEMmRgpBD";
+
   var ultimos={};
   function dedupe(clave){
     var ahora=Date.now();
     if(ultimos[clave]&&ahora-ultimos[clave]<5000) return false;
     ultimos[clave]=ahora;
     return true;
+  }
+  function adsConversion(sendTo){
+    if(!sendTo||typeof gtag!=="function") return;
+    try{
+      gtag("event","conversion",{send_to:sendTo,currency:"CLP",value:1});
+    }catch(e){}
   }
   function trackLead(origen,detalle){
     if(!dedupe(origen+"|"+detalle)) return;
@@ -361,6 +370,8 @@ if(tog&&menu){tog.addEventListener("click",function(){var o=menu.classList.toggl
       lead_detail:detalle,
       service:"analisis_de_suelo"
     });
+    if(origen==="whatsapp") adsConversion(ADS_WA);
+    if(origen==="formulario"||origen==="thank_you") adsConversion(ADS_FORM);
     if(typeof gtag==="function"){
       try{
         gtag("event","generate_lead",{

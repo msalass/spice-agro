@@ -91,6 +91,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
 (function(){
+  var ADS_FORM = "AW-18018765001/Tnc5CNmonMAcEMmRgpBD";
   window.dataLayer=window.dataLayer||[];
   window.dataLayer.push({
     event:"generate_lead",
@@ -100,6 +101,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   });
   if(typeof gtag==="function"){
     try{
+      gtag("event","conversion",{send_to:ADS_FORM,currency:"CLP",value:1});
       gtag("event","generate_lead",{
         currency:"CLP",
         value:1,
