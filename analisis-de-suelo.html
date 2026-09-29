@@ -278,6 +278,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <p class="l-sub" style="margin-top:2.2rem">¿Prefieres escribirnos? Déjanos tus datos y te enviamos la propuesta por correo.</p>
     <div class="form-card">
+      <!-- FormSubmit entrega el correo. En este sitio un POST de Netlify Forms responde 404
+           (también lista-regenerativa). data-netlify y el input ref quedan en el HTML estático
+           para que Netlify registre el campo si la detección vuelve a aceptar envíos. -->
       <form id="analisis-short-form" name="analisis-de-suelo" class="short-form" method="POST" action="https://formsubmit.co/contact@spicelab.cl" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="analisis-de-suelo">
         <input type="hidden" name="subject" value="Solicitud — SPICe Agro (agro.spicelab.cl)">
