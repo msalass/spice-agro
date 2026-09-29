@@ -278,9 +278,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <p class="l-sub" style="margin-top:2.2rem">¿Prefieres escribirnos? Déjanos tus datos y te enviamos la propuesta por correo.</p>
     <div class="form-card">
-      <form id="analisis-short-form" name="analisis-de-suelo" class="short-form" method="POST" action="/gracias-analisis-de-suelo.html" data-netlify="true" netlify-honeypot="bot-field">
+      <form id="analisis-short-form" name="analisis-de-suelo" class="short-form" method="POST" action="https://formsubmit.co/contact@spicelab.cl" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="analisis-de-suelo">
         <input type="hidden" name="subject" value="Solicitud — SPICe Agro (agro.spicelab.cl)">
+        <input type="hidden" name="_subject" value="Solicitud — SPICe Agro (agro.spicelab.cl)">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://agro.spicelab.cl/gracias-analisis-de-suelo.html">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
         <p class="hp" aria-hidden="true">
           <label>No llenar este campo <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label>
         </p>
@@ -366,8 +370,9 @@ if(refInput){
     refInput.value=slug;
     if(interes) interes.value="El plano de tu parcela";
     if(nota) nota.hidden=false;
-    var subject=document.querySelector('#analisis-short-form input[name="subject"]');
-    if(subject) subject.value="Solicitud — El plano de tu parcela — corredora "+slug;
+    document.querySelectorAll('#analisis-short-form input[name="subject"], #analisis-short-form input[name="_subject"]').forEach(function(subject){
+      subject.value="Solicitud — El plano de tu parcela — corredora "+slug;
+    });
     document.querySelectorAll('a[href*="wa.me"]').forEach(function(a){
       try{
         var u=new URL(a.href);
