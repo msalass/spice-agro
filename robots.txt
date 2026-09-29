@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /qr/
 
 Sitemap: https://agro.spicelab.cl/sitemap.xml

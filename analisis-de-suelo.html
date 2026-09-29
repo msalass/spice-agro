@@ -107,6 +107,10 @@ gtag('config', 'AW-18018765001');
 .short-form input,.short-form textarea,.short-form select{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper);font-family:var(--sans);font-size:.95rem;color:var(--ink)}
 .short-form input:focus,.short-form textarea:focus,.short-form select:focus{border-color:var(--ochre);outline:none}
 .short-form textarea{resize:vertical}
+.sf-label{display:flex;flex-direction:column;gap:6px;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.ref-nota{font-size:.9rem;color:var(--teal);background:var(--teal-dim);border-radius:10px;padding:10px 12px;line-height:1.45}
+.ref-nota[hidden]{display:none}
+.hp{position:absolute;left:-9999px;height:0;overflow:hidden}
 @media(max-width:520px){.sf-row{flex-direction:column}}
 </style>
 </head>
@@ -274,11 +278,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <p class="l-sub" style="margin-top:2.2rem">¿Prefieres escribirnos? Déjanos tus datos y te enviamos la propuesta por correo.</p>
     <div class="form-card">
-      <form id="analisis-short-form" class="short-form" action="https://formsubmit.co/contact@spicelab.cl" method="POST">
-        <input type="hidden" name="_subject" value="Solicitud — Análisis de suelo (agro.spicelab.cl)">
+      <!-- FormSubmit entrega el correo. En este sitio un POST de Netlify Forms responde 404
+           (también lista-regenerativa). data-netlify y el input ref quedan en el HTML estático
+           para que Netlify registre el campo si la detección vuelve a aceptar envíos. -->
+      <form id="analisis-short-form" name="analisis-de-suelo" class="short-form" method="POST" action="https://formsubmit.co/contact@spicelab.cl" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="analisis-de-suelo">
+        <input type="hidden" name="subject" value="Solicitud — SPICe Agro (agro.spicelab.cl)">
+        <input type="hidden" name="_subject" value="Solicitud — SPICe Agro (agro.spicelab.cl)">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://agro.spicelab.cl/gracias-analisis-de-suelo.html">
-        <input type="text" name="_honey" style="display:none">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+        <p class="hp" aria-hidden="true">
+          <label>No llenar este campo <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label>
+        </p>
+        <input type="hidden" name="ref" id="ref-corredora" value="web directa">
+        <p class="ref-nota" id="ref-nota" hidden>Llegaste desde tu corredora. «El plano de tu parcela» ya viene seleccionado; puedes cambiarlo si buscas el análisis de suelo.</p>
+        <label class="sf-label">Qué te interesa
+          <select name="interes" id="interes">
+            <option value="Análisis de suelo" selected>Análisis de suelo</option>
+            <option value="El plano de tu parcela">El plano de tu parcela</option>
+          </select>
+        </label>
         <div class="sf-row">
           <input type="text" name="Nombre" placeholder="Tu nombre" required>
           <input type="email" name="Correo" placeholder="Tu correo" required>
@@ -335,6 +355,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 <script>
 (function(){"use strict";
+var DEFAULT_REF="web directa";
+var MAX_REF=40;
+function sanitizeRef(raw){
+  if(!raw) return "";
+  var s=String(raw).normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  s=s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+  if(s.length>MAX_REF) s=s.slice(0,MAX_REF).replace(/-+$/g,"");
+  return s;
+}
+var refInput=document.getElementById("ref-corredora");
+var interes=document.getElementById("interes");
+var nota=document.getElementById("ref-nota");
+if(refInput){
+  var slug=sanitizeRef(new URLSearchParams(window.location.search).get("ref"));
+  if(slug){
+    refInput.value=slug;
+    if(interes) interes.value="El plano de tu parcela";
+    if(nota) nota.hidden=false;
+    document.querySelectorAll('#analisis-short-form input[name="subject"], #analisis-short-form input[name="_subject"]').forEach(function(subject){
+      subject.value="Solicitud — El plano de tu parcela — corredora "+slug;
+    });
+    document.querySelectorAll('a[href*="wa.me"]').forEach(function(a){
+      try{
+        var u=new URL(a.href);
+        var text=u.searchParams.get("text")||"";
+        if(text.indexOf("corredora ")!==-1) return;
+        var extra=" Llegué por la corredora "+slug+" (El plano de tu parcela).";
+        var marker="Mi terreno está en:";
+        var idx=text.indexOf(marker);
+        if(idx!==-1){
+          text=text.slice(0,idx).replace(/\s*$/,"")+extra+" "+text.slice(idx);
+        }else{
+          text=text.replace(/\s*$/,"")+extra;
+        }
+        u.searchParams.set("text",text);
+        a.href=u.toString();
+      }catch(e){}
+    });
+  }else{
+    refInput.value=DEFAULT_REF;
+  }
+}
 var yr=document.getElementById("yr");if(yr)yr.textContent=new Date().getFullYear();
 var hdr=document.querySelector("header");if(hdr){var f=function(){hdr.classList.toggle("scrolled",window.scrollY>6)};f();window.addEventListener("scroll",f,{passive:true});}
 var tog=document.querySelector(".nav-toggle"),menu=document.getElementById("nav-menu");
@@ -364,10 +426,14 @@ if(tog&&menu){tog.addEventListener("click",function(){var o=menu.classList.toggl
   function trackLead(origen,detalle){
     if(!dedupe(origen+"|"+detalle)) return;
     window.dataLayer=window.dataLayer||[];
+    var refEl=document.getElementById("ref-corredora");
+    var interesEl=document.getElementById("interes");
     window.dataLayer.push({
       event:"generate_lead",
       lead_source:origen,
       lead_detail:detalle,
+      lead_ref:refEl?refEl.value:"",
+      lead_interes:interesEl?interesEl.value:"",
       service:"analisis_de_suelo"
     });
     if(origen==="whatsapp") adsConversion(ADS_WA);
