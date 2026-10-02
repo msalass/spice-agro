@@ -167,6 +167,10 @@ test("resolveSite: host de spice-agro es agro mientras SITE_ID no esté definido
     "agro"
   );
   assert.equal(I.resolveSite("", "", "spice-agro.netlify.app"), "agro");
+  assert.equal(
+    I.resolveSite("", "", "https://deploy-preview-8--spice-agro.netlify.app/.netlify/functions/chat"),
+    "agro"
+  );
   process.env.SITE_ID = "huerto";
   try {
     assert.equal(I.resolveSite("", "", "deploy-preview-8--spice-agro.netlify.app"), "huerto");

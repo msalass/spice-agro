@@ -562,27 +562,43 @@ async function callChat(apiKey, baseUrl, model, messages) {
 
 exports.handler = async function handler(event) {
   const origin = hdr(event, "origin");
-  const host = hdr(event, "x-forwarded-host") || hdr(event, "host");
+  const hostHeader = hdr(event, "x-forwarded-host") || hdr(event, "host");
+  // Netlify sometimes puts the public hostname only on rawUrl or another header.
+  const hostBits = [];
+  if (hostHeader) hostBits.push(hostHeader);
+  if (event && event.rawUrl) hostBits.push(event.rawUrl);
+  if (event && event.headers) {
+    for (const k of Object.keys(event.headers)) {
+      const v = event.headers[k];
+      if (typeof v === "string" && /spice-agro|agro\.spicelab\.cl/i.test(v)) hostBits.push(v);
+    }
+  }
+  const host = hostBits.join(" ");
+  // CORS still wants a single hostname, not the joined blob.
+  const corsHost = String(hostHeader || "")
+    .split(",")[0]
+    .trim();
   const send = function (code, payload) {
-    return json(code, origin, payload, host);
+    return json(code, origin, payload, corsHost);
   };
   const method = (event.httpMethod || event.method || "GET").toUpperCase();
 
   if (method === "OPTIONS") {
-    return { statusCode: 204, headers: corsHeaders(origin, host), body: "" };
+    return { statusCode: 204, headers: corsHeaders(origin, corsHost), body: "" };
   }
 
-  if (origin && !isAllowedOrigin(origin, host)) {
+  if (origin && !isAllowedOrigin(origin, corsHost)) {
     return send(403, { error: "forbidden", message: "Origin not allowed." });
   }
 
   if (method === "GET") {
-    return send(200, {
+    const payload = {
       ok: true,
       name: "SPICe chat",
       site: resolveSite(origin, undefined, host),
       configured: Boolean(resolveProvider()),
-    });
+    };
+    return send(200, payload);
   }
 
   if (method !== "POST") {
