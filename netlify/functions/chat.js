@@ -603,8 +603,9 @@ exports.handler = async function handler(event) {
       name: "SPICe chat",
       site: resolveSite(origin, undefined, host),
       configured: Boolean(resolveProvider()),
-      build: "agro-default-2",
+      build: "agro-default-3",
       siteIdSet: Boolean(siteIdRaw.trim()),
+      siteIdValue: /^[a-z0-9_-]{1,24}$/i.test(siteIdRaw.trim()) ? siteIdRaw.trim() : "non-name",
     };
     return send(200, payload);
   }
