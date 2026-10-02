@@ -34,7 +34,7 @@ exports.handler = async (event) => {
     if (pay.status !== "approved") return { statusCode: 200, body: "estado: " + pay.status };
 
     const email = ((pay.payer && pay.payer.email) || "").toLowerCase().trim();
-    const amount = Math.round(pay.transaction_amount || 79000);
+    const amount = Math.round(pay.transaction_amount || 119000);
     if (!email) return { statusCode: 200, body: "sin email" };
 
     // 1) Registrar/activar la compra en Supabase (upsert por email; service_role salta RLS)
@@ -66,8 +66,8 @@ exports.handler = async (event) => {
           htmlContent:
             "<div style=\"font-family:Arial,sans-serif;color:#1d2233;line-height:1.6\">" +
             "<p>Gracias por sumarte a la <b>Academia SPICe Agro</b>.</p>" +
-            "<p>Tu acceso ya esta <b>activo</b>. El curso parte el <b>lunes 14 de septiembre</b>.</p>" +
-            "<p>Ese dia entra a <a href=\"" + SITE + "/curso/\">agro.spicelab.cl/curso</a> con <b>este mismo correo</b> — te llegara un codigo de 6 digitos, sin contrasenas.</p>" +
+            "<p>Tu acceso ya esta <b>activo</b>.</p>" +
+            "<p>Entra a <a href=\"" + SITE + "/curso/\">agro.spicelab.cl/curso</a> con <b>este mismo correo</b> — te llegara un codigo de 6 digitos, sin contrasenas.</p>" +
             "<p>Incluye 4 modulos con lecciones cortas y experimentos, quiz, certificado y acceso de por vida.</p>" +
             "<p>Cualquier duda, escribenos por WhatsApp +56 9 7154 0665.</p>" +
             "<p>— Equipo SPICe Agro</p></div>"

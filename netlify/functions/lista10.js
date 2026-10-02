@@ -7,10 +7,10 @@ exports.handler = async (event) => {
   if (!MP) return { statusCode: 500, body: "Falta MP_ACCESS_TOKEN" };
   const isLista = true;
    
-  const price = isLista ? 71100 : 79000;
+  const price = isLista ? 107100 : 119000;
   const title = isLista
-    ? "Academia SPICe Agro — Preventa lista 10%"
-    : "Academia SPICe Agro — Preventa";
+    ? "Academia SPICe Agro — Lista 10%"
+    : "Academia SPICe Agro";
   try {
     const pref = {
       items: [{

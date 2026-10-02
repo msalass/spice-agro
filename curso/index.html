@@ -59,7 +59,7 @@ button:disabled { opacity:.5; }
   <div id="app">
     <div class="card">
       <h1 id="hola">Hola</h1>
-      <p class="sub" id="acceso-info">Tu curso parte el lunes 14 de septiembre.</p>
+      <p class="sub" id="acceso-info">Tu curso está disponible. Empieza por la primera clase.</p>
     </div>
     <div class="card mod" data-mod="1"><div class="num">01</div><div><h3>Suelo Vivo</h3><div class="state"></div></div></div>
     <div class="card mod" data-mod="2"><div class="num">02</div><div><h3>El clima y el invernadero</h3><div class="state"></div></div></div>
@@ -124,18 +124,16 @@ async function init() {
   const abiertoCurso = Date.now() >= LAUNCH.getTime() || esBeta;
 
   if (!abiertoCurso) {
-    $("acceso-info").innerHTML = "Tu acceso está <b>activo</b>. El curso se abre el <b>lunes 14 de septiembre</b> — ese día aparece aquí la primera clase.";
+    $("acceso-info").innerHTML = "Tu acceso está <b>activo</b>. La primera clase aparece aquí cuando el curso esté abierto.";
     document.querySelectorAll(".mod").forEach(el => {
       el.classList.add("locked");
-      el.querySelector(".state").textContent = "Se abre el 14 de septiembre";
+      el.querySelector(".state").textContent = "Aún no está abierto";
       el.onclick = null; el.style.cursor = "default";
     });
     return;
   }
 
-  $("acceso-info").innerHTML = (esBeta && Date.now() < LAUNCH.getTime())
-    ? "<b>Acceso anticipado (beta).</b> Estás viendo el curso antes del lanzamiento del 14 de septiembre."
-    : "Tu curso está disponible. Empieza por la primera clase.";
+  $("acceso-info").innerHTML = "Tu curso está disponible. Empieza por la primera clase.";
 
   // Estado de módulos: 1 abierto; los demás se abren al aprobar el quiz anterior
   const { data: quizzes } = await db.from("quiz_results").select("module,passed").eq("user_id", session.user.id);
