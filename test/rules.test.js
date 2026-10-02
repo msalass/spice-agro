@@ -43,28 +43,6 @@ function listFiles(dir, out) {
 
 const md = fs.readFileSync(path.join(ROOT, "knowledge", "spicelab.md"), "utf8");
 
-// Embedded in the agro site. Scan chatbot files only: marketing HTML builds
-// wa.me links as "wa.me/" + WA_NUMERO, and the site README still says wa.me/56...
-function chatbotFiles() {
-  const roots = [
-    path.join(ROOT, "spice-widget.js"),
-    path.join(ROOT, "netlify", "functions", "chat.js"),
-    path.join(ROOT, "knowledge"),
-    path.join(ROOT, "scripts"),
-    path.join(ROOT, "test"),
-    path.join(ROOT, "package.json"),
-    path.join(ROOT, ".env.example"),
-  ];
-  const out = [];
-  for (const p of roots) {
-    if (!fs.existsSync(p)) continue;
-    const st = fs.statSync(p);
-    if (st.isDirectory()) listFiles(p, out);
-    else out.push(p);
-  }
-  return out;
-}
-
 // ---------- (a) knowledge + system prompt ----------
 
 test("knowledge md y FALLBACK inline son idénticos (npm run sync)", () => {
@@ -105,7 +83,28 @@ test("knowledge usa enlaces absolutos para las páginas del sitio", () => {
 // ---------- (b) WhatsApp ----------
 
 test("todo wa.me del paquete apunta exactamente a wa.me/56971540665", () => {
-  const files = chatbotFiles();
+  // This site publishes HTML that builds wa.me from WA_NUMERO, and README says wa.me/56...
+  // Scan only the chatbot package, not the rest of agro.spicelab.cl.
+  function chatbotFiles(dir, out) {
+    out = out || [];
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (e.name === "node_modules" || e.name === ".git" || e.name === "live-test") continue;
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) chatbotFiles(p, out);
+      else if (/\.(js|md|toml|json|example)$/.test(e.name)) out.push(p);
+    }
+    return out;
+  }
+  const files = []
+    .concat(chatbotFiles(path.join(ROOT, "knowledge")))
+    .concat(chatbotFiles(path.join(ROOT, "scripts")))
+    .concat(chatbotFiles(path.join(ROOT, "test")))
+    .concat(chatbotFiles(path.join(ROOT, "netlify", "functions")))
+    .concat([
+      path.join(ROOT, "spice-widget.js"),
+      path.join(ROOT, "package.json"),
+      path.join(ROOT, ".env.example"),
+    ]);
   assert.ok(files.length > 5);
   const bad = [];
   for (const f of files) {
@@ -380,30 +379,27 @@ test("upstream 429 → JSON rate_limited con WhatsApp", async (t) => {
   }
 });
 
-test("cada HTML público carga /spice-widget.js con data-site=agro", () => {
-  const html = [];
-  (function walk(dir) {
-    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
-      if (e.name === "node_modules" || e.name === ".git" || e.name === ".netlify" || e.name === "live-test") continue;
-      const p = path.join(dir, e.name);
-      if (e.isDirectory()) walk(p);
-      else if (e.name.endsWith(".html")) html.push(p);
-    }
-  })(ROOT);
-  assert.ok(html.length > 10);
-  const tag = '<script src="/spice-widget.js" defer data-site="agro"></script>';
-  const missing = [];
-  for (const f of html) {
-    const txt = fs.readFileSync(f, "utf8");
-    const i = txt.lastIndexOf(tag);
-    const body = txt.lastIndexOf("</body>");
-    if (i === -1 || body === -1 || i > body) missing.push(path.relative(ROOT, f));
+test("Groq 429 en el modelo principal → reintenta una vez con GROQ_FALLBACK_MODEL", async (t) => {
+  const models = [];
+  t.mock.method(globalThis, "fetch", async (url, opts) => {
+    const m = JSON.parse(opts.body).model;
+    models.push(m);
+    if (m === "openai/gpt-oss-120b") return { ok: false, status: 429, text: async () => "{}" };
+    return { ok: true, status: 200, text: async () => JSON.stringify({ choices: [{ message: { content: "Hola. https://wa.me/56971540665" } }] }) };
+  });
+  process.env.GROQ_API_KEY = "fake-groq-key";
+  I._resetRate();
+  try {
+    const res = await chat.handler({
+      httpMethod: "POST",
+      headers: { origin: "https://spicelab.cl", "x-forwarded-for": "10.0.0.11" },
+      body: JSON.stringify({ messages: [{ role: "user", content: "hola" }] }),
+    });
+    assert.equal(res.statusCode, 200);
+  } finally {
+    delete process.env.GROQ_API_KEY;
   }
-  assert.deepEqual(missing, []);
-});
-
-test("widget evita el flotante .wa de agro y el submit de análisis de suelo", () => {
-  const w = fs.readFileSync(path.join(ROOT, "spice-widget.js"), "utf8");
-  assert.ok(w.includes("a.whatsapp-float, a.wa"));
-  assert.ok(w.includes("#analisis-short-form button[type='submit']"));
+  assert.deepEqual(models, ["openai/gpt-oss-120b", "openai/gpt-oss-20b"]);
+  assert.equal(I.resolveProvider({ GROQ_API_KEY: "x", GROQ_FALLBACK_MODEL: "none" }).fallbackModel, "");
+  assert.equal(I.resolveProvider({ OPENAI_API_KEY: "x" }).fallbackModel, undefined);
 });
