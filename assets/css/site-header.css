@@ -1,0 +1,201 @@
+/* Header único de SPICe Agro. Autónomo: no depende de styles.css. */
+#site-header{
+  --sh-ink:#1d2233;
+  --sh-soft:#565c72;
+  --sh-teal:#317286;
+  --sh-ochre:#cb9831;
+  --sh-navy:#10142a;
+  --sh-paper:#f5f0e4;
+  --sh-line:rgba(29,34,51,.12);
+  position:sticky;
+  top:0;
+  z-index:400;
+  width:100%;
+  align-self:stretch;
+  flex:none;
+  background:rgba(245,240,228,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--sh-line);
+  color:var(--sh-ink);
+  font-family:"Hanken Grotesk",system-ui,sans-serif;
+  overflow:visible;
+}
+#site-header *{box-sizing:border-box}
+#site-header a{color:inherit;text-decoration:none}
+#site-header .sh-wrap{max-width:1160px;margin:0 auto;padding:0 clamp(1.25rem,5vw,2.5rem)}
+#site-header .sh-nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:70px;
+  gap:1rem;
+  position:relative;
+}
+#site-header .sh-brand{display:inline-flex;align-items:center;gap:10px;flex:none}
+#site-header .sh-brand svg{width:36px;height:36px;flex:none}
+#site-header .sh-brand-text{display:flex;flex-direction:column;line-height:1}
+#site-header .sh-brand-wm{
+  font-family:Fraunces,Georgia,serif;
+  font-weight:600;
+  font-size:1.28rem;
+  letter-spacing:-.01em;
+  color:var(--sh-ink);
+}
+#site-header .sh-brand-wm span{color:var(--sh-ochre);font-style:italic}
+#site-header .sh-brand-tag{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.58rem;
+  letter-spacing:.2em;
+  color:var(--sh-soft);
+  margin-top:3px;
+}
+#site-header .sh-links{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+#site-header .sh-links>li{list-style:none;margin:0;padding:0}
+#site-header .sh-links a{
+  font-size:.92rem;
+  color:var(--sh-soft);
+  transition:color .2s;
+}
+#site-header .sh-links a:hover{color:var(--sh-ink)}
+#site-header .sh-links a.sh-current{color:var(--sh-teal);font-weight:600}
+#site-header .sh-ext{color:var(--sh-teal)!important;font-weight:500}
+#site-header .sh-ext:hover{color:var(--sh-ink)!important}
+#site-header .sh-cta{
+  font-weight:600;
+  font-size:.94rem;
+  padding:10px 18px;
+  border-radius:100px;
+  background:var(--sh-ochre);
+  color:var(--sh-navy)!important;
+  white-space:nowrap;
+}
+#site-header .sh-cta:hover{background:#d9a128;color:var(--sh-navy)!important}
+#site-header .sh-toggle{
+  display:none;
+  background:none;
+  border:0;
+  cursor:pointer;
+  padding:.3rem;
+  color:var(--sh-ink);
+}
+#site-header .sh-toggle svg{width:24px;height:24px;display:block}
+
+#site-header .sh-dd{position:relative}
+#site-header .sh-dd>a{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+}
+#site-header .sh-caret{width:9px;height:9px;transition:transform .18s}
+#site-header .sh-dd::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:100%;
+  height:16px;
+}
+#site-header .sh-dd-menu{
+  display:none;
+  position:absolute;
+  top:calc(100% + 12px);
+  left:50%;
+  transform:translateX(-50%);
+  background:#fdfbf5;
+  border:1px solid var(--sh-line);
+  border-radius:14px;
+  box-shadow:0 20px 45px -18px rgba(25,31,57,.28);
+  padding:8px;
+  min-width:190px;
+  z-index:50;
+}
+#site-header .sh-dd-menu a{
+  display:block;
+  padding:10px 14px;
+  border-radius:9px;
+  font-size:.9rem;
+  color:#1b2b3a;
+  white-space:nowrap;
+}
+#site-header .sh-dd-menu a:hover{background:rgba(203,152,49,.13);color:#a07825}
+#site-header .sh-dd-menu a.sh-current{color:var(--sh-ochre);font-weight:600}
+
+/* Escritorio: se abre con el cursor o el foco. El clic del enlace padre sigue navegando. */
+@media (hover:hover) and (pointer:fine){
+  #site-header .sh-dd:hover>.sh-dd-menu,
+  #site-header .sh-dd:focus-within>.sh-dd-menu{display:block}
+  #site-header .sh-dd:hover .sh-caret,
+  #site-header .sh-dd:focus-within .sh-caret{transform:rotate(180deg)}
+}
+#site-header .sh-dd:hover>.sh-dd-menu,
+#site-header .sh-dd:focus-within>.sh-dd-menu,
+#site-header .sh-dd.is-open>.sh-dd-menu{display:block}
+#site-header .sh-dd:hover .sh-caret,
+#site-header .sh-dd:focus-within .sh-caret,
+#site-header .sh-dd.is-open .sh-caret{transform:rotate(180deg)}
+#site-header .sh-dd.is-dismissed>.sh-dd-menu{display:none!important}
+#site-header .sh-dd.is-dismissed .sh-caret{transform:none!important}
+
+@media (max-width:900px){
+  #site-header .sh-toggle{display:inline-flex}
+  #site-header .sh-links{
+    position:absolute;
+    top:70px;
+    left:0;
+    right:0;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    background:var(--sh-paper);
+    border-bottom:1px solid var(--sh-line);
+    padding:.5rem 1.5rem 1rem;
+    clip-path:inset(0 0 100% 0);
+    transition:clip-path .3s ease;
+  }
+  #site-header .sh-links.is-open{clip-path:inset(0 0 0 0)}
+  #site-header .sh-links>li{border-top:1px solid var(--sh-line)}
+  #site-header .sh-links a,
+  #site-header .sh-cta{display:block;padding:.9rem .2rem}
+  #site-header .sh-cta{text-align:center;border-radius:100px;margin:.4rem 0 0;padding:12px 18px}
+  #site-header .sh-dd>a{display:flex;justify-content:space-between}
+  #site-header .sh-dd::after{display:none}
+  #site-header .sh-dd-menu{
+    position:static;
+    transform:none;
+    box-shadow:none;
+    border:0;
+    background:transparent;
+    padding:0 0 .35rem .85rem;
+    min-width:0;
+    display:none;
+  }
+  /* En el layout móvil el primer toque abre; el hover no debe anticiparse. */
+  #site-header .sh-dd:hover>.sh-dd-menu,
+  #site-header .sh-dd:focus-within>.sh-dd-menu{display:none}
+  #site-header .sh-dd.is-open>.sh-dd-menu,
+  #site-header .sh-dd:focus-within.is-open>.sh-dd-menu{display:block}
+}
+
+/* Páginas centradas (gracias, 404): la barra queda arriba, a todo el ancho, y el contenido sigue centrado. */
+body:has(#site-header){
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding-top:0;
+  padding-left:0;
+  padding-right:0;
+}
+body:has(#site-header)>#site-header{align-self:stretch;width:100%}
+body:has(#site-header)>.card,
+body:has(#site-header)>.stack,
+body:has(#site-header)>.error-wrap{
+  margin:auto 1.25rem;
+  width:min(600px, calc(100% - 2.5rem));
+}
