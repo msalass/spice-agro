@@ -92,6 +92,8 @@ gtag('config', 'AW-18018765001');
 .doc-cta p{color:rgba(255,251,220,.82);max-width:54ch;margin:0 auto 1.6rem}
 .doc-cta .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 </style>
+  <link rel="stylesheet" href="/assets/css/site-header.css">
+  <script src="/assets/js/site-header.js" defer></script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -116,10 +118,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <circle cx="17.84" cy="40.4" r="1.9" fill="currentColor" stroke="none"/><circle cx="30.34" cy="39.9" r="1.9" fill="currentColor" stroke="none"/>
   </symbol>
 </svg>
-<header id="top">
-  <div class="wrap">
-    <nav>
-      <a class="brand" href="/" aria-label="SPICe Agro — inicio">
+<!-- SITE-HEADER:START -->
+<header id="site-header">
+  <div class="sh-wrap">
+    <nav class="sh-nav" aria-label="Principal">
+      <a class="sh-brand" href="/" aria-label="SPICe Agro — inicio">
         <svg viewBox="0 0 48 48" width="36" height="36" aria-hidden="true">
           <g fill="none" stroke="#317286" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
             <path d="M24,17.54c-3.5-6.8-8.5-9.78-12.2-10.2,0,3.57,3.6,8.16,12.2,10.2Z"/>
@@ -139,26 +142,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <circle cx="17.84" cy="40.4" r="1.9"/><circle cx="30.34" cy="39.9" r="1.9"/>
           </g>
         </svg>
-        <div class="brand-text">
-          <span class="brand-wm">SPICe <span>Agro</span></span>
-          <span class="brand-tag">del laboratorio al huerto</span>
-        </div>
+        <span class="sh-brand-text">
+          <span class="sh-brand-wm">SPICe <span>Agro</span></span>
+          <span class="sh-brand-tag">del laboratorio al huerto</span>
+        </span>
       </a>
-      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
+      <button class="sh-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav-menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
-      <ul class="nav-links" id="nav-menu" role="list">
+      <ul class="sh-links" id="site-nav-menu">
         <li><a href="/academia.html">Academia</a></li>
-        <li><a href="/huerto-rentable.html" class="active">Huerto Rentable</a></li>
+        <li class="sh-dd" id="hr-nav-dd">
+          <a href="/huerto-rentable.html" id="hr-nav-link" aria-haspopup="true" aria-expanded="false" aria-controls="hr-nav-menu">Huerto Rentable<svg class="sh-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="sh-dd-menu" id="hr-nav-menu" role="group" aria-label="Programas de Huerto Rentable">
+            <a href="/huerto-rentable-35.html">HR35 · Parte</a>
+            <a href="/huerto-rentable-55.html">HR55 · Produce</a>
+            <a href="/spice-partner.html">SPICe Partner</a>
+          </div>
+        </li>
         <li><a href="/herramientas.html">Herramientas</a></li>
         <li><a href="/la-ciencia.html">La ciencia</a></li>
         <li><a href="https://huerto.spicelab.cl">Huerto</a></li>
-        <li><a class="nav-ext" href="https://www.spicelab.cl" target="_blank" rel="noopener">SPICe Lab &#8599;</a></li>
-        <li><a class="btn ochre" href="/seminario-suelo-vivo.html">Suelo Vivo &rsaquo;</a></li>
+        <li><a class="sh-ext" href="https://www.spicelab.cl" target="_blank" rel="noopener">SPICe Lab ↗</a></li>
+        <li class="sh-cta-item"><a class="sh-cta" href="/analisis-de-suelo.html">Análisis de suelo ›</a></li>
       </ul>
     </nav>
   </div>
+  <noscript><style>#site-header .sh-toggle{display:none!important}#site-header .sh-links{position:static!important;clip-path:none!important;display:flex!important;flex-wrap:wrap!important;height:auto!important}#site-header .sh-dd-menu{display:block!important;position:static!important;transform:none!important}</style></noscript>
 </header>
+<!-- SITE-HEADER:END -->
 <main>
   <section class="doc-hero">
     <svg class="topo" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">

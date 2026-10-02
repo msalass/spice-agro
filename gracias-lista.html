@@ -50,12 +50,67 @@ h1{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:clamp(1.9rem,5
 .brand-wm span{color:var(--ochre);font-style:italic}
 .brand-tag{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#999;margin-top:3px}
 </style>
+  <link rel="stylesheet" href="/assets/css/site-header.css">
+  <script src="/assets/js/site-header.js" defer></script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PP99D648"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+<!-- SITE-HEADER:START -->
+<header id="site-header">
+  <div class="sh-wrap">
+    <nav class="sh-nav" aria-label="Principal">
+      <a class="sh-brand" href="/" aria-label="SPICe Agro — inicio">
+        <svg viewBox="0 0 48 48" width="36" height="36" aria-hidden="true">
+          <g fill="none" stroke="#317286" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24,17.54c-3.5-6.8-8.5-9.78-12.2-10.2,0,3.57,3.6,8.16,12.2,10.2Z"/>
+            <path d="M24,16.4c3.5-6.8,8.5-9.78,12.2-10.2,0,3.57-3.6,8.16-12.2,10.2Z"/>
+            <path d="M24,11.41v11.79"/>
+          </g>
+          <path fill="none" stroke="#cb9831" stroke-width="2.3" stroke-linecap="round" d="M11,23.2h26"/>
+          <g fill="none" stroke="#cb9831" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23.98,24.13v5.74"/><path d="M23.17,29.87l-8.39,.5"/>
+            <path d="M23.98,29.87l8.18,.25"/><path d="M24.03,31.38l-.1,6.51"/>
+            <path d="M23.84,37.9l-6,2.5"/><path d="M23.84,37.9l6.5,2"/>
+            <path d="M35.31,37.3l-4.94,2.6"/>
+          </g>
+          <g fill="#cb9831" stroke="none">
+            <circle cx="23.98" cy="29.87" r="2.6"/><circle cx="14.94" cy="30.29" r="2.1"/>
+            <circle cx="32.56" cy="30.12" r="2.1"/><circle cx="23.84" cy="37.9" r="2.4"/>
+            <circle cx="17.84" cy="40.4" r="1.9"/><circle cx="30.34" cy="39.9" r="1.9"/>
+          </g>
+        </svg>
+        <span class="sh-brand-text">
+          <span class="sh-brand-wm">SPICe <span>Agro</span></span>
+          <span class="sh-brand-tag">del laboratorio al huerto</span>
+        </span>
+      </a>
+      <button class="sh-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav-menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <ul class="sh-links" id="site-nav-menu">
+        <li><a href="/academia.html">Academia</a></li>
+        <li class="sh-dd" id="hr-nav-dd">
+          <a href="/huerto-rentable.html" id="hr-nav-link" aria-haspopup="true" aria-expanded="false" aria-controls="hr-nav-menu">Huerto Rentable<svg class="sh-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="sh-dd-menu" id="hr-nav-menu" role="group" aria-label="Programas de Huerto Rentable">
+            <a href="/huerto-rentable-35.html">HR35 · Parte</a>
+            <a href="/huerto-rentable-55.html">HR55 · Produce</a>
+            <a href="/spice-partner.html">SPICe Partner</a>
+          </div>
+        </li>
+        <li><a href="/herramientas.html">Herramientas</a></li>
+        <li><a href="/la-ciencia.html">La ciencia</a></li>
+        <li><a href="https://huerto.spicelab.cl">Huerto</a></li>
+        <li><a class="sh-ext" href="https://www.spicelab.cl" target="_blank" rel="noopener">SPICe Lab ↗</a></li>
+        <li class="sh-cta-item"><a class="sh-cta" href="/analisis-de-suelo.html">Análisis de suelo ›</a></li>
+      </ul>
+    </nav>
+  </div>
+  <noscript><style>#site-header .sh-toggle{display:none!important}#site-header .sh-links{position:static!important;clip-path:none!important;display:flex!important;flex-wrap:wrap!important;height:auto!important}#site-header .sh-dd-menu{display:block!important;position:static!important;transform:none!important}</style></noscript>
+</header>
+<!-- SITE-HEADER:END -->
 
 <div class="card">
   <div class="check">
