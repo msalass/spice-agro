@@ -155,8 +155,8 @@ test("resolveSite por Origin", () => {
 test("resolveSite ignora site falso desde spicelab/agro/otros", () => {
   assert.equal(I.resolveSite("https://spicelab.cl", "huerto"), "spicelab");
   assert.equal(I.resolveSite("https://agro.spicelab.cl", "huerto"), "agro");
-  assert.equal(I.resolveSite("https://deploy-preview-1--x.netlify.app", "huerto"), "spicelab");
-  assert.equal(I.resolveSite("", "huerto"), "spicelab");
+  assert.equal(I.resolveSite("https://deploy-preview-1--x.netlify.app", "huerto"), "agro");
+  assert.equal(I.resolveSite("", "huerto"), "agro");
   assert.equal(I.resolveSite("https://huerto.spicelab.cl", "spicelab"), "huerto");
 });
 
@@ -195,7 +195,7 @@ test("resolveSite: SITE_ID para previews/sin Origin; pista solo en localhost", (
     delete process.env.SITE_ID;
   }
   assert.equal(I.resolveSite("http://localhost:8888", "huerto"), "huerto");
-  assert.equal(I.resolveSite("http://localhost:8888", "nope"), "spicelab");
+  assert.equal(I.resolveSite("http://localhost:8888", "nope"), "agro");
 });
 
 // ---------- CORS ----------

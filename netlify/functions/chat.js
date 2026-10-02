@@ -183,7 +183,12 @@ function isAllowedOrigin(origin, host) {
 
 function envSite() {
   const v = String(process.env.SITE_ID || "").trim().toLowerCase();
-  return SITES.indexOf(v) !== -1 ? v : "spicelab";
+  if (SITES.indexOf(v) !== -1) return v;
+  // Explicit but unknown SITE_ID stays on the package default.
+  if (v) return "spicelab";
+  // This copy is deployed for agro.spicelab.cl. Previews have no agro Origin,
+  // and SITE_ID is set later by Marcos in Netlify.
+  return "agro";
 }
 
 /**
