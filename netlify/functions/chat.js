@@ -184,10 +184,8 @@ function isAllowedOrigin(origin, host) {
 function envSite() {
   const v = String(process.env.SITE_ID || "").trim().toLowerCase();
   if (SITES.indexOf(v) !== -1) return v;
-  // Explicit but unknown SITE_ID stays on the package default.
-  if (v) return "spicelab";
-  // This copy is deployed for agro.spicelab.cl. Previews have no agro Origin,
-  // and SITE_ID is set later by Marcos in Netlify.
+  // Unset, or a value that is not exactly spicelab|agro|huerto.
+  // This copy serves agro.spicelab.cl. Marcos sets SITE_ID=agro in Netlify.
   return "agro";
 }
 
@@ -597,17 +595,12 @@ exports.handler = async function handler(event) {
   }
 
   if (method === "GET") {
-    const siteIdRaw = String(process.env.SITE_ID || "");
-    const payload = {
+    return send(200, {
       ok: true,
       name: "SPICe chat",
       site: resolveSite(origin, undefined, host),
       configured: Boolean(resolveProvider()),
-      build: "agro-default-3",
-      siteIdSet: Boolean(siteIdRaw.trim()),
-      siteIdValue: /^[a-z0-9_-]{1,24}$/i.test(siteIdRaw.trim()) ? siteIdRaw.trim() : "non-name",
-    };
-    return send(200, payload);
+    });
   }
 
   if (method !== "POST") {

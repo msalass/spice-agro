@@ -190,7 +190,7 @@ test("resolveSite: SITE_ID para previews/sin Origin; pista solo en localhost", (
   }
   process.env.SITE_ID = "bogus";
   try {
-    assert.equal(I.resolveSite(""), "spicelab");
+    assert.equal(I.resolveSite(""), "agro");
   } finally {
     delete process.env.SITE_ID;
   }
