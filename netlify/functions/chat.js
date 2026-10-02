@@ -597,11 +597,14 @@ exports.handler = async function handler(event) {
   }
 
   if (method === "GET") {
+    const siteIdRaw = String(process.env.SITE_ID || "");
     const payload = {
       ok: true,
       name: "SPICe chat",
       site: resolveSite(origin, undefined, host),
       configured: Boolean(resolveProvider()),
+      build: "agro-default-2",
+      siteIdSet: Boolean(siteIdRaw.trim()),
     };
     return send(200, payload);
   }
