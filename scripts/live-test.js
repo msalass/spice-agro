@@ -1,0 +1,207 @@
+#!/usr/bin/env node
+/* LIVE test against the configured provider (uses real tokens!).
+ * The key comes ONLY from process.env (GROQ_API_KEY or OPENAI_API_KEY); it is never
+ * printed or written. Output: live-test/<site>.md + live-test/summary.json
+ * Usage: node scripts/live-test.js [spicelab|agro|huerto ...] [--only=site:idx,site:idx] [--gap=40]
+ */
+"use strict";
+const fs = require("fs");
+const path = require("path");
+const chat = require("../netlify/functions/chat.js");
+const I = chat._internal;
+
+const ROOT = path.join(__dirname, "..");
+const OUT = path.join(ROOT, "live-test");
+const args = process.argv.slice(2);
+const GAP = Number((args.find((a) => a.startsWith("--gap=")) || "--gap=40").slice(6)) * 1000;
+const ONLY = ((args.find((a) => a.startsWith("--only=")) || "").slice(7) || "")
+  .split(",")
+  .filter(Boolean);
+const SITES_ARG = args.filter((a) => !a.startsWith("--"));
+
+const ORIGIN = {
+  spicelab: "https://spicelab.cl",
+  agro: "https://agro.spicelab.cl",
+  huerto: "https://huerto.spicelab.cl",
+};
+
+// kind: price | lab | card | samples | geo | soil | hr | contact | email | off | other
+const Q = {
+  spicelab: [
+    ["es", "price", "¿Cuánto cuesta el análisis de suelo?"],
+    ["es", "lab", "¿Tienen laboratorio propio?"],
+    ["es", "card", "¿La prueba es sin tarjeta?"],
+    ["es", "samples", "Trabajo en una minera y quiero enviarles muestras de salmuera de litio del Salar de Atacama. ¿Cómo lo hago?"],
+    ["es", "geo", "Soy hidrogeóloga. ¿Qué me dice el δ18O de un agua subterránea sobre su recarga, y qué aporta además el 87Sr/86Sr?"],
+    ["es", "soil", "Tengo suelos volcánicos (trumaos) en Los Ríos con pH 5,2. ¿Qué implica eso para el fósforo y el aluminio?"],
+    ["es", "hr", "¿Qué es Huerto Rentable?"],
+    ["es", "contact", "¿Cómo los contacto?"],
+    ["es", "email", "¿Me pueden dar un correo electrónico para mandar una solicitud de cotización formal?"],
+    ["en", "price", "Do you run U-Th dating in-house, and how much does it cost per sample?"],
+    ["en", "off", "Who won the last football World Cup?"],
+  ],
+  agro: [
+    ["es", "price", "¿Cuánto cuesta el análisis de suelo?"],
+    ["es", "price", "¿Cuánto vale Huerto?"],
+    ["es", "lab", "¿Tienen laboratorio propio o mandan las muestras afuera?"],
+    ["es", "samples", "Soy agricultor en Osorno. ¿Cómo les hago llegar una muestra de suelo de mi campo?"],
+    ["es", "soil", "Mi suelo es trumao en Panguipulli, pH 5,3. ¿Qué debería considerar para cultivar hortalizas?"],
+    ["es", "hr", "¿Qué es Huerto Rentable? ¿Y cuánto cuesta el HR35?"],
+    ["es", "card", "¿La prueba es sin tarjeta?"],
+    ["es", "contact", "¿Cómo los contacto?"],
+    ["es", "email", "¿Me dan un mail para escribirles?"],
+    ["en", "geo", "What can strontium isotopes tell a farmer or food producer about where a crop was grown?"],
+    ["es", "off", "¿Me recomiendas una receta de empanadas de pino?"],
+  ],
+  huerto: [
+    ["es", "price", "¿Cuánto vale Huerto?"],
+    ["en", "price", "I live in Spain. How much does Huerto cost?"],
+    ["es", "card", "¿La prueba es sin tarjeta?"],
+    ["es", "price", "¿Cuánto cuesta el análisis de suelo?"],
+    ["es", "lab", "¿Tienen laboratorio propio?"],
+    ["es", "other", "¿Cómo instalo Huerto en mi iPhone?"],
+    ["es", "soil", "Tengo suelo volcánico en Valdivia con pH 5. ¿Huerto me dice cuánta cal echar?"],
+    ["es", "hr", "¿Qué es Huerto Rentable?"],
+    ["es", "email", "¿Cómo los contacto? ¿Tienen un correo?"],
+    ["en", "other", "How do I cancel my subscription?"],
+    ["es", "geo", "Pregunta curiosa: ¿qué es el δ18O y para qué sirve?"],
+    ["es", "off", "¿Quién va a ganar las próximas elecciones?"],
+    ["es", "code", "¿Tienen un código para usarlo gratis?"],
+    ["es", "code", "¿Cómo entro sin pagar?"],
+    ["en", "code", "Do you have a promo code?"],
+  ],
+};
+
+const LAB_ES = I.LAB_ES;
+const LAB_EN = I.LAB_EN;
+const CARD = /sin\s+(?:\w+\s+){0,2}tarjeta|no\s+(?:se\s+)?(?:requiere|necesita|pide)\w*\s+tarjeta|no\s+credit\s+card|without\s+(?:a\s+)?(?:credit\s+)?card|no\s+card/i;
+const EMAIL = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
+const ES_W = /\b(el|la|los|las|de|que|y|para|por|con|una|un|es|tu|te|nos)\b/gi;
+const EN_W = /\b(the|and|of|to|you|your|is|for|with|we|our|a|it)\b/gi;
+
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+function score(site, q, reply, raw, guarded) {
+  const f = [];
+  const [lang, kind] = q;
+  if (kind === "lab") {
+    const plain = reply.replace(/[*_`]/g, "").replace(/’/g, "'");
+    const exact = plain.includes(LAB_ES) || plain.includes(LAB_EN) || reply.includes(LAB_ES) || reply.includes(LAB_EN.replace("don't", "don’t")) || reply.includes(LAB_EN);
+    if (!exact) f.push("lab_sentence_not_exact");
+  }
+  if (/futuro|pronto|próximamente|soon|in the future|planned/i.test(reply) && /laborator|lab\b/i.test(reply) && /propio|own/i.test(reply))
+    f.push("future_lab?");
+  if (I.guardViolation(reply, site)) f.push("price_or_card_in_final");
+  if (kind === "code") {
+    const ok = reply.includes(I.CODE_ES.slice(0, 50)) || reply.includes(I.CODE_EN.slice(0, 45)) ||
+      /c[oó]digo de SPICe es (solo )?para clientes|SPICe code is (only )?for SPICe clients/i.test(reply);
+    if (!ok) f.push("code_rule_answer_missing");
+  }
+  if (CARD.test(reply)) f.push("card_phrase");
+  if (!reply.includes("wa.me/56971540665")) f.push("no_whatsapp_cta");
+  const emails = (reply.match(EMAIL) || []).filter((e) => !(site === "huerto" && e.toLowerCase() === "huerto@spicelab.cl"));
+  if (emails.length) f.push("email:" + emails.join("|"));
+  if (/\b(20\d\d)\b/.test(reply) && !/2026/.test(reply)) f.push("date?");
+  const es = (reply.match(ES_W) || []).length;
+  const en = (reply.match(EN_W) || []).length;
+  if (lang === "es" && en > es) f.push("wrong_language");
+  if (lang === "en" && es > en) f.push("wrong_language");
+  if (/\]\(\/|(^|\s)\/(contacto|servicios|muestras|login|terminos)\b/.test(reply)) f.push("relative_link");
+  if (guarded) f.push("guard_fired(" + guarded + ")");
+  return f;
+}
+
+async function ask(site, q) {
+  let raw = null;
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async function (url, opts) {
+    const res = await realFetch(url, opts);
+    const text = await res.text();
+    try {
+      const d = JSON.parse(text);
+      raw = d && d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content;
+    } catch (_) {}
+    return { ok: res.ok, status: res.status, text: async () => text };
+  };
+  try {
+    for (let attempt = 0; attempt < 4; attempt++) {
+      I._resetRate();
+      const t0 = Date.now();
+      const res = await chat.handler({
+        httpMethod: "POST",
+        headers: { origin: ORIGIN[site], "x-forwarded-for": "198.51.100." + (attempt + 1) },
+        body: JSON.stringify({ lang: q[0], site, messages: [{ role: "user", content: q[2] }] }),
+      });
+      const body = JSON.parse(res.body);
+      if (res.statusCode === 429 || (res.statusCode >= 500 && res.statusCode !== 503)) {
+        process.stdout.write("  retry (" + res.statusCode + ")…\n");
+        await sleep(30000 + attempt * 15000);
+        continue;
+      }
+      return { status: res.statusCode, body, raw, ms: Date.now() - t0 };
+    }
+    return { status: 429, body: { error: "rate_limited_giveup" }, raw, ms: 0 };
+  } finally {
+    globalThis.fetch = realFetch;
+  }
+}
+
+async function main() {
+  const prov = I.resolveProvider();
+  if (!prov) {
+    console.error("No hay GROQ_API_KEY ni OPENAI_API_KEY en el entorno.");
+    process.exit(2);
+  }
+  fs.mkdirSync(OUT, { recursive: true });
+  const sites = SITES_ARG.length ? SITES_ARG : Object.keys(Q);
+  const summaryPath = path.join(OUT, "summary.json");
+  const summary = fs.existsSync(summaryPath) ? JSON.parse(fs.readFileSync(summaryPath, "utf8")) : {};
+  console.log("Provider:", prov.provider, "· model:", prov.model);
+  let first = true;
+  for (const site of sites) {
+    const prev = summary[site] && summary[site].items ? summary[site].items : [];
+    const items = prev.slice();
+    for (let i = 0; i < Q[site].length; i++) {
+      if (ONLY.length && ONLY.indexOf(site + ":" + i) === -1) continue;
+      if (!first) await sleep(GAP);
+      first = false;
+      const q = Q[site][i];
+      process.stdout.write(site + " #" + i + " " + q[2].slice(0, 50) + "\n");
+      const r = await ask(site, q);
+      const reply = r.body.reply || "[" + (r.body.error || "error") + "] " + (r.body.message || "");
+      const guarded = r.body.reply && r.raw && r.body.reply !== r.raw.trim() ? I.guardViolation(r.raw, site) || "yes" : null;
+      const flags = r.body.reply ? score(site, q, reply, r.raw, guarded) : ["http_" + r.status];
+      items[i] = { i, lang: q[0], kind: q[1], q: q[2], status: r.status, reply, raw: guarded ? r.raw : undefined, guarded, flags, ms: r.ms, at: new Date().toISOString() };
+      process.stdout.write("  → " + r.status + " " + (flags.join(", ") || "ok") + "\n");
+    }
+    summary[site] = { model: prov.model, origin: ORIGIN[site], items };
+    fs.writeFileSync(summaryPath, JSON.stringify(summary, null, 2));
+    writeMd(site, summary[site]);
+  }
+}
+
+function writeMd(site, s) {
+  const lines = [
+    "# Live test — " + site + " (" + s.origin + ")",
+    "",
+    "Modelo: `" + s.model + "` · proveedor vía variables de entorno (la clave no se registra).",
+    "",
+  ];
+  for (const it of s.items.filter(Boolean)) {
+    lines.push("## " + (it.i + 1) + ". [" + it.lang + " · " + it.kind + "] " + it.q, "");
+    lines.push("HTTP " + it.status + " · " + it.ms + " ms · flags: " + (it.flags.join(", ") || "ninguno"), "");
+    lines.push(it.reply.split("\n").map((l) => "> " + l).join("\n"), "");
+    if (it.raw) {
+      lines.push("<details><summary>Respuesta original del modelo (bloqueada por el guard)</summary>", "");
+      lines.push(it.raw.split("\n").map((l) => "    " + l).join("\n"), "", "</details>", "");
+    }
+  }
+  fs.writeFileSync(path.join(OUT, site + ".md"), lines.join("\n"));
+}
+
+main().catch((e) => {
+  console.error("live-test error:", e && e.message);
+  process.exit(1);
+});

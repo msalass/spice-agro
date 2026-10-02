@@ -8,7 +8,8 @@
   "scripts": {
     "demo": "node scripts/demo-server.js",
     "sync": "node scripts/sync-knowledge.js",
-    "check": "node --check netlify/functions/chat.js && node --check scripts/demo-server.js && node --check scripts/sync-knowledge.js && node --check spice-widget.js && node scripts/sync-knowledge.js --check",
-    "test": "node --test test/*.js"
+    "check": "node --check netlify/functions/chat.js && node --check scripts/demo-server.js && node --check scripts/sync-knowledge.js && node --check scripts/live-test.js && node --check spice-widget.js && node scripts/sync-knowledge.js --check",
+    "test": "node --test test/*.js",
+    "live-test": "node scripts/live-test.js"
   }
 }

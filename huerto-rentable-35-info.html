@@ -349,6 +349,6 @@ var tog=document.querySelector(".nav-toggle"),menu=document.getElementById("nav-
 if(tog&&menu){tog.addEventListener("click",function(){var o=menu.classList.toggle("open");tog.setAttribute("aria-expanded",String(o));});menu.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){menu.classList.remove("open");tog.setAttribute("aria-expanded","false");});});}
 })();
 </script>
-<script src="/spice-widget.js" defer></script>
+<script src="/spice-widget.js" defer data-site="agro"></script>
 </body>
 </html>

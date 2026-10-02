@@ -52,7 +52,7 @@ function safePublicPath(urlPath) {
   if (clean.includes("\0")) return null;
   const rel = clean === "/" ? "index.html" : clean.replace(/^\/+/, "");
   if (rel.split("/").some(function (part) {
-    return part === ".git" || part === "node_modules" || part === ".netlify" || part === ".env" || part.startsWith(".");
+    return part === ".git" || part === "node_modules" || part === ".netlify" || part === ".env" || part === "live-test" || part.startsWith(".");
   })) return null;
   const abs = path.normalize(path.join(PUBLIC, rel));
   if (!abs.startsWith(PUBLIC + path.sep) && abs !== PUBLIC) return null;
@@ -143,7 +143,7 @@ const server = http.createServer(function (req, res) {
 });
 
 server.listen(PORT, "127.0.0.1", function () {
-  const key = Boolean((process.env.OPENAI_API_KEY || "").trim());
+  const key = Boolean((process.env.OPENAI_API_KEY || process.env.GROQ_API_KEY || "").trim());
   console.log("SPICe Lab chat — demo local");
   console.log("  Widget:   http://localhost:" + PORT + "/");
   console.log("  Function: POST http://localhost:" + PORT + "/.netlify/functions/chat");
