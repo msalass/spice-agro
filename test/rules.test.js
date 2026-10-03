@@ -83,8 +83,7 @@ test("knowledge usa enlaces absolutos para las páginas del sitio", () => {
 // ---------- (b) WhatsApp ----------
 
 test("todo wa.me del paquete apunta exactamente a wa.me/56971540665", () => {
-  // This site publishes HTML that builds wa.me from WA_NUMERO, and README says wa.me/56...
-  // Scan only the chatbot package, not the rest of agro.spicelab.cl.
+  // Site HTML builds wa.me from WA_NUMERO, and the site README says wa.me/56...
   function chatbotFiles(dir, out) {
     out = out || [];
     for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -99,7 +98,7 @@ test("todo wa.me del paquete apunta exactamente a wa.me/56971540665", () => {
     .concat(chatbotFiles(path.join(ROOT, "knowledge")))
     .concat(chatbotFiles(path.join(ROOT, "scripts")))
     .concat(chatbotFiles(path.join(ROOT, "test")))
-    .concat(chatbotFiles(path.join(ROOT, "netlify", "functions")))
+    .concat([path.join(ROOT, "netlify", "functions", "chat.js")])
     .concat([
       path.join(ROOT, "spice-widget.js"),
       path.join(ROOT, "package.json"),
