@@ -10,6 +10,13 @@
 
 [functions]
   directory = "netlify/functions"
+  # esbuild is Netlify's default and matches the existing functions
+  # (CommonJS exports.handler, no native addons or dynamic requires).
+  node_bundler = "esbuild"
+
+# chat.js reads both knowledge files at runtime (inline fallback if missing).
+[functions.chat]
+  included_files = ["knowledge/spicelab.md", "knowledge/huerto.md"]
 
 # --- Cabeceras de seguridad (todas las rutas) ---
 [[headers]]
@@ -20,7 +27,8 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
     # Nota: NO se fija Content-Security-Policy estricta a propósito,
-    # para no bloquear GTM / Google Ads / Doppler / Flow cuando se agreguen.
+    # para no bloquear GTM / Google Ads / Doppler / Flow cuando se agreguen,
+    # ni el widget SPICe (/spice-widget.js, fuentes de Google, /.netlify/functions/chat).
 
 # --- Caché larga para assets versionables ---
 [[headers]]
@@ -31,6 +39,12 @@
 # Las páginas HTML deben revalidarse (para que los deploys se vean al instante)
 [[headers]]
   for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# El widget vive en la raíz publicada; revalidar para que un deploy se vea al instante.
+[[headers]]
+  for = "/spice-widget.js"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
@@ -166,6 +180,37 @@
 # Láminas QR de corredoras: viven en el repo (qr/corredoras/) y no se sirven en el sitio.
 [[redirects]]
   from = "/qr/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# El sitio publica la raíz. Estos archivos del chat no son páginas.
+[[redirects]]
+  from = "/knowledge/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/test/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.env.example"
   to = "/404.html"
   status = 404
   force = true

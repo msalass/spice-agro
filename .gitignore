@@ -10,6 +10,12 @@ Thumbs.db
 # Netlify (local)
 .netlify/
 
+# Secretos locales del chat (nunca commitear la clave)
+.env
+
+# Salida de npm run live-test (gasta tokens; no va al repo)
+live-test/
+
 # Logs
 *.log
 npm-debug.log*
