@@ -12,7 +12,7 @@ const I = chat._internal;
 function htmlFiles(dir, out) {
   out = out || [];
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (e.name === "node_modules" || e.name === ".git" || e.name === "live-test" || e.name === "qr") continue;
+    if (e.name === "node_modules" || e.name === ".git" || e.name === "live-test" || e.name === "qr" || e.name === "partials") continue;
     const p = path.join(dir, e.name);
     if (e.isDirectory()) htmlFiles(p, out);
     else if (e.name.endsWith(".html")) out.push(p);
@@ -22,7 +22,7 @@ function htmlFiles(dir, out) {
 
 test("cada HTML público carga /spice-widget.js con data-site=agro", () => {
   const files = htmlFiles(ROOT);
-  assert.equal(files.length, 23, files.map((f) => path.relative(ROOT, f)).join(", "));
+  assert.equal(files.length, 24, files.map((f) => path.relative(ROOT, f)).join(", "));
   const tag = '<script src="/spice-widget.js" defer data-site="agro"></script>';
   for (const f of files) {
     const html = fs.readFileSync(f, "utf8");

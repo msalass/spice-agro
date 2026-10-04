@@ -142,6 +142,12 @@
   force = true
 
 [[redirects]]
+  from = "/proyectos"
+  to = "/proyectos.html"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/privacidad"
   to = "/privacidad.html"
   status = 301
