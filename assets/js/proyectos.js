@@ -14,6 +14,8 @@
   var index = 0;
   var opener = null;
   var startX = 0;
+  var scrollY = 0;
+  var scrollLocked = false;
 
   function photoAt(i) {
     var photos = current.photos;
@@ -36,11 +38,48 @@
     });
   }
 
+  function setScrollLock(on) {
+    if (on === scrollLocked) return;
+    scrollLocked = on;
+    document.documentElement.classList.toggle("proy-lb-open", on);
+    document.body.classList.toggle("proy-lb-open", on);
+    if (on) {
+      scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      document.body.style.position = "fixed";
+      document.body.style.top = "-" + scrollY + "px";
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+      return;
+    }
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
+    var root = document.documentElement;
+    var previous = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(0, scrollY);
+    root.style.scrollBehavior = previous;
+  }
+
+  function releaseAfterClose() {
+    if (dialog.open) return;
+    setScrollLock(false);
+    img.removeAttribute("src");
+    if (!opener) return;
+    var back = opener;
+    opener = null;
+    back.focus();
+  }
+
   function openProject(id, button) {
     current = projects[id];
     if (!current || !current.photos.length) return;
     opener = button || null;
     show(0);
+    setScrollLock(true);
     dialog.showModal();
     dialog.querySelector(".proy-lb-close").focus();
   }
@@ -65,10 +104,12 @@
     if (event.target === dialog) dialog.close();
   });
 
-  dialog.addEventListener("close", function () {
-    img.removeAttribute("src");
-    if (opener) opener.focus();
-  });
+  dialog.addEventListener("close", releaseAfterClose);
+  // After a touch gesture, some browsers remove `open` on Escape without
+  // firing close. The attribute change is the reliable signal.
+  new MutationObserver(function () {
+    if (!dialog.open) releaseAfterClose();
+  }).observe(dialog, { attributes: true, attributeFilter: ["open"] });
 
   dialog.addEventListener("keydown", function (event) {
     if (event.key === "ArrowRight") {
