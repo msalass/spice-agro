@@ -14,9 +14,9 @@
   # (CommonJS exports.handler, no native addons or dynamic requires).
   node_bundler = "esbuild"
 
-# chat.js reads both knowledge files at runtime (inline fallback if missing).
+# chat.js reads the knowledge files at runtime (inline fallback if missing).
 [functions.chat]
-  included_files = ["knowledge/spicelab.md", "knowledge/huerto.md"]
+  included_files = ["knowledge/spicelab.md", "knowledge/huerto.md", "knowledge/agro-prices.md"]
 
 # --- Cabeceras de seguridad (todas las rutas) ---
 [[headers]]

@@ -12,7 +12,7 @@ const I = chat._internal;
 function htmlFiles(dir, out) {
   out = out || [];
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (e.name === "node_modules" || e.name === ".git" || e.name === "live-test" || e.name === "qr") continue;
+    if (e.name === "node_modules" || e.name === ".git" || e.name === "live-test" || e.name === "qr" || e.name === "partials") continue;
     const p = path.join(dir, e.name);
     if (e.isDirectory()) htmlFiles(p, out);
     else if (e.name.endsWith(".html")) out.push(p);
