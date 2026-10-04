@@ -285,7 +285,8 @@ footer{border-top:1px solid var(--line);padding:clamp(2.5rem,5vw,3.5rem) 0}
 .proyecto-photos{display:grid;gap:8px;min-width:0}
 .proyecto-photos>img,.proyecto-side img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:center;border-radius:14px;background:var(--paper-2)}
 .proyecto-side{min-width:0}
-.proyecto-side--tall img{aspect-ratio:3/4;object-position:center 42%;width:min(46%,220px)}
+.proyecto-side--tall img{aspect-ratio:3/4;object-fit:cover;object-position:center 42%;width:min(46%,220px);height:auto}
+.proyecto-photos>.proyecto-side--tall:first-child img{width:min(100%,380px);object-position:center}
 .proyecto-copy{min-width:0;padding:clamp(.35rem,.8vw,.7rem) clamp(.2rem,1vw,.55rem)}
 .proyecto-meta{color:var(--teal);margin-bottom:.55rem}
 .proyecto-note{color:var(--ink-soft);font-size:.95rem;margin:-.2rem 0 .45rem}
