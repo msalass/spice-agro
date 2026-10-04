@@ -279,12 +279,13 @@ footer{border-top:1px solid var(--line);padding:clamp(2.5rem,5vw,3.5rem) 0}
 /* Proyectos realizados — portada */
 .proyectos{background:var(--cream);padding:clamp(4rem,8vw,6.5rem) 0}
 .proyecto-list{display:flex;flex-direction:column;gap:clamp(1.1rem,2.4vw,1.6rem);margin-top:clamp(2rem,4vw,3rem)}
-.proyecto{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.95fr);gap:clamp(1rem,2.6vw,2.1rem);align-items:center;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(.8rem,1.8vw,1.15rem);box-shadow:var(--shadow)}
+.proyecto{display:grid;grid-template-columns:minmax(0,1.28fr) minmax(0,.82fr);gap:clamp(1rem,2.6vw,2.1rem);align-items:center;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(.8rem,1.8vw,1.15rem);box-shadow:var(--shadow)}
+.proyecto:nth-child(even){grid-template-columns:minmax(0,.82fr) minmax(0,1.28fr)}
 .proyecto:nth-child(even) .proyecto-photos{order:2}
-.proyecto-photos{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:8px;min-width:0}
-.proyecto-photos>img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:14px;background:var(--paper-2)}
-.proyecto-side{position:relative;min-width:0;min-height:0}
-.proyecto-side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:14px;background:var(--paper-2)}
+.proyecto-photos{display:grid;gap:8px;min-width:0}
+.proyecto-photos>img,.proyecto-side img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:center;border-radius:14px;background:var(--paper-2)}
+.proyecto-side{min-width:0}
+.proyecto-side--tall img{aspect-ratio:3/4;object-position:center 42%;width:min(46%,220px)}
 .proyecto-copy{min-width:0;padding:clamp(.35rem,.8vw,.7rem) clamp(.2rem,1vw,.55rem)}
 .proyecto-meta{color:var(--teal);margin-bottom:.55rem}
 .proyecto-note{color:var(--ink-soft);font-size:.95rem;margin:-.2rem 0 .45rem}
