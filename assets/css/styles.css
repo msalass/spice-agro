@@ -275,3 +275,34 @@ footer{border-top:1px solid var(--line);padding:clamp(2.5rem,5vw,3.5rem) 0}
 .ticket .lista-form{margin-top:.15rem}
 .ticket .lista-form .btn{width:100%;margin-top:.1rem}
 @media(max-width:480px){.lista-form{max-width:100%}}
+
+/* Proyectos realizados — portada */
+.proyectos{background:var(--cream);padding:clamp(4rem,8vw,6.5rem) 0}
+.proyecto-list{display:flex;flex-direction:column;gap:clamp(1.1rem,2.4vw,1.6rem);margin-top:clamp(2rem,4vw,3rem)}
+.proyecto{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.95fr);gap:clamp(1rem,2.6vw,2.1rem);align-items:center;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(.8rem,1.8vw,1.15rem);box-shadow:var(--shadow)}
+.proyecto:nth-child(even) .proyecto-photos{order:2}
+.proyecto-photos{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:8px;min-width:0}
+.proyecto-photos>img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:14px;background:var(--paper-2)}
+.proyecto-side{position:relative;min-width:0;min-height:0}
+.proyecto-side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:14px;background:var(--paper-2)}
+.proyecto-copy{min-width:0;padding:clamp(.35rem,.8vw,.7rem) clamp(.2rem,1vw,.55rem)}
+.proyecto-meta{color:var(--teal);margin-bottom:.55rem}
+.proyecto-note{color:var(--ink-soft);font-size:.95rem;margin:-.2rem 0 .45rem}
+.proyecto h3{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,2.6vw,2.15rem);letter-spacing:-.02em;line-height:1.05}
+.proyecto-place{color:var(--ink-soft);font-size:1rem;margin-top:.25rem}
+.proyecto blockquote{margin:.95rem 0 0}
+.proyecto blockquote p{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(1.02rem,1.5vw,1.16rem);line-height:1.48;letter-spacing:-.011em;color:var(--ink);text-wrap:pretty}
+.proyecto blockquote footer{margin-top:.75rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.proyectos-cta{margin-top:clamp(1.8rem,3.5vw,2.6rem);display:flex;flex-direction:column;align-items:flex-start;gap:.8rem}
+.proyectos-cta p{color:var(--ink-soft);max-width:42ch}
+@media(max-width:760px){
+  .proyecto,.proyecto:nth-child(even){grid-template-columns:1fr;gap:.9rem}
+  .proyecto:nth-child(even) .proyecto-photos{order:0}
+  .proyecto-copy{padding:.15rem .15rem .35rem}
+}
+@media(max-width:420px){
+  .proyecto{border-radius:16px;padding:.7rem}
+  .proyecto-photos{gap:6px}
+  .proyecto-photos img{border-radius:10px}
+  .proyecto-meta{letter-spacing:.12em}
+}
