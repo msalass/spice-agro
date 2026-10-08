@@ -126,23 +126,30 @@
       });
     }
 
-    var path = (doc.location && doc.location.pathname) || "/";
-    if (path.length > 1 && path.endsWith("/")) path = path.slice(0, -1);
-    if (path.endsWith("/index.html")) path = path.slice(0, -"/index.html".length) || "/";
+    function pageKey(p) {
+      if (!p) return "/";
+      if (p.length > 1 && p.endsWith("/")) p = p.slice(0, -1);
+      if (p.endsWith("/index.html")) p = p.slice(0, -"/index.html".length) || "/";
+      if (p.endsWith(".html")) p = p.slice(0, -".html".length);
+      return p || "/";
+    }
+    var path = pageKey((doc.location && doc.location.pathname) || "/");
     var hrFamily = {
-      "/huerto-rentable.html": true,
-      "/huerto-rentable-35.html": true,
-      "/huerto-rentable-55.html": true,
-      "/spice-partner.html": true,
-      "/huerto-rentable-35-info.html": true
+      "/huerto-rentable": true,
+      "/huerto-rentable-35": true,
+      "/huerto-rentable-55": true,
+      "/spice-partner": true,
+      "/huerto-rentable-35-info": true,
+      "/proyectos": true
     };
     header.querySelectorAll(".sh-links a").forEach(function (a) {
       var href = a.getAttribute("href") || "";
       if (href.charAt(0) !== "/") return;
-      var hit = href === path || (a === link && hrFamily[path]);
+      var hrefKey = pageKey(href);
+      var hit = hrefKey === path || (a === link && hrFamily[path]);
       if (!hit) return;
       a.classList.add("sh-current");
-      if (a !== link || href === path) a.setAttribute("aria-current", "page");
+      if (a !== link || hrefKey === path) a.setAttribute("aria-current", "page");
     });
   }
 

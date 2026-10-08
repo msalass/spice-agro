@@ -55,6 +55,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://agro.spicelab.cl/proyectos.html</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://agro.spicelab.cl/analisis-de-suelo.html</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>

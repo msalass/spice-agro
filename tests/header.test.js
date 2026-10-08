@@ -35,7 +35,7 @@ describe("header único", function () {
       const html = fs.readFileSync(file, "utf8");
       assert.strictEqual(headerBlock(html), PARTIAL, path.relative(ROOT, file));
       assert.ok(html.includes('href="/assets/css/site-header.css"'), file);
-      assert.ok(html.includes('src="/assets/js/site-header.js"'), file);
+      assert.ok(html.includes('src="/assets/js/site-header.js'), file);
     }
   });
 
@@ -43,6 +43,7 @@ describe("header único", function () {
     const labels = [
       "Academia",
       "Huerto Rentable",
+      "Proyectos",
       "HR35 · Parte",
       "HR55 · Produce",
       "SPICe Partner",
@@ -60,6 +61,7 @@ describe("header único", function () {
     }
     assert.match(PARTIAL, /<a href="\/academia\.html">Academia<\/a>/);
     assert.match(PARTIAL, /<a href="\/huerto-rentable\.html" id="hr-nav-link"/);
+    assert.match(PARTIAL, /<a href="\/proyectos\.html">Proyectos<\/a>\s*<a href="\/huerto-rentable-35\.html">HR35 · Parte<\/a>/);
     assert.match(PARTIAL, /<a href="\/huerto-rentable-35\.html">HR35 · Parte<\/a>/);
     assert.match(PARTIAL, /<a href="\/huerto-rentable-55\.html">HR55 · Produce<\/a>/);
     assert.match(PARTIAL, /<a href="\/spice-partner\.html">SPICe Partner<\/a>/);
