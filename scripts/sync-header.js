@@ -12,7 +12,7 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const PARTIAL = path.join(ROOT, "partials", "site-header.html");
 const CSS_TAG = '<link rel="stylesheet" href="/assets/css/site-header.css">';
-const JS_TAG = '<script src="/assets/js/site-header.js" defer></script>';
+const JS_TAG = '<script src="/assets/js/site-header.js?v=20261008e" defer></script>';
 const MARKER = /<!-- SITE-HEADER:START -->[\s\S]*?<!-- SITE-HEADER:END -->/;
 
 function walkHtml(dir, out) {
@@ -34,7 +34,12 @@ function ensureAssets(html) {
   if (!html.includes("/assets/css/site-header.css")) {
     html = html.replace("</head>", "  " + CSS_TAG + "\n</head>");
   }
-  if (!html.includes("/assets/js/site-header.js")) {
+  if (html.includes("/assets/js/site-header.js")) {
+    html = html.replace(
+      /<script src="\/assets\/js\/site-header\.js(?:\?[^"]*)?" defer><\/script>/g,
+      JS_TAG
+    );
+  } else {
     html = html.replace("</head>", "  " + JS_TAG + "\n</head>");
   }
   return html;
