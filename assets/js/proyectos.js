@@ -26,10 +26,18 @@
     var photos = current.photos;
     index = (i + photos.length) % photos.length;
     var photo = photos[index];
-    img.alt = photo.alt;
-    img.width = photo.w;
-    img.height = photo.h;
-    if (img.getAttribute("src") !== photo.src) img.src = photo.src;
+    // A fresh element: setting width/height on the live <img> before the new
+    // src arrives draws the previous bitmap into the next aspect ratio
+    // (landscape stretched into Valdivia's portrait frame on iOS).
+    var next = document.createElement("img");
+    next.alt = photo.alt;
+    next.decoding = "async";
+    next.width = photo.w;
+    next.height = photo.h;
+    next.src = photo.src;
+    if (img.isConnected) img.replaceWith(next);
+    else stage.insertBefore(next, stage.querySelector(".proy-lb-next"));
+    img = next;
     title.textContent = current.place + ", " + current.region;
     count.textContent = (index + 1) + " / " + photos.length;
     [photoAt(index + 1), photoAt(index - 1)].forEach(function (photo) {
