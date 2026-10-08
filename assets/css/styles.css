@@ -283,9 +283,18 @@ footer{border-top:1px solid var(--line);padding:clamp(2.5rem,5vw,3.5rem) 0}
 .proy-strip-head p{color:var(--ink-soft);max-width:46ch}
 .proy-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;list-style:none}
 .proy-row>li{position:relative;border-radius:16px;overflow:hidden;background:var(--navy);color:var(--cream);min-height:0}
-.proy-shot,.proy-card-photo{display:block;position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--paper-2);color:inherit}
-.proy-shot img,.proy-card-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
-.proy-shot img.proy-cover--tall,.proy-card-photo img.proy-cover--tall{object-position:center 46%}
+/* The frame is 4:3. The photo is absolute, so its intrinsic size cannot
+   stretch the card (flex min-height) or fight object-fit. Padding-top is
+   the fallback when aspect-ratio is missing; it is turned off where
+   aspect-ratio applies, or the two heights add and the box goes portrait. */
+.proy-card-open{align-items:flex-start}
+.proy-card-open>.proy-card-body{width:100%}
+.proy-shot,.proy-card-photo{position:relative;display:block;width:100%;max-width:100%;margin:0;overflow:hidden;background:var(--paper-2);flex:none;align-self:stretch;min-height:0;line-height:0;color:inherit;aspect-ratio:4/3}
+.proy-shot::before,.proy-card-photo::before{content:"";display:block;width:100%;padding-top:75%}
+@supports (aspect-ratio:4/3){
+  .proy-shot::before,.proy-card-photo::before{content:none;display:none;padding-top:0}
+}
+.proy-shot img,.proy-card-photo img{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center;display:block}
 .proy-cap{position:absolute;left:0;right:0;bottom:0;z-index:1;display:flex;flex-direction:column;gap:2px;padding:2.2rem .8rem .7rem;background:linear-gradient(to top,rgba(16,20,42,.82),rgba(16,20,42,0));font-size:.92rem;line-height:1.25;pointer-events:none}
 .proy-cap a{pointer-events:auto;color:inherit;text-decoration:none}
 .proy-cap b,.proy-cap b a{font-family:var(--serif);font-weight:600;font-size:1.05rem}
