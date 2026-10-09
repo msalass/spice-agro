@@ -111,6 +111,12 @@ gtag('config', 'AW-18018765001');
 .ref-nota{font-size:.9rem;color:var(--teal);background:var(--teal-dim);border-radius:10px;padding:10px 12px;line-height:1.45}
 .ref-nota[hidden]{display:none}
 .hp{position:absolute;left:-9999px;height:0;overflow:hidden}
+.sf-etapa{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.sf-etapa legend{font-weight:600;font-size:.92rem;color:var(--navy);margin-bottom:2px;padding:0}
+.sf-etapa label{display:flex;align-items:flex-start;gap:10px;font-size:.92rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:11px 14px;cursor:pointer;line-height:1.4}
+.sf-etapa label:has(input:checked){border-color:var(--ochre);background:rgba(203,152,49,.1)}
+.short-form .sf-etapa input{width:auto;padding:0;margin:3px 0 0;accent-color:#cb9831;flex:none}
+#formulario{scroll-margin-top:88px}
 @media(max-width:520px){.sf-row{flex-direction:column}}
 </style>
   <link rel="stylesheet" href="/assets/css/site-header.css">
@@ -205,8 +211,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h1>El informe completo — <em>y qué hacer con el resultado.</em></h1>
     <p class="lead">Vamos a terreno, tomamos las muestras y te entregamos el análisis agronómico completo con <strong>dos caminos para corregir tu suelo</strong>: el convencional y el regenerativo. No una tabla de números: el plan maestro de tu terreno.</p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:.2rem">
-      <a class="btn ochre" data-cta="wa-hero" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20quiero%20solicitar%20una%20propuesta%20de%20an%C3%A1lisis%20de%20suelo." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px"><svg viewBox="0 0 32 32" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.8 1 1-4.7-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C5 9.5 9.5 5 16 5s11 4.5 11 10-4.9 9.8-11 9.8zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.5 0-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.6.8.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>Solicitar propuesta</a>
-      <a class="btn ghost-light" href="#solicitar">Ver el formulario &rsaquo;</a>
+      <a class="btn ochre" data-cta="wa-hero" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20quiero%20una%20propuesta%20de%20an%C3%A1lisis%20de%20suelo." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px"><svg viewBox="0 0 32 32" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.8 1 1-4.7-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C5 9.5 9.5 5 16 5s11 4.5 11 10-4.9 9.8-11 9.8zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.5 0-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.6.8.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>Quiero una propuesta</a>
+      <a class="btn ghost-light" href="#formulario">Estoy explorando opciones &rsaquo;</a>
     </div>
     <p class="l-hero-trust"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>Cada informe firmado por un doctor en geoquímica</p>
     </div>
@@ -272,7 +278,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="hr-quote">
         <span class="hr-quote-label">Propuesta &middot; seg&uacute;n tu terreno</span>
         <p>Cada terreno es distinto. Armamos la propuesta seg&uacute;n tu superficie, la cantidad de sectores y lo que quieras producir.</p>
-        <a class="btn ochre" href="#solicitar">Solicitar propuesta &rsaquo;</a>
+        <a class="btn ochre" data-cta="wa-oferta" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20quiero%20una%20propuesta%20de%20an%C3%A1lisis%20de%20suelo.%20Mi%20terreno%20est%C3%A1%20en%3A%20" target="_blank" rel="noopener">Quiero una propuesta &rsaquo;</a>
       </div>
     </article>
   </div>
@@ -285,14 +291,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h2 class="l-h2">Conversemos tu caso</h2>
     <p class="l-sub">Cuéntanos dónde está el terreno, cuánta superficie tiene y qué quieres producir. Te respondemos con una propuesta para tu caso.</p>
     <div class="cta-wa-card">
-      <a class="btn ochre cta-wa-main" data-cta="wa-form" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20quiero%20solicitar%20una%20propuesta%20de%20an%C3%A1lisis%20de%20suelo.%20Mi%20terreno%20est%C3%A1%20en%3A%20" target="_blank" rel="noopener">
+      <a class="btn ochre cta-wa-main" data-cta="wa-form" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20quiero%20una%20propuesta%20de%20an%C3%A1lisis%20de%20suelo.%20Mi%20terreno%20est%C3%A1%20en%3A%20" target="_blank" rel="noopener">
         <svg viewBox="0 0 32 32" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.8 1 1-4.7-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C5 9.5 9.5 5 16 5s11 4.5 11 10-4.9 9.8-11 9.8zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.5 0-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.6.8.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
-        Solicitar propuesta por WhatsApp
+        Quiero una propuesta
       </a>
       <p class="cta-wa-note">Respuesta habitual en menos de 12 horas hábiles</p>
     </div>
-    <p class="l-sub" style="margin-top:2.2rem">¿Prefieres escribirnos? Déjanos tus datos y te enviamos la propuesta por correo.</p>
-    <div class="form-card">
+    <p class="l-sub" style="margin-top:2.2rem">Si todavía estás mirando, cuéntanos lo básico y te escribimos qué incluye para tu terreno.</p>
+    <div class="form-card" id="formulario">
       <!-- FormSubmit entrega el correo. En este sitio un POST de Netlify Forms responde 404
            (también lista-regenerativa). data-netlify y el input ref quedan en el HTML estático
            para que Netlify registre el campo si la detección vuelve a aceptar envíos. -->
@@ -314,6 +320,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <option value="El plano de tu parcela">El plano de tu parcela</option>
           </select>
         </label>
+        <fieldset class="sf-etapa">
+          <legend>¿En qué etapa estás?</legend>
+          <label><input type="radio" name="Etapa" value="Estoy explorando opciones" checked> Estoy explorando opciones</label>
+          <label><input type="radio" name="Etapa" value="Quiero una propuesta"> Quiero una propuesta</label>
+          <label><input type="radio" name="Etapa" value="Ya tengo un análisis y necesito interpretarlo"> Ya tengo un análisis y necesito interpretarlo</label>
+        </fieldset>
         <div class="sf-row">
           <input type="text" name="Nombre" placeholder="Tu nombre" required>
           <input type="email" name="Correo" placeholder="Tu correo" required>
@@ -324,7 +336,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <input type="text" name="Superficie" placeholder="Superficie aproximada (m² o hectáreas)">
         <textarea name="Mensaje" placeholder="¿Qué quieres producir? ¿Ya tienes análisis anteriores?" rows="3"></textarea>
-        <button type="submit" class="btn ochre" style="width:100%;justify-content:center">Solicitar propuesta &rsaquo;</button>
+        <button type="submit" class="btn ochre" style="width:100%;justify-content:center">Enviar &rsaquo;</button>
       </form>
     </div>
     <p class="cta-wa-note" style="max-width:560px;margin:1rem auto 0">Trabajamos en la Región de Los Ríos. Fuera de la región también vamos, con un costo de traslado que cotizamos según la distancia.</p>
@@ -484,8 +496,19 @@ if(tog&&menu){tog.addEventListener("click",function(){var o=menu.classList.toggl
 
   var form=document.getElementById("analisis-short-form");
   if(form){
+    var submit=form.querySelector('button[type="submit"]');
+    function syncSubmit(){
+      var elegida=form.querySelector('input[name="Etapa"]:checked');
+      if(!elegida||!submit) return;
+      submit.textContent=elegida.value==="Quiero una propuesta"?"Pedir propuesta ›":"Enviar ›";
+    }
+    form.querySelectorAll('input[name="Etapa"]').forEach(function(radio){
+      radio.addEventListener("change",syncSubmit);
+    });
+    syncSubmit();
     form.addEventListener("submit",function(){
-      trackLead("formulario","analisis-short-form");
+      var elegida=form.querySelector('input[name="Etapa"]:checked');
+      trackLead("formulario",elegida?elegida.value:"analisis-short-form");
     });
   }
 })();
