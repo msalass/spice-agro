@@ -901,7 +901,7 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
   </div>
 </section>
 
-<!-- CTA FINAL: WHATSAPP + FORMULARIO NETLIFY (ancla de ads: /huerto-rentable-35#formulario) -->
+<!-- CTA FINAL: WHATSAPP + FORMULARIO (ancla de ads: /huerto-rentable-35#formulario) -->
 <section id="formulario" class="l-form">
   <div class="wrap">
     <span class="mono eyebrow--ochre l-eyebrow">Da el siguiente paso</span>
@@ -916,11 +916,16 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
     </div>
     <p class="l-sub" style="margin-top:2.2rem">¿Prefieres que te contactemos nosotros? Déjanos tus datos y te escribimos.</p>
     <div class="form-card">
-      <!-- HTML estático a propósito: el parser de Netlify solo detecta formularios
-           presentes en el archivo publicado, no los que arma JavaScript. -->
-      <form id="hr35-short-form" name="hr35" class="short-form" method="POST" action="/gracias-hr35.html" data-netlify="true" netlify-honeypot="bot-field">
+      <!-- FormSubmit entrega el correo. En este sitio un POST de Netlify Forms responde 404.
+           data-netlify queda en el HTML estático por si la detección vuelve a aceptar envíos.
+           El redirect a gracias-hr35 es el campo _next, igual que en análisis de suelo. -->
+      <form id="hr35-short-form" name="hr35" class="short-form" method="POST" action="https://formsubmit.co/contact@spicelab.cl" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="hr35">
-        <input type="hidden" name="subject" value="Solicitud HR35 — SPICe Agro (agro.spicelab.cl)">
+        <input type="hidden" name="subject" value="Solicitud HR35 — SPICe Agro">
+        <input type="hidden" name="_subject" value="Solicitud HR35 — SPICe Agro">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://agro.spicelab.cl/gracias-hr35.html">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
         <input type="hidden" name="programa" value="Huerto Rentable 35">
         <input type="hidden" name="gclid" id="hr35-gclid" value="">
         <input type="hidden" name="utm_source" id="hr35-utm-source" value="">
