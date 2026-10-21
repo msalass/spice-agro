@@ -23,17 +23,31 @@ function formHtml() {
   return m[0];
 }
 
-test("el formulario hr35 es HTML estático detectable por Netlify", () => {
+test("el formulario hr35 se envía por FormSubmit, igual que análisis de suelo", () => {
   const form = formHtml();
+  const soil = stripComments(fs.readFileSync(path.join(ROOT, "analisis-de-suelo.html"), "utf8"));
+  const soilForm = soil.match(/<form\b[\s\S]*?<\/form>/)[0];
   assert.match(form, /<form\b[^>]*\bname="hr35"/);
   assert.match(form, /\bmethod="POST"/);
-  assert.match(form, /\baction="\/gracias-hr35\.html"/);
+  assert.match(form, /\baction="https:\/\/formsubmit\.co\/contact@spicelab\.cl"/);
+  assert.match(soilForm, /\baction="https:\/\/formsubmit\.co\/contact@spicelab\.cl"/);
   assert.match(form, /\bdata-netlify="true"/);
   assert.match(form, /\bnetlify-honeypot="bot-field"/);
   assert.match(form, /name="form-name"[^>]*value="hr35"/);
   assert.match(form, /name="bot-field"/);
+  assert.match(form, /name="_honey"/);
+  assert.match(form, /name="_captcha"[^>]*value="false"/);
+  assert.match(form, /name="_subject"[^>]*value="Solicitud HR35 — SPICe Agro"/);
+  assert.match(form, /name="subject"[^>]*value="Solicitud HR35 — SPICe Agro"/);
+  assert.match(form, /name="_next"[^>]*value="https:\/\/agro\.spicelab\.cl\/gracias-hr35\.html"/);
+  assert.doesNotMatch(form, /\baction="\/gracias-hr35\.html"/);
+  assert.doesNotMatch(form, /_template/);
+  assert.doesNotMatch(soilForm, /_template/);
   assert.doesNotMatch(form, /onsubmit/i);
-  assert.doesNotMatch(form, /formsubmit\.co/);
+  const inline = (stripComments(PAGE).match(/<script\b(?![^>]*\bsrc=)[^>]*>[\s\S]*?<\/script>/g) || []).join("\n");
+  assert.doesNotMatch(inline, /preventDefault/);
+  assert.doesNotMatch(inline, /fetch\s*\(/);
+  assert.doesNotMatch(inline, /window\.open/);
   assert.doesNotMatch(form, /consentimiento/);
   for (const name of [
     "interes",
@@ -84,8 +98,6 @@ test("el formulario hr35 es HTML estático detectable por Netlify", () => {
   assert.match(PAGE, /<section id="formulario"/);
   assert.doesNotMatch(PAGE, /id="postular"/);
   assert.doesNotMatch(PAGE, /#postular/);
-  assert.doesNotMatch(PAGE, /preventDefault/);
-  assert.doesNotMatch(PAGE, /window\.open/);
 });
 
 test("la página HR35 no usa las palabras prohibidas y no toca el precio", () => {
@@ -119,7 +131,7 @@ test("cada enlace wa.me de HR35 declara un location distinto", () => {
   assert.match(PAGE, /gtag\("event","whatsapp_click",\{location:/);
 });
 
-test("netlify.toml no se traga el POST del formulario", () => {
+test("la URL de _next no está redirigida: FormSubmit manda al .html publicado", () => {
   const rules = [];
   let current = null;
   for (const line of TOML.split("\n")) {
