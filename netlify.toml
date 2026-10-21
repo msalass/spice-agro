@@ -165,6 +165,9 @@
   status = 301
   force = true
 
+# El formulario hr35 hace POST a /gracias-hr35.html (el archivo publicado).
+# Esta 301 solo cubre la URL sin extensión. No fuerces un redirect sobre el .html:
+# un 301 en el POST lo convierte en GET y Netlify no registra el envío.
 [[redirects]]
   from = "/gracias-hr35"
   to = "/gracias-hr35.html"
@@ -221,8 +224,8 @@
   status = 404
   force = true
 
-# --- Página 404 propia ---
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
+# 404 propia: NO agregar [[redirects]] from = "/*" status = 404.
+# En este sitio un splat con status 404 responde 404 a los POST antes de que
+# el handler de Netlify Forms vea el envío (el archivo estático no se "sirve"
+# en POST, así que la regla gana y el lead se pierde). Con 404.html en la raíz
+# publicada, Netlify ya muestra esa página en las rutas que no existen.

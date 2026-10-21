@@ -34,7 +34,7 @@ gtag('config', 'AW-18018765001');
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>¡Inscripción recibida! — Huerto Rentable 35 · SPICe Agro</title>
+<title>Datos recibidos — Huerto Rentable 35 · SPICe Agro</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -142,12 +142,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section class="card">
       <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
       <p class="kicker">Huerto Rentable 35</p>
-      <h1>¡Inscripción recibida!</h1>
-      <p class="sub">Hemos recibido tu información correctamente.</p>
-      <p class="body">Te contactaremos en <strong>menos de 12 horas hábiles</strong> para coordinar el pago de <strong>$1.690.000 CLP + IVA</strong> y agendar la instalación del <strong>Programa Huerto Rentable 35</strong>.</p>
-      <p class="body">Si tienes dudas o quieres avanzar más rápido, puedes escribirnos directamente por WhatsApp ahora mismo.</p>
+      <h1>Recibimos tus datos.</h1>
+      <p class="sub">Te escribimos en menos de 12 horas hábiles para conversar tu terreno y el siguiente paso.</p>
+      <p class="body">El programa es <strong>$1.690.000 CLP + IVA</strong>. Si quieres avanzar ahora, escríbenos por WhatsApp y coordinamos la visita y la forma de pago que te acomode.</p>
       <div class="actions">
-        <a href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20acabo%20de%20inscribirme%20al%20Programa%20Huerto%20Rentable%2035%20y%20quiero%20coordinar%20el%20siguiente%20paso." class="btn btn-wa" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
+        <a href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20acabo%20de%20dejar%20mis%20datos%20del%20Programa%20Huerto%20Rentable%2035%20y%20quiero%20coordinar%20el%20siguiente%20paso." class="btn btn-wa" data-wa-location="gracias" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
         <a href="/huerto-rentable-35.html" class="btn btn-ghost">Volver al programa</a>
       </div>
     </section>
@@ -162,7 +161,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p>Mientras coordinamos los detalles, descarga esta guía práctica para comenzar con más claridad, evitar errores comunes y entender cómo organizar un huerto pequeño para que funcione de verdad.</p>
         <div class="bonus-actions">
           <a href="/assets/downloads/guia-huerto-rentable-35.pdf" class="btn btn-ochre" target="_blank" rel="noopener">Descargar guía</a>
-          <a href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20descargu%C3%A9%20la%20gu%C3%ADa%20y%20tengo%20algunas%20preguntas%20sobre%20Huerto%20Rentable%2035." class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Tengo dudas</a>
+          <a href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20descargu%C3%A9%20la%20gu%C3%ADa%20y%20tengo%20algunas%20preguntas%20sobre%20Huerto%20Rentable%2035." class="btn btn-ghost" data-wa-location="gracias-guia" target="_blank" rel="noopener noreferrer">Tengo dudas</a>
         </div>
       </div>
     </section>
@@ -172,6 +171,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="brand-tag">del laboratorio al huerto</div>
     </div>
   </div>
+<script>
+(function(){
+  var SEND_TO = "AW-18018765001/tmf9CMP2hqQdEMmRgpBD";
+  var GUARD = "hr35-form-conversion";
+
+  document.addEventListener("click", function (e) {
+    var t = e.target;
+    var a = (t && t.closest) ? t.closest('a[href*="wa.me"]') : null;
+    if (!a || typeof gtag !== "function") return;
+    try {
+      gtag("event", "whatsapp_click", { location: a.getAttribute("data-wa-location") || "gracias" });
+    } catch (err) {}
+  }, true);
+
+  var already = false;
+  try { already = sessionStorage.getItem(GUARD) === "1"; } catch (e) {}
+  if (already) return;
+  try { sessionStorage.setItem(GUARD, "1"); } catch (e) {}
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "generate_lead",
+    form: "hr35",
+    lead_source: "thank_you",
+    lead_detail: "gracias-hr35",
+    service: "hr35"
+  });
+  if (typeof gtag === "function") {
+    try {
+      gtag("event", "conversion", { send_to: SEND_TO, value: 0.0, currency: "CLP" });
+      gtag("event", "generate_lead", { form: "hr35" });
+    } catch (e) {}
+  }
+  if (typeof fbq === "function") {
+    try {
+      fbq("track", "Lead", {
+        content_name: "Huerto Rentable 35 - thank you",
+        content_category: "programa",
+        content_ids: ["HR35"],
+        origen: "thank_you"
+      });
+    } catch (e) {}
+  }
+})();
+</script>
 <script src="/spice-widget.js" defer data-site="agro"></script>
 </body>
 </html>
