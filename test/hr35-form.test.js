@@ -34,16 +34,16 @@ test("el formulario hr35 es HTML estático detectable por Netlify", () => {
   assert.match(form, /name="bot-field"/);
   assert.doesNotMatch(form, /onsubmit/i);
   assert.doesNotMatch(form, /formsubmit\.co/);
+  assert.doesNotMatch(form, /consentimiento/);
   for (const name of [
-    "nombre",
-    "whatsapp",
-    "correo",
-    "region",
-    "comuna",
-    "superficie",
-    "que_cultiva",
-    "plazo",
-    "consentimiento",
+    "interes",
+    "Etapa",
+    "Nombre",
+    "Correo",
+    "Telefono",
+    "Comuna",
+    "Superficie",
+    "Mensaje",
     "gclid",
     "utm_source",
     "utm_medium",
@@ -52,6 +52,35 @@ test("el formulario hr35 es HTML estático detectable por Netlify", () => {
   ]) {
     assert.match(form, new RegExp("name=\"" + name + "\""), name);
   }
+  const order = ["interes", "Etapa", "Nombre", "Correo", "Telefono", "Comuna", "Superficie", "Mensaje"];
+  let cursor = -1;
+  for (const name of order) {
+    const at = form.indexOf('name="' + name + '"');
+    assert.ok(at > cursor, "orden: " + name);
+    cursor = at;
+  }
+  assert.match(form, /<option value="Huerto Rentable 35" selected>/);
+  assert.match(form, /value="Huerto Rentable 55"/);
+  assert.match(form, /value="Academia"/);
+  assert.match(form, /value="Análisis de suelo"/);
+  assert.match(form, /name="Etapa" value="Estoy explorando opciones" checked/);
+  assert.match(form, /value="Quiero una propuesta"/);
+  assert.match(form, /value="Ya cultivo y quiero ordenar mi producción"/);
+  assert.match(form, /placeholder="Tu nombre"[^>]*required/);
+  assert.match(form, /type="email" name="Correo"[^>]*required|name="Correo"[^>]*type="email"[^>]*required|type="email"[^>]*required[^>]*name="Correo"/);
+  const correo = /<input\b[^>]*name="Correo"[^>]*>/.exec(form)[0];
+  assert.match(correo, /type="email"/);
+  assert.match(correo, /\brequired\b/);
+  assert.match(form, /placeholder="Tu correo"/);
+  assert.doesNotMatch(/<input\b[^>]*name="Telefono"[^>]*>/.exec(form)[0], /\brequired\b/);
+  assert.match(/<input\b[^>]*name="Comuna"[^>]*>/.exec(form)[0], /\brequired\b/);
+  assert.doesNotMatch(/<input\b[^>]*name="Superficie"[^>]*>/.exec(form)[0], /\brequired\b/);
+  assert.doesNotMatch(/<textarea\b[^>]*name="Mensaje"[^>]*>/.exec(form)[0], /\brequired\b/);
+  assert.match(form, /placeholder="¿Qué cultivas hoy o qué quieres producir\?"/);
+  assert.match(form, />Enviar &rsaquo;</);
+  assert.match(form, /class="sf-label"/);
+  assert.match(form, /class="sf-etapa"/);
+  assert.match(form, /class="sf-row"/);
   assert.match(PAGE, /<section id="formulario"/);
   assert.doesNotMatch(PAGE, /id="postular"/);
   assert.doesNotMatch(PAGE, /#postular/);
@@ -80,7 +109,13 @@ test("cada enlace wa.me de HR35 declara un location distinto", () => {
     assert.ok(m, "falta data-wa-location en " + tag.slice(0, 80));
     locations.push(m[1]);
   }
-  assert.deepStrictEqual(locations.sort(), ["calc", "cta", "float", "hero", "hero-info"]);
+  assert.deepStrictEqual(locations.sort(), ["calc", "cta", "float", "hero"]);
+  assert.doesNotMatch(PAGE, /data-wa-location="hero-info"/);
+  assert.doesNotMatch(PAGE, /Quiero más información/);
+  const explore = PAGE.match(/<a\b[^>]*>Quiero explorar opciones/)[0];
+  assert.match(explore, /href="#formulario"/);
+  assert.doesNotMatch(explore, /wa\.me/);
+  assert.doesNotMatch(explore, /data-wa-location/);
   assert.match(PAGE, /gtag\("event","whatsapp_click",\{location:/);
 });
 
