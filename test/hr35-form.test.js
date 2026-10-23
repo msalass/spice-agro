@@ -139,7 +139,9 @@ test("el ancla #formulario abre el formulario, sin WhatsApp al lado", () => {
   const section = PAGE.slice(start, PAGE.indexOf("</section>", start));
   assert.ok(section.includes('id="hr35-short-form"'));
   assert.match(section, /<h2[^>]*>Hablemos de tu huerto<\/h2>/);
-  assert.match(section, /Cuéntanos de tu terreno y te contactamos para ver juntos si HR35 es para ti\./);
+  assert.match(section, /Cuéntanos de tu terreno y te contactamos sin compromiso para ver juntos si HR35 es para ti\./);
+  assert.match(section, /<p class="sf-note">Te respondemos dentro de 24 horas hábiles\. Tus datos solo se usan para contactarte\.<\/p>/);
+  assert.ok(section.indexOf(">Enviar &rsaquo;<") < section.indexOf('class="sf-note"'));
   assert.doesNotMatch(section, /wa\.me/);
   assert.doesNotMatch(section, /data-wa-location/);
   assert.doesNotMatch(section, /Prefieres conversar/);
