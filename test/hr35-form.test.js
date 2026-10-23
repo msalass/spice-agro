@@ -121,14 +121,37 @@ test("cada enlace wa.me de HR35 declara un location distinto", () => {
     assert.ok(m, "falta data-wa-location en " + tag.slice(0, 80));
     locations.push(m[1]);
   }
-  assert.deepStrictEqual(locations.sort(), ["calc", "cta", "float", "hero"]);
+  assert.deepStrictEqual(locations.sort(), ["calc", "float", "hero"]);
   assert.doesNotMatch(PAGE, /data-wa-location="hero-info"/);
   assert.doesNotMatch(PAGE, /Quiero más información/);
-  const explore = PAGE.match(/<a\b[^>]*>Quiero explorar opciones/)[0];
-  assert.match(explore, /href="#formulario"/);
-  assert.doesNotMatch(explore, /wa\.me/);
-  assert.doesNotMatch(explore, /data-wa-location/);
+  const explores = PAGE.match(/<a\b[^>]*>Quiero explorar opciones/g) || [];
+  assert.ok(explores.length >= 1);
+  for (const explore of explores) {
+    assert.match(explore, /href="#formulario"/);
+    assert.doesNotMatch(explore, /wa\.me/);
+    assert.doesNotMatch(explore, /data-wa-location/);
+  }
   assert.match(PAGE, /gtag\("event","whatsapp_click",\{location:/);
+});
+
+test("el ancla #formulario abre el formulario, sin WhatsApp al lado", () => {
+  const start = PAGE.indexOf('<section id="formulario"');
+  const section = PAGE.slice(start, PAGE.indexOf("</section>", start));
+  assert.ok(section.includes('id="hr35-short-form"'));
+  assert.match(section, /<h2[^>]*>Hablemos de tu huerto<\/h2>/);
+  assert.match(section, /Cuéntanos de tu terreno y te contactamos sin compromiso para ver juntos si HR35 es para ti\./);
+  assert.match(section, /<p class="sf-note">Te respondemos dentro de 24 horas hábiles\. Tus datos solo se usan para contactarte\.<\/p>/);
+  assert.ok(section.indexOf(">Enviar &rsaquo;<") < section.indexOf('class="sf-note"'));
+  assert.doesNotMatch(section, /wa\.me/);
+  assert.doesNotMatch(section, /data-wa-location/);
+  assert.doesNotMatch(section, /Prefieres conversar/);
+  assert.doesNotMatch(section, /form-wa-alt/);
+  assert.doesNotMatch(section, /postul/i);
+  assert.match(PAGE, /#formulario\{scroll-margin-top:92px\}/);
+  assert.match(PAGE, /a\.wa\.is-parked\{visibility:hidden/);
+  assert.doesNotMatch(PAGE, /is-parked",seeing&&narrow/);
+  assert.match(PAGE, /classList\.toggle\("is-parked",seeing\)/);
+  assert.match(PAGE, /IntersectionObserver/);
 });
 
 test("la URL de _next no está redirigida: FormSubmit manda al .html publicado", () => {

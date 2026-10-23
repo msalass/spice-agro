@@ -901,20 +901,12 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
   </div>
 </section>
 
-<!-- CTA FINAL: WHATSAPP + FORMULARIO (ancla de ads: /huerto-rentable-35#formulario) -->
+<!-- CTA FINAL: el ancla #formulario abre el formulario. Sin enlace de WhatsApp en esta sección. -->
 <section id="formulario" class="l-form">
   <div class="wrap">
     <span class="mono eyebrow--ochre l-eyebrow">Da el siguiente paso</span>
     <h2 class="l-h2">Hablemos de tu huerto</h2>
-    <p class="l-sub">La forma más rápida de avanzar es conversar directamente. Cuéntanos tu terreno y tus objetivos, y te respondemos con la información exacta para tu caso.</p>
-    <div class="cta-wa-card">
-      <a class="btn ochre cta-wa-main" data-wa-location="cta" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20quiero%20informaci%C3%B3n%20sobre%20Huerto%20Rentable%2035." target="_blank" rel="noopener">
-        <svg viewBox="0 0 32 32" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.8 1 1-4.7-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C5 9.5 9.5 5 16 5s11 4.5 11 10-4.9 9.8-11 9.8zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.5 0-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.6.8.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
-        Conversar por WhatsApp
-      </a>
-      <p class="cta-wa-note">Respuesta habitual en menos de 12 horas hábiles</p>
-    </div>
-    <p class="l-sub" style="margin-top:2.2rem">¿Prefieres que te contactemos nosotros? Déjanos tus datos y te escribimos.</p>
+    <p class="l-sub">Cuéntanos de tu terreno y te contactamos sin compromiso para ver juntos si HR35 es para ti.</p>
     <div class="form-card">
       <!-- FormSubmit entrega el correo. En este sitio un POST de Netlify Forms responde 404.
            data-netlify queda en el HTML estático por si la detección vuelve a aceptar envíos.
@@ -960,16 +952,14 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
         <input type="text" name="Superficie" placeholder="Superficie aproximada (m² o hectáreas)" maxlength="80">
         <textarea name="Mensaje" placeholder="¿Qué cultivas hoy o qué quieres producir?" rows="3"></textarea>
         <button type="submit" class="btn ochre" style="width:100%;justify-content:center">Enviar &rsaquo;</button>
+        <p class="sf-note">Te respondemos dentro de 24 horas hábiles. Tus datos solo se usan para contactarte.</p>
       </form>
     </div>
   </div>
 </section>
 
 <style>
-.cta-wa-card{max-width:500px;margin:1.6rem auto 0;text-align:center}
-.cta-wa-main{width:100%;justify-content:center;font-size:1.05rem;padding:16px}
-.cta-wa-note{font-size:.82rem;color:var(--ink-soft);margin-top:.7rem}
-.l-form .form-card{max-width:620px;padding:1.6rem}
+.l-form .form-card{max-width:620px;margin-top:0;padding:1.6rem}
 .short-form{display:flex;flex-direction:column;gap:12px}
 .sf-row{display:flex;gap:12px}
 .short-form input,.short-form textarea,.short-form select{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper);font-family:var(--sans);font-size:.95rem;color:var(--ink)}
@@ -982,7 +972,9 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
 .sf-etapa label{display:flex;align-items:flex-start;gap:10px;font-size:.92rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:11px 14px;cursor:pointer;line-height:1.4}
 .sf-etapa label:has(input:checked){border-color:var(--ochre);background:rgba(203,152,49,.1)}
 .short-form .sf-etapa input{width:auto;padding:0;margin:3px 0 0;accent-color:#cb9831;flex:none}
-#formulario{scroll-margin-top:88px}
+.sf-note{margin:0;font-size:.78rem;line-height:1.45;text-align:center;color:var(--ink-soft)}
+#formulario{scroll-margin-top:92px}
+a.wa.is-parked{visibility:hidden;pointer-events:none}
 @media(max-width:520px){.sf-row{flex-direction:column}}
 </style>
 
@@ -1072,6 +1064,19 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
     var v=(param(p)||"").slice(0,200);
     if(v){try{sessionStorage.setItem(p,v);}catch(e){}}
   });
+
+  var formSec=document.getElementById("formulario");
+  var floatWa=document.querySelector('a.wa[data-wa-location="float"]');
+  if(formSec&&floatWa&&"IntersectionObserver" in window){
+    var seeing=false;
+    function parkFloat(){
+      floatWa.classList.toggle("is-parked",seeing);
+    }
+    new IntersectionObserver(function(entries){
+      seeing=entries.some(function(en){return en.isIntersecting;});
+      parkFloat();
+    },{threshold:0.01}).observe(formSec);
+  }
 
   document.addEventListener("click",function(e){
     var t=e.target;
