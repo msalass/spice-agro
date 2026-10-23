@@ -121,7 +121,7 @@ test("cada enlace wa.me de HR35 declara un location distinto", () => {
     assert.ok(m, "falta data-wa-location en " + tag.slice(0, 80));
     locations.push(m[1]);
   }
-  assert.deepStrictEqual(locations.sort(), ["calc", "cta", "float", "hero"]);
+  assert.deepStrictEqual(locations.sort(), ["calc", "float", "hero"]);
   assert.doesNotMatch(PAGE, /data-wa-location="hero-info"/);
   assert.doesNotMatch(PAGE, /Quiero más información/);
   const explores = PAGE.match(/<a\b[^>]*>Quiero explorar opciones/g) || [];
@@ -134,19 +134,21 @@ test("cada enlace wa.me de HR35 declara un location distinto", () => {
   assert.match(PAGE, /gtag\("event","whatsapp_click",\{location:/);
 });
 
-test("el ancla #formulario abre el formulario y WhatsApp queda debajo", () => {
+test("el ancla #formulario abre el formulario, sin WhatsApp al lado", () => {
   const start = PAGE.indexOf('<section id="formulario"');
   const section = PAGE.slice(start, PAGE.indexOf("</section>", start));
-  const formAt = section.indexOf('id="hr35-short-form"');
-  const waAt = section.indexOf('data-wa-location="cta"');
-  assert.ok(formAt > 0 && waAt > formAt, "el formulario tiene que ir antes del enlace de WhatsApp");
+  assert.ok(section.includes('id="hr35-short-form"'));
+  assert.match(section, /<h2[^>]*>Hablemos de tu huerto<\/h2>/);
+  assert.match(section, /Cuéntanos de tu terreno y te contactamos para ver juntos si HR35 es para ti\./);
+  assert.doesNotMatch(section, /wa\.me/);
+  assert.doesNotMatch(section, /data-wa-location/);
+  assert.doesNotMatch(section, /Prefieres conversar/);
+  assert.doesNotMatch(section, /form-wa-alt/);
+  assert.doesNotMatch(section, /postul/i);
   assert.match(PAGE, /#formulario\{scroll-margin-top:92px\}/);
-  assert.doesNotMatch(section, /cta-wa-main/);
-  assert.doesNotMatch(section, /Conversar por WhatsApp/);
-  const cta = section.match(/<a\b[^>]*data-wa-location="cta"[^>]*>[\s\S]*?<\/a>/)[0];
-  assert.match(cta, /https:\/\/wa\.me\/56971540665\?text=Hola%20SPICe%20Agro%2C%20quiero%20informaci%C3%B3n%20sobre%20Huerto%20Rentable%2035\./);
-  assert.match(cta, /¿Prefieres conversar\? Escríbenos por WhatsApp/);
   assert.match(PAGE, /a\.wa\.is-parked\{visibility:hidden/);
+  assert.doesNotMatch(PAGE, /is-parked",seeing&&narrow/);
+  assert.match(PAGE, /classList\.toggle\("is-parked",seeing\)/);
   assert.match(PAGE, /IntersectionObserver/);
 });
 

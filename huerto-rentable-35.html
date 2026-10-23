@@ -901,12 +901,12 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
   </div>
 </section>
 
-<!-- CTA FINAL: el ancla #formulario abre el formulario. WhatsApp queda debajo, como alternativa. -->
+<!-- CTA FINAL: el ancla #formulario abre el formulario. Sin enlace de WhatsApp en esta sección. -->
 <section id="formulario" class="l-form">
   <div class="wrap">
     <span class="mono eyebrow--ochre l-eyebrow">Da el siguiente paso</span>
     <h2 class="l-h2">Hablemos de tu huerto</h2>
-    <p class="l-sub">Cuéntanos tu terreno y tus objetivos, y te respondemos con la información exacta para tu caso.</p>
+    <p class="l-sub">Cuéntanos de tu terreno y te contactamos para ver juntos si HR35 es para ti.</p>
     <div class="form-card">
       <!-- FormSubmit entrega el correo. En este sitio un POST de Netlify Forms responde 404.
            data-netlify queda en el HTML estático por si la detección vuelve a aceptar envíos.
@@ -954,15 +954,11 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
         <button type="submit" class="btn ochre" style="width:100%;justify-content:center">Enviar &rsaquo;</button>
       </form>
     </div>
-    <p class="form-wa-alt"><a data-wa-location="cta" href="https://wa.me/56971540665?text=Hola%20SPICe%20Agro%2C%20quiero%20informaci%C3%B3n%20sobre%20Huerto%20Rentable%2035." target="_blank" rel="noopener">¿Prefieres conversar? Escríbenos por WhatsApp</a></p>
   </div>
 </section>
 
 <style>
 .l-form .form-card{max-width:620px;margin-top:0;padding:1.6rem}
-.form-wa-alt{text-align:center;margin:1.15rem auto 0;font-size:.9rem;line-height:1.45}
-.form-wa-alt a{color:var(--ink-soft);text-decoration:underline;text-underline-offset:3px}
-.form-wa-alt a:hover{color:var(--navy)}
 .short-form{display:flex;flex-direction:column;gap:12px}
 .sf-row{display:flex;gap:12px}
 .short-form input,.short-form textarea,.short-form select{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper);font-family:var(--sans);font-size:.95rem;color:var(--ink)}
@@ -976,10 +972,8 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
 .sf-etapa label:has(input:checked){border-color:var(--ochre);background:rgba(203,152,49,.1)}
 .short-form .sf-etapa input{width:auto;padding:0;margin:3px 0 0;accent-color:#cb9831;flex:none}
 #formulario{scroll-margin-top:92px}
+a.wa.is-parked{visibility:hidden;pointer-events:none}
 @media(max-width:520px){.sf-row{flex-direction:column}}
-@media(max-width:720px){
-  a.wa.is-parked{visibility:hidden;pointer-events:none}
-}
 </style>
 
 <!-- FOOTER -->
@@ -1072,16 +1066,14 @@ src="https://www.facebook.com/tr?id=2201948253880575&ev=PageView&noscript=1"/></
   var formSec=document.getElementById("formulario");
   var floatWa=document.querySelector('a.wa[data-wa-location="float"]');
   if(formSec&&floatWa&&"IntersectionObserver" in window){
-    var narrow=window.matchMedia("(max-width:720px)");
     var seeing=false;
     function parkFloat(){
-      floatWa.classList.toggle("is-parked",seeing&&narrow.matches);
+      floatWa.classList.toggle("is-parked",seeing);
     }
     new IntersectionObserver(function(entries){
       seeing=entries.some(function(en){return en.isIntersecting;});
       parkFloat();
     },{threshold:0.01}).observe(formSec);
-    if(narrow.addEventListener) narrow.addEventListener("change",parkFloat);
   }
 
   document.addEventListener("click",function(e){
