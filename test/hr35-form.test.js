@@ -124,11 +124,30 @@ test("cada enlace wa.me de HR35 declara un location distinto", () => {
   assert.deepStrictEqual(locations.sort(), ["calc", "cta", "float", "hero"]);
   assert.doesNotMatch(PAGE, /data-wa-location="hero-info"/);
   assert.doesNotMatch(PAGE, /Quiero más información/);
-  const explore = PAGE.match(/<a\b[^>]*>Quiero explorar opciones/)[0];
-  assert.match(explore, /href="#formulario"/);
-  assert.doesNotMatch(explore, /wa\.me/);
-  assert.doesNotMatch(explore, /data-wa-location/);
+  const explores = PAGE.match(/<a\b[^>]*>Quiero explorar opciones/g) || [];
+  assert.ok(explores.length >= 1);
+  for (const explore of explores) {
+    assert.match(explore, /href="#formulario"/);
+    assert.doesNotMatch(explore, /wa\.me/);
+    assert.doesNotMatch(explore, /data-wa-location/);
+  }
   assert.match(PAGE, /gtag\("event","whatsapp_click",\{location:/);
+});
+
+test("el ancla #formulario abre el formulario y WhatsApp queda debajo", () => {
+  const start = PAGE.indexOf('<section id="formulario"');
+  const section = PAGE.slice(start, PAGE.indexOf("</section>", start));
+  const formAt = section.indexOf('id="hr35-short-form"');
+  const waAt = section.indexOf('data-wa-location="cta"');
+  assert.ok(formAt > 0 && waAt > formAt, "el formulario tiene que ir antes del enlace de WhatsApp");
+  assert.match(PAGE, /#formulario\{scroll-margin-top:92px\}/);
+  assert.doesNotMatch(section, /cta-wa-main/);
+  assert.doesNotMatch(section, /Conversar por WhatsApp/);
+  const cta = section.match(/<a\b[^>]*data-wa-location="cta"[^>]*>[\s\S]*?<\/a>/)[0];
+  assert.match(cta, /https:\/\/wa\.me\/56971540665\?text=Hola%20SPICe%20Agro%2C%20quiero%20informaci%C3%B3n%20sobre%20Huerto%20Rentable%2035\./);
+  assert.match(cta, /¿Prefieres conversar\? Escríbenos por WhatsApp/);
+  assert.match(PAGE, /a\.wa\.is-parked\{visibility:hidden/);
+  assert.match(PAGE, /IntersectionObserver/);
 });
 
 test("la URL de _next no está redirigida: FormSubmit manda al .html publicado", () => {
